@@ -16,7 +16,6 @@ CREATE TABLE Products (
     available_quantity INT CHECK(available_quantity >= 0),
     inventory_status BOOLEAN NOT NULL,
     category VARCHAR(255) NOT NULL,
-    time_stamp timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
     image_id INT
 );
 
