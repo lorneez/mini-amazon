@@ -1,0 +1,3 @@
+ID,email,password,name,address,balance,is_seller
+1,example@gmail.com,password1,Test Name,"123 Road, City, ST 27708",5,TRUE
+2,example1@gmail.com,password2,Testing Name,"123 Road, City, ST 27708",10,FALSE
