@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 
 function LandingPage() {
+    const history = useHistory();
+
     const auth = useContext(AuthContext);
     const { state } = auth;
     const { isSignedIn, userType } = state;
