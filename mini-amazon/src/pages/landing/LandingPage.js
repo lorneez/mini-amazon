@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from "react"
 import SideBarComponent from "../../components/SideBarComponent";
 import { useHistory } from "react-router-dom";
-import AuthContext from "../../contexts/AuthContext";
+import {AuthContext} from "../../contexts/AuthContext";
 
 function LandingPage() {
     const history = useHistory();

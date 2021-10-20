@@ -10,9 +10,10 @@ export const AuthContext = React.createContext(initialState);
 
 const authReducer = (state, action) => {
     const { payload } = action;
-
+    console.log("REDUCER CALLED")
     switch (action.type) {
         case "LOGIN":
+            console.log(action.type, payload)
             return {
                 ...state,
                 isSignedIn: true,

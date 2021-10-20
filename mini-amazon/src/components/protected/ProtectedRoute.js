@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react"
-import AuthContext from "../../contexts/AuthContext";
+import {AuthContext} from "../../contexts/AuthContext";
 import LoadingComponent from "./LoadingComponent";
 
 function ProtectedRoute(props) {
@@ -11,6 +11,7 @@ function ProtectedRoute(props) {
     const [protectedComponent, setProtectedComponent] = useState(false);
 
     useEffect(() => {
+        console.log(state)
         if(isSignedIn) {
             setProtectedComponent(true);
         }
@@ -21,7 +22,7 @@ function ProtectedRoute(props) {
         setTimeout(() => {
             setLoadingScreen(false);
         }, 1000);
-    }, [auth, loadingScreen, protectedComponent]);
+    }, [state, isSignedIn, loadingScreen, protectedComponent]);
 
     function renderPage() {
         if(loadingScreen) {
@@ -29,7 +30,7 @@ function ProtectedRoute(props) {
         }
         else {
             if(protectedComponent) {
-                return props.component
+                return props.component()
             }
             else {
                 return <div>invalid auth</div>
