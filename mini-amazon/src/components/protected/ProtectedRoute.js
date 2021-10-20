@@ -11,7 +11,7 @@ function ProtectedRoute(props) {
     const [protectedComponent, setProtectedComponent] = useState(false);
 
     useEffect(() => {
-        console.log(state)
+        console.log("page change")
         if(isSignedIn) {
             setProtectedComponent(true);
         }
@@ -22,7 +22,7 @@ function ProtectedRoute(props) {
         setTimeout(() => {
             setLoadingScreen(false);
         }, 1000);
-    }, [state, isSignedIn, loadingScreen, protectedComponent]);
+    }, [auth, loadingScreen, protectedComponent]);
 
     function renderPage() {
         if(loadingScreen) {

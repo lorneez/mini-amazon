@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
 
 function SideBarComponent(props) {
     const sideBarType = props.type;
@@ -66,9 +67,9 @@ function SideBarComponent(props) {
                 {links.map(function(link, index){
                     return (
                         <li key={index}>
-                            <a href={link.route} style={{color: "white"}}>
+                            <Linkgi style={{color: "white"}} to={link.route}>
                                 {link.name}
-                            </a>
+                            </Linkgi>
                         </li>
                     )
                 })}
