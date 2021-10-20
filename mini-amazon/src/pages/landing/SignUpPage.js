@@ -1,16 +1,16 @@
 import React from "react"
-import SideBarComponent from "../components/SideBarComponent";
+import SideBarComponent from "../../components/SideBarComponent";
 
-function HomePage() {
+function SignUpPage() {
     return (
         <div>
             <div className={"columns"}>
                 <div className={"column is-one-fifth"}>
-                    <SideBarComponent type={"buyer"}/>
+                    <SideBarComponent type={"landing"}/>
                 </div>
                 <div className={"column"}>
                     <div className={"container"}>
-                        Welcome to Zest
+                        Sign Up Page
                     </div>
                 </div>
             </div>
@@ -18,4 +18,4 @@ function HomePage() {
     )
 }
 
-export default HomePage;
+export default SignUpPage;
