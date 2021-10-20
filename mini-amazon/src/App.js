@@ -9,6 +9,10 @@ import BuyerDashboard from "./pages/buyer/BuyerDashboard";
 import Cart from "./pages/buyer/Cart";
 import Orders from "./pages/buyer/Orders";
 import Search from "./pages/buyer/Search";
+import SellerDashboard from "./pages/seller/SellerDashboard";
+import Reviews from "./pages/seller/Reviews";
+import SellerOrders from "./pages/seller/SellerOrders";
+import Inventory from "./pages/seller/Inventory";
 
 
 function App() {
@@ -24,6 +28,10 @@ function App() {
                 <Route path="/orders" exact component={Orders} />
                 <Route path="/search" exact component={Search} />
                 <Route path="/cart" exact component={Cart} />
+                <Route path="/seller/dashboard" exact component={SellerDashboard} />
+                <Route path="/seller/inventory" exact component={Inventory} />
+                <Route path="/seller/orders" exact component={SellerOrders} />
+                <Route path="/seller/reviews" exact component={Reviews} />
             </Switch>
         </BrowserRouter>
     );
