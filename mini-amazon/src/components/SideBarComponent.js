@@ -1,7 +1,12 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, {useContext} from "react";
+import { Link } from "react-router-dom";
+import {AuthContext} from "../contexts/AuthContext";
 
 function SideBarComponent(props) {
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { username } = state;
+
     const sideBarType = props.type;
 
     const landingPageLinks = [
@@ -67,9 +72,9 @@ function SideBarComponent(props) {
                 {links.map(function(link, index){
                     return (
                         <li key={index}>
-                            <Linkgi style={{color: "white"}} to={link.route}>
+                            <Link style={{color: "white"}} to={link.route}>
                                 {link.name}
-                            </Linkgi>
+                            </Link>
                         </li>
                     )
                 })}
@@ -89,14 +94,14 @@ function SideBarComponent(props) {
             case "buyer":
                 return (
                     <div>
-                        {renderNavigationTitle("Buyer!")}
+                        {renderNavigationTitle("Hello " + username + " !")}
                         {renderNavigationLinks(buyerLinks)}
                     </div>
                 )
             case "seller":
                 return (
                     <div>
-                        {renderNavigationTitle("Seller!")}
+                        {renderNavigationTitle("Hello " + username + " !")}
                         {renderNavigationLinks(sellerLinks)}
                     </div>
                 )

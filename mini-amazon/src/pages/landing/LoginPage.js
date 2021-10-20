@@ -44,7 +44,7 @@ function LoginPage() {
                             <input className="input is-primary" value={password} type="text" placeholder="Password"
                                    onChange={(e)=>setPassword(e.target.value)}
                             />
-                            <button className="button" onClick={() => handleSubmit()}>Button</button>
+                            <button className="button" onClick={() => handleSubmit()}>Login</button>
                         </div>
                         Username: {username}
                     </div>
