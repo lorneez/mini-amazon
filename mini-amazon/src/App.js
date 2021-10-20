@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import HomePage from "./pages/HomePage";
 import ProductBrowse from "./pages/product/ProductBrowse";
 import ProductDetails from "./pages/product/ProductDetails";
 import ProductReview from "./pages/product/ProductReview";
@@ -16,6 +15,7 @@ import SellerDashboard from "./pages/seller/SellerDashboard";
 import Reviews from "./pages/seller/Reviews";
 import SellerOrders from "./pages/seller/SellerOrders";
 import Inventory from "./pages/seller/Inventory";
+import ProtectedRoute from "./components/protected/ProtectedRoute";
 
 function App() {
     return (
@@ -24,18 +24,18 @@ function App() {
                 <Route path="/" exact component={LandingPage} />
                 <Route path="/login" exact component={LoginPage} />
                 <Route path="/sign-up" exact component={SignUpPage} />
-                <Route path="/product/browse" exact component={ProductBrowse} />
-                <Route path="/product/details" exact component={ProductDetails} />
-                <Route path="/product/review" exact component={ProductReview} />
-                <Route path="/product/create" exact component={CreateProduct} />
-                <Route path="/dashboard" exact component={BuyerDashboard} />
-                <Route path="/orders" exact component={Orders} />
-                <Route path="/search" exact component={Search} />
-                <Route path="/cart" exact component={Cart} />
-                <Route path="/seller/dashboard" exact component={SellerDashboard} />
-                <Route path="/seller/inventory" exact component={Inventory} />
-                <Route path="/seller/orders" exact component={SellerOrders} />
-                <Route path="/seller/reviews" exact component={Reviews} />
+                <ProtectedRoute path="/product/browse" exact component={ProductBrowse} />
+                <ProtectedRoute path="/product/details" exact component={ProductDetails} />
+                <ProtectedRoute path="/product/review" exact component={ProductReview} />
+                <ProtectedRoute path="/product/create" exact component={CreateProduct} />
+                <ProtectedRoute path="/dashboard" exact component={BuyerDashboard} />
+                <ProtectedRoute path="/orders" exact component={Orders} />
+                <ProtectedRoute path="/search" exact component={Search} />
+                <ProtectedRoute path="/cart" exact component={Cart} />
+                <ProtectedRoute path="/seller/dashboard" exact component={SellerDashboard} />
+                <ProtectedRoute path="/seller/inventory" exact component={Inventory} />
+                <ProtectedRoute path="/seller/orders" exact component={SellerOrders} />
+                <ProtectedRoute path="/seller/reviews" exact component={Reviews} />
             </Switch>
         </BrowserRouter>
     );

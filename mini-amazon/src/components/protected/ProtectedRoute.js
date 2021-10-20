@@ -23,3 +23,5 @@ function ProtectedRoute(props) {
         </div>
     )
 }
+
+export default ProtectedRoute
