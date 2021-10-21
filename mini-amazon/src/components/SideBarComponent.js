@@ -1,11 +1,13 @@
 import React, {useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {AuthContext} from "../contexts/AuthContext";
 
 function SideBarComponent(props) {
+    const history = useHistory();
+
     const auth = useContext(AuthContext);
-    const { state } = auth;
-    const { username } = state;
+    const { state, dispatch } = auth;
+    const { username, isSignedIn } = state;
 
     const sideBarType = props.type;
 
@@ -115,11 +117,40 @@ function SideBarComponent(props) {
         }
     }
 
+    function handleLogout() {
+        dispatch({
+            type: "LOGOUT",
+            payload: {}
+        });
+
+        history.push("/");
+    }
+
+    function renderLogout() {
+        if(isSignedIn) {
+            return (
+                <div>
+                    <button className="button" onClick={() => handleLogout()}>Logout</button>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div>
+                    Login pls
+                </div>
+            )
+        }
+    }
+
     return (
         <div style={{background: "black", height: "100vh"}}>
             <aside className="menu">
                 <div className={"p-4"}>
                     {renderPage()}
+                </div>
+                <div className={"p-4"} style={{color: "white"}}>
+                    {renderLogout()}
                 </div>
             </aside>
         </div>
