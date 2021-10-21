@@ -21,11 +21,13 @@ function LoginPage() {
             payload: {
                 isSignedIn: true,
                 username: username,
-                userType: "buyer"
+                userType: "seller",
+                token: "jwt-token",
+                expireDate: Math.floor(new Date().getTime() / 1000 + 2000)
             }
         });
 
-        history.push("/dashboard");
+        history.push("/seller/dashboard");
     }
 
     return (

@@ -1,9 +1,12 @@
 import React from 'react';
+import {clearAuthentication, setAuthentication} from "../api/localStorage";
 
 let initialState = {
     isSignedIn: false,
     username: null,
-    userType: null
+    userType: null,
+    token: null,
+    expireDate: null
 };
 
 export const AuthContext = React.createContext(initialState);
@@ -13,20 +16,34 @@ const authReducer = (state, action) => {
     console.log("REDUCER CALLED")
     switch (action.type) {
         case "LOGIN":
-            console.log(action.type, payload)
+            setAuthentication(payload);
             return {
                 ...state,
                 isSignedIn: true,
                 username: payload.username,
-                userType: payload.userType
+                userType: payload.userType,
+                token: payload.token,
+                expireDate: payload.expireDate
             };
         case "LOGOUT":
+            clearAuthentication()
             return {
                 ...state,
                 isSignedIn: false,
                 username: null,
-                userType: null
+                userType: null,
+                token: null,
+                expireDate: null
             };
+        case "REFRESH":
+            return {
+                ...state,
+                isSignedIn: payload.isSignedIn,
+                username: payload.username,
+                userType: payload.userType,
+                token: payload.token,
+                expireDate: payload.expireDate
+            }
         default:
             return state;
     }
