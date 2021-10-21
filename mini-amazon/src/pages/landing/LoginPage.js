@@ -21,11 +21,11 @@ function LoginPage() {
             payload: {
                 isSignedIn: true,
                 username: username,
-                userType: "buyer"
+                userType: "seller"
             }
         });
 
-        history.push("/dashboard");
+        history.push("/seller/dashboard");
     }
 
     return (
