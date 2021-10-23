@@ -6,11 +6,10 @@ from .. import login
 
 
 class User(UserMixin):
-    def __init__(self, id, email, firstname, lastname):
+    def __init__(self, id, email, name):
         self.id = id
         self.email = email
-        self.firstname = firstname
-        self.lastname = lastname
+        self.name = name
 
     @staticmethod
     def get_by_auth(email, password):
