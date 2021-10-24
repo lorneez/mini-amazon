@@ -20,7 +20,7 @@ def login():
         # set login status as false and return
     login_user(user)
     # get the token and expiration time 
-    # return status = true, toke, and time
+    # return status = true, token, and time
     # next_page = request.args.get('next')
     # if not next_page or url_parse(next_page).netloc != '':
     #     next_page = url_for('index.index')

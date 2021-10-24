@@ -1,8 +1,9 @@
 from flask_login import UserMixin
 from flask import current_app as app
 from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
+import datetime
 
-from .. import login
 
 
 class User(UserMixin):
@@ -27,6 +28,26 @@ WHERE email = :email
             return None
         else:
             return User(*(rows[0][1:]))
+
+    @staticmethod
+    def encode_auth_token(self, user_id):
+    """
+    Generates the Auth Token
+    :return: string
+    """
+    try:
+        payload = {
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+            'iat': datetime.datetime.utcnow(),
+            'sub': user_id
+        }
+        return jwt.encode(
+            payload,
+            app.config.get('SECRET_KEY'),
+            algorithm='HS256'
+        )
+    except Exception as e:
+        return e
 
     @staticmethod
     def email_exists(email):
@@ -56,13 +77,13 @@ RETURNING id
             # reporting needed
             return None
 
-    @staticmethod
-    @login.user_loader
-    def get(id):
-        rows = app.db.execute("""
-SELECT id, email, name
-FROM Users
-WHERE id = :id
-""",
-                              id=id)
-        return User(*(rows[0])) if rows else None
+#     @staticmethod
+#     @login.user_loader
+#     def get(id):
+#         rows = app.db.execute("""
+# SELECT id, email, name
+# FROM Users
+# WHERE id = :id
+# """,
+#                               id=id)
+#         return User(*(rows[0])) if rows else None
