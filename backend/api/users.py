@@ -6,22 +6,26 @@ from flask_babel import _, lazy_gettext as _l
 from .models.user import User
 
 # @bp.route('/login', methods=['GET', 'POST'])
-@app.route("/api/users", methods=["GET"])
+# return the login status, token, and time in seconds the time of expiration of token
+@app.route("/api/user_login", methods=["GET"])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index.index'))
     # form = LoginForm()
-    if form.validate_on_submit():
-        user = User.get_by_auth(form.email.data, form.password.data)
-        if user is None:
-            flash('Invalid email or password')
-            return redirect(url_for('users.login'))
-        login_user(user)
-        next_page = request.args.get('next')
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index.index')
+    # if form.validate_on_submit():
+    user = User.get_by_auth(form.email.data, form.password.data)
+    if user is None:
+        # flash('Invalid email or password')
+        # return redirect(url_for('users.login'))
+        # set login status as false and return
+    login_user(user)
+    # get the token and expiration time 
+    # return status = true, toke, and time
+    # next_page = request.args.get('next')
+    # if not next_page or url_parse(next_page).netloc != '':
+    #     next_page = url_for('index.index')
 
-        return redirect(next_page)
+    # return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
 
