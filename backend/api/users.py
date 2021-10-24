@@ -2,31 +2,48 @@ from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_babel import _, lazy_gettext as _l
+ from datetime import timedelta
 
 from .models.user import User
 
 # @bp.route('/login', methods=['GET', 'POST'])
 # return the login status, token, and time in seconds the time of expiration of token
-@app.route("/api/user_login", methods=["GET"])
+@app.route("/api/user_login", methods=["POST"])
 def login():
+    incoming = request.get_json()
+    status=False
     if current_user.is_authenticated:
-        return redirect(url_for('index.index'))
-    # form = LoginForm()
-    # if form.validate_on_submit():
-    user = User.get_by_auth(form.email.data, form.password.data)
+        status=True
+    user = User.get_by_auth(incoming['email'], incoming['password'])
     if user is None:
-        # flash('Invalid email or password')
-        # return redirect(url_for('users.login'))
+        flash('Invalid email or password')
         # set login status as false and return
-    login_user(user)
+    success = login_user(user, remember=True, duration=timedelta(hours=5))):
+    if not success:
+        status = False
+        flash('Unable to login. Try again')
     # get the token and expiration time 
-    # return status = true, token, and time
-    # next_page = request.args.get('next')
-    # if not next_page or url_parse(next_page).netloc != '':
-    #     next_page = url_for('index.index')
+    return jsonify(login_status=status)
 
-    # return redirect(next_page)
-    return render_template('login.html', title='Sign In', form=form)
+@app.route("/api/create_user", methods=["POST"])
+def register():
+    '''
+    '''
+    incoming = request.get_json()
+    if User.email_exists(incoming['email']):
+        flash('Account with email already exists. Please try a different email.')
+        return None
+    user = User.register(incoming['email'], incoming['password'], incoming['name'])
+    if user is None:
+        flash('Cannot create account.')
+        return None
+    flash('Congratulations! You are now registered')
+    return jsonify(email = incoming['email'])
+
+# @bp.route('/logout')
+# def logout():
+#     logout_user()
+#     return redirect(url_for('index.index'))
 
 
 # class RegistrationForm(FlaskForm):
@@ -59,7 +76,3 @@ def login():
 #     return render_template('register.html', title='Register', form=form)
 
 
-# @bp.route('/logout')
-# def logout():
-#     logout_user()
-#     return redirect(url_for('index.index'))
