@@ -47,7 +47,7 @@ function SignUpPage() {
                             {/* <input className="input is-primary" value={password} type="text" placeholder="Password"
                                    onChange={(e)=>setPassword(e.target.value)}
                             /> */}
-                            <button className="button" onClick={() => handleSubmit()}>Sign Up</button>
+                            <button className="button landingbutton" onClick={() => handleSubmit()}>Sign Up</button>
                         </div>
                     </div>
                 </flexbox>

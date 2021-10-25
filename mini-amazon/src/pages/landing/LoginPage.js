@@ -46,7 +46,7 @@ function LoginPage() {
                                    onChange={(e)=>setUsername(e.target.value)}
                             />
                             <PasswordInput value = {password}/>
-                            <button className="button" onClick={() => handleSubmit()}>Login</button>
+                            <button className="button landingbutton" onClick={() => handleSubmit()}>Login</button>
                         </div>
                     </div>
                     </flexbox>
