@@ -1,9 +1,9 @@
 import React, {useState, useContext} from "react"
 import { useHistory } from "react-router-dom";
-
+import './Style.css';
 import SideBarComponent from "../../components/SideBarComponent";
 import {AuthContext} from "../../contexts/AuthContext";
-
+import PasswordInput from "../../components/PasswordInput";
 
 function SignUpPage() {
     const history = useHistory();
@@ -31,27 +31,32 @@ function SignUpPage() {
 
     return (
         <div>
-            <div className={"columns"}>
+            <div className={"columns center"}>
                 <div className={"column is-one-fifth"}>
                     <SideBarComponent type={"landing"}/>
                 </div>
-                <div className={"column"}>
-                    <div className={"container"}>
+                <div className={"column center"}>
+                <flexbox className={"is-align-items-end"}>
+                    <div className={"container "}>
                         Sign Up Page
                         <div style={{width: 400}}>
                             <input className="input is-primary"  value={username} type="text" placeholder="Username"
                                    onChange={(e)=>setUsername(e.target.value)}
                             />
-                            <input className="input is-primary" value={password} type="text" placeholder="Password"
+                            <PasswordInput value = {password}/>
+                            {/* <input className="input is-primary" value={password} type="text" placeholder="Password"
                                    onChange={(e)=>setPassword(e.target.value)}
-                            />
+                            /> */}
                             <button className="button" onClick={() => handleSubmit()}>Sign Up</button>
                         </div>
                     </div>
+                </flexbox>
                 </div>
             </div>
         </div>
     )
 }
+
+
 
 export default SignUpPage;
