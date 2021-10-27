@@ -33,11 +33,11 @@ WHERE email = :email
     def encode_auth_token(self, user_id):
     """
     Generates the Auth Token
-    :return: string
+    :return: encoded jwt token and datetime object of expiration
     """
     try:
         payload = {
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, seconds=5),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5),
             'iat': datetime.datetime.utcnow(),
             'sub': user_id
         }
@@ -45,7 +45,7 @@ WHERE email = :email
             payload,
             app.config.get('SECRET_KEY'),
             algorithm='HS256'
-        )
+        ), payload['exp']
     except Exception as e:
         return e
 

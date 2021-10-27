@@ -10,20 +10,21 @@ from .models.user import User
 # return the login status, token, and time in seconds the time of expiration of token
 @app.route("/api/user_login", methods=["POST"])
 def login():
+    '''
+    if a valid user, this will provide info to front end necessary for logging the user in
+    return: json object with login status, encoded jwt token, expiration time (datetime)
+    '''
     incoming = request.get_json()
     status=False
-    if current_user.is_authenticated:
-        status=True
+    token = None
+    expiration = None
     user = User.get_by_auth(incoming['email'], incoming['password'])
     if user is None:
         flash('Invalid email or password')
-        # set login status as false and return
-    success = login_user(user, remember=True, duration=timedelta(hours=5))):
-    if not success:
-        status = False
-        flash('Unable to login. Try again')
-    # get the token and expiration time 
-    return jsonify(login_status=status)
+    else:
+        status = True
+        token, expiration = User.encode_auth_token(incoming['email'])
+    return jsonify(login_status=status, auth_token = token, expir = expiration)
 
 @app.route("/api/create_user", methods=["POST"])
 def register():
