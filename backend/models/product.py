@@ -26,6 +26,14 @@ WHERE id = :id
 SELECT id, name, price, available_quantity, inventory_status, category, image_id
 FROM Products
 WHERE available > 0
-''',
-                              available=available)
+''')
+        return [Product(*row) for row in rows]
+
+    @staticmethod
+    def get_category(category):
+        rows = app.db.execute('''
+SELECT id, name, price, available_quantity, inventory_status, category, image_id
+FROM Products
+WHERE category = :category
+''', category=category)
         return [Product(*row) for row in rows]

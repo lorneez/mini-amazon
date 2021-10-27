@@ -1,8 +1,8 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_babel import _, lazy_gettext as _l
- from datetime import timedelta
+from datetime import timedelta
 
 from .models.user import User
 
@@ -45,35 +45,3 @@ def register():
 # def logout():
 #     logout_user()
 #     return redirect(url_for('index.index'))
-
-
-# class RegistrationForm(FlaskForm):
-#     firstname = StringField(_l('First Name'), validators=[DataRequired()])
-#     lastname = StringField(_l('Last Name'), validators=[DataRequired()])
-#     email = StringField(_l('Email'), validators=[DataRequired(), Email()])
-#     password = PasswordField(_l('Password'), validators=[DataRequired()])
-#     password2 = PasswordField(
-#         _l('Repeat Password'), validators=[DataRequired(),
-#                                            EqualTo('password')])
-#     submit = SubmitField(_l('Register'))
-
-#     def validate_email(self, email):
-#         if User.email_exists(email.data):
-#             raise ValidationError(_('Already a user with this email.'))
-
-
-# @bp.route('/register', methods=['GET', 'POST'])
-# def register():
-#     if current_user.is_authenticated:
-#         return redirect(url_for('index.index'))
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         if User.register(form.email.data,
-#                          form.password.data,
-#                          form.firstname.data,
-#                          form.lastname.data):
-#             flash('Congratulations, you are now a registered user!')
-#             return redirect(url_for('users.login'))
-#     return render_template('register.html', title='Register', form=form)
-
-
