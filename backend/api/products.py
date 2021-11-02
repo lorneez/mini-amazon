@@ -8,3 +8,5 @@ def all_products():
 def all_products_category():
     incoming = request.get_json()
     return Product.get_category(incoming['category'])
+
+
