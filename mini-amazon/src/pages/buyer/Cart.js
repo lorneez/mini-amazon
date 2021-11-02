@@ -1,5 +1,6 @@
 import React from "react"
 import SideBarComponent from "../../components/SideBarComponent"
+import CartTable from "../../components/CartTable"
 
 
 function Cart() {
@@ -11,7 +12,7 @@ function Cart() {
                 </div>
                 <div className={"column"}>
                     <div className={"container"}>
-                        Cart
+                        <CartTable/>
                     </div>
                 </div>
             </div>
