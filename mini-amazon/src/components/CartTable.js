@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 
-function CartTable(props) {
-    return(
+function CartTable({items}) {
+    return (
         <table class="table">
             <thead>
                 <tr>
@@ -10,75 +10,24 @@ function CartTable(props) {
                 <th><abbr title="Quantity">Quantity</abbr></th>
                 <th><abbr title="Price">Price</abbr></th>
                 <th><abbr title="Date Added">Date Added</abbr></th>
+                <th><abbr title="Last Updated">Last Updated</abbr></th>
+                <th><abbr title="Amount Sold">Amount Sold</abbr></th>
                 <th><abbr title="Status">Status</abbr></th>
                 </tr>
             </thead>
+            {items.map((item)=>(
             <tbody>
                 <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
+                <th>{item.details}</th>
+                <td>{item.quantity}</td>
+                <td>{item.price}</td>
+                <td>{item.dateAdded}</td>
+                <td>{item.lastUpdated}</td>
+                <td>{item.amountSold}</td>
+                <td>{item.status}</td>
                 </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                <tr>
-                <th>Macbook Air (M1, 2020)</th>
-                <td>10</td>
-                <td>$999</td>
-                <td>May 26, 2019. 6:30PM</td>
-                <td>IN STOCK</td>
-                </tr>
-                
             </tbody>
+            ))}
         </table>
     )
 }
