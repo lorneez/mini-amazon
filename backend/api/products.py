@@ -1,4 +1,5 @@
-from .models.product import Product
+from models.product import Product
+from flask import request
 
 @app.route("/api/all_products", methods=["GET"])
 def all_products():
