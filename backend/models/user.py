@@ -2,8 +2,7 @@ from flask import current_app as app
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
-
-
+from flask_login import UserMixin
 
 class User(UserMixin):
     def __init__(self, id, email, firstname, lastname):
@@ -30,23 +29,21 @@ WHERE email = :email
 
     @staticmethod
     def encode_auth_token(self, user_id):
-    """
-    Generates the Auth Token
-    :return: encoded jwt token and datetime object of expiration
-    """
-    try:
-        payload = {
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5),
-            'iat': datetime.datetime.utcnow(),
-            'sub': user_id
-        }
-        return jwt.encode(
-            payload,
-            app.config.get('SECRET_KEY'),
-            algorithm='HS256'
-        ), payload['exp']
-    except Exception as e:
-        return e
+        # Generates the Auth Token
+        # return: encoded jwt token and datetime object of expiration
+        try:
+            payload = {
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5),
+                'iat': datetime.datetime.utcnow(),
+                'sub': user_id
+            }
+            return jwt.encode(
+                payload,
+                app.config.get('SECRET_KEY'),
+                algorithm='HS256'
+            ), payload['exp']
+        except Exception as e:
+            return e
 
     @staticmethod
     def email_exists(email):
