@@ -1,5 +1,8 @@
 from models.product import Product
-from flask import request
+from flask import Flask, request
+
+# Configure application
+app = Flask(__name__)
 
 @app.route("/api/all_products", methods=["GET"])
 def all_products():
@@ -9,5 +12,3 @@ def all_products():
 def all_products_category():
     incoming = request.get_json()
     return Product.get_category(incoming['category'])
-
-

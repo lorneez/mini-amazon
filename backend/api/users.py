@@ -1,11 +1,11 @@
-from flask import flash, request
+from flask import flash, request, jsonify, Flask
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_babel import _, lazy_gettext as _l
 from datetime import timedelta
-from flask import jsonify
+from models.product import User
 
-from models.user import User
+app = Flask(__name__)
 
 # @bp.route('/login', methods=['GET', 'POST'])
 # return the login status, token, and time in seconds the time of expiration of token
