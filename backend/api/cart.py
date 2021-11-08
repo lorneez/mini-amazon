@@ -9,7 +9,7 @@ def all_products():
     return Cart.get_all_user(request.args["user_id"])
 
 @app.route("/api/add_cart", methods=["POST"])
-def add_saved_item():
+def add_to cart():
     '''
     '''
     added_prod = Cart.add_product(request.args['user_id'], request.args['product_id'], request.args['quantity'])
@@ -17,3 +17,4 @@ def add_saved_item():
         flash('Could not add product to cart')
         return None
     return jsonify(product = request.args['product_id'])
+

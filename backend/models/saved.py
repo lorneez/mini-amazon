@@ -25,10 +25,10 @@ FROM Products
 WHERE id IN (
     SELECT product_id
     FROM SavedItem
-    WHERE user_id = uid
+    WHERE user_id = :uid
 )
 ORDER BY time_stamp DESCENDING
-''')
+''', uid=uid)
         return [Cart(*row) for row in rows]
 
     @staticmethod
@@ -36,9 +36,9 @@ ORDER BY time_stamp DESCENDING
         rows = app.db.execute('''
     SELECT *
     FROM SavedItem
-    WHERE user_id = uid 
-    AND product_id = pid
-    ''')
+    WHERE user_id = :uid 
+    AND product_id = :pid
+    ''', uid=uid, pid=pid)
         return len(rows)>0
 
     @staticmethod
@@ -46,11 +46,11 @@ ORDER BY time_stamp DESCENDING
         try:
             rows = app.db.execute('''
             UPDATE SavedItem
-            SET product_id = pid
-            WHERE user_id = uid 
-            AND product_id = pid
+            SET product_id = :pid
+            WHERE user_id = :uid 
+            AND product_id = :pid
             RETURNING pid
-            ''')
+            ''', uid=uid, pid=pid)
             pid = rows[0][0]
             return Product.get(pid)
         except Exception:
@@ -61,9 +61,9 @@ ORDER BY time_stamp DESCENDING
         try:
             rows = app.db.execute("""
 INSERT INTO SavedItem(id, user_id, product_id)
-VALUES(NEWID(), uid, pid)
-RETURNING pid
-""")
+VALUES(NEWID(), :uid, :pid)
+RETURNING :pid
+""", uid=uid, pid=pid)
             pid = rows[0][0]
             return Product.get(pid)
         except Exception:
