@@ -20,3 +20,13 @@ def add_saved_item():
         flash('Could not save item to account')
         return None
     return jsonify(product = request.args['product_id'])
+
+@app.route("/api/remove_saved_item", methods=["POST"])
+def remove_item():
+    '''
+    '''
+    if not Saved.product_exists(request.args['user_id'], request.args['product_id']):
+        flash('Product is not saved. Cannot remove.')
+        return None
+    Saved.remove_product(request.args['user_id'], request.args['product_id'])
+    return jsonify(product = request.args['product_id'])

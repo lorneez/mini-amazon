@@ -18,7 +18,7 @@ def add_to_cart():
         return None
     return jsonify(product = request.args['product_id'])
 
-@app.route("/api/update_quantity", methods=["POST"])
+@app.route("/api/update_cart_quantity", methods=["POST"])
 def update_quantity():
     '''
     '''
@@ -31,7 +31,7 @@ def update_quantity():
         return None
     return jsonify(product = request.args['product_id'])
 
-@app.route("/api/remove_item", methods=["POST"])
+@app.route("/api/remove_cart_item", methods=["POST"])
 def remove_item():
     '''
     '''
