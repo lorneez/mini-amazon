@@ -31,3 +31,14 @@ def update_quantity():
         return None
     return jsonify(product = request.args['product_id'])
 
+@app.route("/api/remove_item", methods=["POST"])
+def remove_item():
+    '''
+    '''
+    if not Cart.cart_item_exists(request.args['user_id'], request.args['product_id']):
+        flash('Product is not in cart. Cannot remove.')
+        return None
+    Cart.remove_product(request.args['user_id'], request.args['product_id'])
+    return jsonify(product = request.args['product_id'])
+
+
