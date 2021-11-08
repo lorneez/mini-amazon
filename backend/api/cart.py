@@ -4,7 +4,6 @@ from flask import Flask, request
 # Configure application
 app = Flask(__name__)
 
-@app.route("/apiuser_cart", methods=["GET"])
+@app.route("/api_user_cart", methods=["GET"])
 def all_products():
-    incoming = request.get_json()
-    return Cart.get_all_user(incoming["user_id"])
+    return Cart.get_all_user(request.args["user_id"])

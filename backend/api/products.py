@@ -10,5 +10,5 @@ def all_products():
 
 @app.route("/api/products_category", methods=["GET"])
 def all_products_category():
-    incoming = request.get_json()
-    return Product.get_category(incoming['category'])
+    return Product.get_category(request.args['category'])
+

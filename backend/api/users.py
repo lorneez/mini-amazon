@@ -15,32 +15,30 @@ def login():
     if a valid user, this will provide info to front end necessary for logging the user in
     return: json object with login status, encoded jwt token, expiration time (datetime)
     '''
-    incoming = request.get_json()
     status=False
     token = None
     expiration = None
-    user = User.get_by_auth(incoming['email'], incoming['password'])
+    user = User.get_by_auth(request.args['email'], request.args['password'])
     if user is None:
         flash('Invalid email or password')
     else:
         status = True
-        token, expiration = User.encode_auth_token(incoming['email'])
+        token, expiration = User.encode_auth_token(request.args['email'])
     return jsonify(login_status=status, auth_token = token, expir = expiration)
 
 @app.route("/api/create_user", methods=["POST"])
 def register():
     '''
     '''
-    incoming = request.get_json()
-    if User.email_exists(incoming['email']):
+    if User.email_exists(request.args['email']):
         flash('Account with email already exists. Please try a different email.')
         return None
-    user = User.register(incoming['email'], incoming['password'], incoming['name'])
+    user = User.register(request.args['email'], request.args['password'], request.args['name'])
     if user is None:
         flash('Cannot create account.')
         return None
     flash('Congratulations! You are now registered')
-    return jsonify(email = incoming['email'])
+    return jsonify(email = request.args['email'])
 
 # @bp.route('/logout')
 # def logout():
