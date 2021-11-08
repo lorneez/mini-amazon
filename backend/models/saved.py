@@ -42,6 +42,21 @@ ORDER BY time_stamp DESCENDING
         return len(rows)>0
 
     @staticmethod
+    def update_time(uid, pid):
+        try:
+            rows = app.db.execute('''
+            UPDATE SavedItem
+            SET product_id = pid
+            WHERE user_id = uid 
+            AND product_id = pid
+            RETURNING pid
+            ''')
+            pid = rows[0][0]
+            return Product.get(pid)
+        except Exception:
+            return None
+
+    @staticmethod
     def add_product(uid, pid):
         try:
             rows = app.db.execute("""

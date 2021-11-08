@@ -14,6 +14,8 @@ def add_saved_item():
     '''
     if not Saved.product_exists(request.args['user_id'], request.args['product_id']):
         saved_prod = Saved.add_product(request.args['user_id'], request.args['product_id'])
+    else:
+        saved_prod = Saved.update_time(request.args['user_id'], request.args['product_id'])
     if saved_prod is None:
         flash('Could not save item to account')
         return None
