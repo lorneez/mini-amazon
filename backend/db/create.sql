@@ -46,6 +46,7 @@ CREATE TABLE SavedItem (
     id INT NOT NULL,
     user_id INT NOT NULL,
     product_id INT NOT NULL,
+    time_stamp timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
     FOREIGN KEY (user_id) REFERENCES Users(id),
     FOREIGN KEY (product_id) REFERENCES Products(id),
     PRIMARY KEY (id, user_id, product_id)
