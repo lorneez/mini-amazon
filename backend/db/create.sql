@@ -161,7 +161,7 @@ CREATE FUNCTION TF_CART_QUANTITY() RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.quantity <= 0 THEN
         BEGIN
-            DELETE FROM friendship WHERE quantity <= 0;
+            DELETE FROM CartItem WHERE quantity <= 0;
         END
     END IF;
 END;
