@@ -25,7 +25,48 @@ FROM Products
 WHERE id IN (
     SELECT product_id
     FROM CartItem
-    WHERE user_id = uid
+    WHERE user_id = :uid
 )
-''')
+''', uid=uid)
         return [Cart(*row) for row in rows]
+
+        @staticmethod
+    def cart_item_exists(uid, pid):
+        rows = app.db.execute('''
+    SELECT *
+    FROM CartItem
+    WHERE user_id = :uid 
+    AND product_id = :pid
+    ''', uid=uid, pid=pid)
+        return len(rows)>0
+
+    @staticmethod
+    def update_quantity(uid, pid, quant):
+        try:
+            rows = app.db.execute('''
+            UPDATE CartItem
+            SET quantity = quantity+:quant
+            WHERE user_id = :uid 
+            AND product_id = :pid
+            RETURNING :pid
+            ''', uid=uid, pid=pid, quant=quant)
+            pid = rows[0][0]
+            return Product.get(pid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def add_product(uid, pid, quant):
+        if cart_item_exists(uid, pid):
+            return update_quantity(uid, pid, quant)
+        else:
+            try:
+                rows = app.db.execute("""
+    INSERT INTO CartItem(id, user_id, product_id, quantity)
+    VALUES(NEWID(), :uid, :pid, :quant)
+    RETURNING pid
+    """, uid=uid, pid=pid, quant=quant)
+                pid = rows[0][0]
+                return Product.get(pid)
+            except Exception:
+                return None
