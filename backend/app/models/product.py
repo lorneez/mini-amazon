@@ -1,9 +1,10 @@
 from flask import current_app as app
 
 class Product:
-    def __init__(self, id, name, price, available_quantity, inventory_status, category, image_id):
+    def __init__(self, id, name, seller_id, price, available_quantity, inventory_status, category, image_id):
         self.id = id
         self.name = name
+        self.seller = seller_id
         self.price = price
         self.available_quantity = available_quantity
         self.inventory_status = inventory_status
@@ -27,6 +28,15 @@ SELECT id, name, price, available_quantity, inventory_status, category, image_id
 FROM Products
 WHERE available > 0
 ''')
+        return [Product(*row) for row in rows]
+
+    @staticmethod
+    def get_by_seller(seller_id):
+        rows = app.db.execute('''
+SELECT *
+FROM Products
+WHERE seller_id = :seller_id
+''', seller_id = seller_id)
         return [Product(*row) for row in rows]
 
     @staticmethod

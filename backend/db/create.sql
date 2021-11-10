@@ -12,11 +12,14 @@ CREATE TABLE Users (
 CREATE TABLE Products (
     id INT NOT NULL PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
+    seller_id INT NOT NULL,
     price FLOAT NOT NULL CHECK(price >= 0.0),
     available_quantity INT CHECK(available_quantity >= 0),
     inventory_status BOOLEAN NOT NULL,
     category VARCHAR(255) NOT NULL,
-    image_id INT
+    image_id INT,
+    FOREIGN KEY (seller_id) REFERENCES Users(id),
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE CartItem (
