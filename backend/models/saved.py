@@ -1,5 +1,6 @@
 from flask import current_app as app
-from models.product import Product
+from product import Product
+from cart import Cart
 
 class Saved:
     def __init__(self, id, user_id, product_id):

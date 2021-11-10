@@ -1,4 +1,5 @@
 from flask import current_app as app
+from product import Product
 
 class ProductReview:
     def __init__(self, from_id, product_id):
