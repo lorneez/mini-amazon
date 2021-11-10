@@ -8,15 +8,9 @@ const styles = {
         marginLeft: "40px",
         display: 'flex',
         flexDirection: 'row',
-        gap: '250px',
+        gap: '550px',
         fontWeight: '900',
         fontSize: '25px'
-    },
-    button:{
-        width: '100px',
-        height: '30px',
-        marginLeft: '2px',
-        background: 'orange'
     },
     dropdown:{
         display: 'flex',
@@ -25,11 +19,10 @@ const styles = {
     }
 }
 
-function CartHeader(props) {
+function OrderHeader(props) {
     return(
     <div style = {styles.container} >
-        <div>Manage Cart</div>
-        <Button color='orange' style={styles.button}>Add Item</Button>
+        <div>View Your Orders</div>
         <div style={styles.dropdown}>
         <div class="dropdown is-active">
             <div class="dropdown-trigger">
@@ -56,4 +49,4 @@ function CartHeader(props) {
     )
 }
 
-export default CartHeader;
+export default OrderHeader;

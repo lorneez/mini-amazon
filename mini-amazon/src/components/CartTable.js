@@ -32,9 +32,5 @@ function CartTable({items}) {
     )
 }
 
-const styles = {
-    
-}
-
 export default CartTable;
 

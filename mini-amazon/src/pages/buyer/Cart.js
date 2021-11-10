@@ -8,8 +8,8 @@ const rows = [
         details: "macbook pro 11111",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
+        lastUpdated: "Friday May 29, 2019. 6:30PM",
         amountSold: "123",
         status: "IN STOCK"
     },
@@ -17,8 +17,8 @@ const rows = [
         details: "macbook pro 11111",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
+        lastUpdated: "Friday May 29, 2019. 6:30PM",
         amountSold: "123",
         status: "IN STOCK"
     },
@@ -26,8 +26,8 @@ const rows = [
         details: "macbook pro 11111",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
+        lastUpdated: "Friday May 29, 2019. 6:30PM",
         amountSold: "123",
         status: "IN STOCK"
     },
@@ -35,8 +35,8 @@ const rows = [
         details: "macbook pro 11111",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
+        lastUpdated: "Friday May 29, 2019. 6:30PM",
         amountSold: "123",
         status: "IN STOCK"
     },
