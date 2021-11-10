@@ -12,13 +12,14 @@ const styles = {
     }
 }
 
-function SideBrowse({title}, {products}) {
+function SideBrowse(props) {
+
     return(
         <div>
             <div style={styles.container}>
-                {title}
+                {props.title}
                 <div style={styles.flex_container}>
-                {products.map((product)=>(
+                {props.products.map((product)=>(
                     <Card picture={product.url}/>
                 ))}
                 </div>

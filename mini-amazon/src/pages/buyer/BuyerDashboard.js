@@ -43,6 +43,7 @@ const trendingRows = [
 ]
 
 function BuyerDashboard() {
+    console.log(recommendedRows)
     return (
         <div>
             <div className={"columns"}>
