@@ -6,7 +6,8 @@ app = Flask(__name__)*b
 
 @app.route("/api/user_all_saved", methods=["GET"])
 def all_saved():
-    return Saved.get_all_user(request.args["user_id"])
+    saved = Saved.get_all_user(request.args["user_id"])
+    return json.dumps([item.__dict__ for item in saved])
 
 @app.route("/api/add_saved", methods=["POST"])
 def add_saved_item():

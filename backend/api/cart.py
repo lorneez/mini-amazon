@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route("/api_user_cart", methods=["GET"])
 def all_products():
-    return Cart.get_all_user(request.args["user_id"])
+    cart = Cart.get_all_user(request.args["user_id"])
+    return json.dumps([item.__dict__ for item in cart])
 
 @app.route("/api/add_cart", methods=["POST"])
 def add_to_cart():

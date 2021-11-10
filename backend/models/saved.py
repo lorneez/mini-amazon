@@ -29,7 +29,7 @@ WHERE id IN (
 )
 ORDER BY time_stamp DESCENDING
 ''', uid=uid)
-        return [Cart(*row) for row in rows]
+        return [Saved(*row) for row in rows]
 
     @staticmethod
     def product_exists(uid, pid):

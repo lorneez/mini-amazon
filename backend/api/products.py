@@ -6,9 +6,11 @@ app = Flask(__name__)
 
 @app.route("/api/all_products", methods=["GET"])
 def all_products():
-    return Product.get_all()
+    products = Product.get_all()
+    return json.dumps([item.__dict__ for item in products])
 
 @app.route("/api/products_category", methods=["GET"])
 def all_products_category():
-    return Product.get_category(request.args['category'])
+    products = Product.get_category(request.args['category'])
+    return json.dumps([item.__dict__ for item in products])
 
