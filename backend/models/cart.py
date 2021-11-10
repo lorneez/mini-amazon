@@ -1,4 +1,5 @@
 from flask import current_app as app
+from product import Product
 
 class Cart:
     def __init__(self, id, user_id, product_id, quantity):
@@ -30,7 +31,7 @@ WHERE id IN (
 ''', uid=uid)
         return [Cart(*row) for row in rows]
 
-        @staticmethod
+    @staticmethod
     def cart_item_exists(uid, pid):
         rows = app.db.execute('''
     SELECT *

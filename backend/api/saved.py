@@ -1,8 +1,8 @@
 from models.product import Saved
-from flask import Flask, request
+from flask import Flask, request, jsonify, flash
 
 # Configure application
-app = Flask(__name__)*b
+app = Flask(__name__)
 
 @app.route("/api/user_all_saved", methods=["GET"])
 def all_saved():
