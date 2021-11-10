@@ -1,4 +1,4 @@
-from models.product import Cart
+from models.cart import Cart
 from flask import Flask, request, jsonify, flash
 
 # Configure application

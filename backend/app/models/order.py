@@ -65,16 +65,4 @@ RETURNING :id, :uid, :pid
         except Exception:
             return None
 
-    @staticmethod
-    def remove_product(uid, pid):
-        if cart_item_exists(uid, pid):
-            try:
-                rows = app.db.execute("""
-                DELETE FROM SavedItem
-                WHERE user_id=:uid
-                AND product_id=:pid
-                """, uid=uid, pid=pid)
-            except Exception:
-                return None
-
     

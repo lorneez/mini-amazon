@@ -1,4 +1,4 @@
-from models.product import Saved
+from models.svaed import Saved
 from flask import Flask, request, jsonify, flash
 
 # Configure application

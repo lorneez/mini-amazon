@@ -1,4 +1,5 @@
-from models.product import Product, PReview
+from models.product import Product
+from models.product_review import PReview
 from flask import Flask, request
 
 # Configure application
