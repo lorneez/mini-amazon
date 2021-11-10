@@ -18,8 +18,7 @@ CREATE TABLE Products (
     inventory_status BOOLEAN NOT NULL,
     category VARCHAR(255) NOT NULL,
     image_id INT,
-    FOREIGN KEY (seller_id) REFERENCES Users(id),
-    PRIMARY KEY (id)
+    FOREIGN KEY (seller_id) REFERENCES Users(id)
 );
 
 CREATE TABLE CartItem (
@@ -63,7 +62,7 @@ CREATE TABLE Messages (
     text VARCHAR(255) NOT NULL,
     FOREIGN KEY (from_id) REFERENCES Users(id),
     FOREIGN KEY (to_id) REFERENCES Users(id),
-    FOREIGN KEY (order_id) REFERENCES OrderItem(id),
+    -- FOREIGN KEY (order_id) REFERENCES OrderItem(id),
     PRIMARY KEY (from_id, to_id, order_id, time_stamp)
 );
 
@@ -165,7 +164,7 @@ BEGIN
     IF NEW.quantity <= 0 THEN
         BEGIN
             DELETE FROM CartItem WHERE quantity <= 0;
-        END
+        END;
     END IF;
 END;
 $$ LANGUAGE plpgsql;
