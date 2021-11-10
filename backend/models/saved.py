@@ -2,10 +2,11 @@ from flask import current_app as app
 from models.product import Product
 
 class Saved:
-    def __init__(self, id, user_id, product_id):
+    def __init__(self, id, user_id, product_id, time_stamp):
         self.id = id
         self.uid = user_id
         self.pid = product_id
+        self.time = time_stamp
 
     @staticmethod
     def get(id):
@@ -49,7 +50,7 @@ ORDER BY time_stamp DESCENDING
             SET product_id = :pid
             WHERE user_id = :uid 
             AND product_id = :pid
-            RETURNING pid
+            RETURNING :pid
             ''', uid=uid, pid=pid)
             pid = rows[0][0]
             return Product.get(pid)
@@ -75,8 +76,8 @@ RETURNING :pid
             try:
                 rows = app.db.execute("""
                 DELETE FROM SavedItem
-                WHERE uid=:uid
-                AND pid=:pid
+                WHERE user_id=:uid
+                AND product_id=:pid
                 """, uid=uid, pid=pid)
             except Exception:
                 return None

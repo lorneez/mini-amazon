@@ -1,81 +1,82 @@
 from flask import current_app as app
 
-class ProductReview:
-    def __init__(self, from_id, product_id):
-        self.id = id
-        self.uid = user_id
+class PReview:
+    def __init__(self, from_id, product_id, time_stamp, review_text, numDownVotes, numUpVotes, numStars):
+        self.uid = from_id
         self.pid = product_id
+        self.time = time_stamp
+        self.text = review_text
+        self.down = numDownVotes
+        self.up = numUpVotes
+        self.stars = numStars
 
     @staticmethod
-    def get(id):
+    def get(uid, pid):
         rows = app.db.execute('''
 SELECT *
-FROM SavedItem
-WHERE id = :id
+FROM ProductReview
+WHERE from_id = :uid
+AND product_id = := pid
 ''',
-                              id=id)
-        return SavedItem(*(rows[0])) if rows is not None else None
+                              uid=uid, pid=pid)
+        return PReview(*(rows[0])) if rows is not None else None
 
     @staticmethod
-    def get_all_user(uid):
+    def get_all_for_product(pid):
         rows = app.db.execute('''
 SELECT *
-FROM Products
-WHERE id IN (
-    SELECT product_id
-    FROM SavedItem
-    WHERE user_id = :uid
-)
-ORDER BY time_stamp DESCENDING
-''', uid=uid)
-        return [Cart(*row) for row in rows]
+FROM ProductReview
+WHERE product_id=:pid
+ORDER BY numUpVotes DESCENDING, time_stamp DESCENDING
+''', pid=pid)
+        return [PReview(*row) for row in rows]
 
     @staticmethod
-    def product_exists(uid, pid):
+    def product_review_exists(uid, pid):
         rows = app.db.execute('''
     SELECT *
-    FROM SavedItem
-    WHERE user_id = :uid 
+    FROM ProductReview
+    WHERE from_id = :uid 
     AND product_id = :pid
     ''', uid=uid, pid=pid)
         return len(rows)>0
 
     @staticmethod
-    def update_time(uid, pid):
+    def update_text(uid, pid, text):
         try:
             rows = app.db.execute('''
-            UPDATE SavedItem
-            SET product_id = :pid
+            UPDATE ProductReview
+            SET review_text = :text
             WHERE user_id = :uid 
             AND product_id = :pid
-            RETURNING pid
-            ''', uid=uid, pid=pid)
-            pid = rows[0][0]
-            return Product.get(pid)
+            RETURNING :uid, :pid
+            ''', uid=uid, pid=pid, text=text)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
         except Exception:
             return None
 
     @staticmethod
-    def add_product(uid, pid):
+    def add_product_review(uid, pid, text):
         try:
             rows = app.db.execute("""
-INSERT INTO SavedItem(id, user_id, product_id)
-VALUES(NEWID(), :uid, :pid)
-RETURNING :pid
-""", uid=uid, pid=pid)
-            pid = rows[0][0]
-            return Product.get(pid)
+INSERT INTO ProductReview(from_id, product_id, review_text)
+VALUES(:uid, :pid, :text)
+RETURNING :uid, :pid
+""", uid=uid, pid=pid, text=text)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
         except Exception:
             return None
 
     @staticmethod
-    def remove_product(uid, pid):
-        if cart_item_exists(uid, pid):
+    def remove_product_review(uid, pid):
+        if product_review_exists(uid, pid):
             try:
                 rows = app.db.execute("""
-                DELETE FROM SavedItem
-                WHERE uid=:uid
-                AND pid=:pid
+                DELETE FROM ProductReview
+                WHERE from_id=:uid
+                AND product_id=:pid
                 """, uid=uid, pid=pid)
             except Exception:
                 return None
