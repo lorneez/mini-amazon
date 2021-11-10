@@ -3,19 +3,19 @@ import Button from "react-bootstrap/Button";
 
 const styles = {
     table: {
-        borderSpacing: "1000px"
+        borderSpacing: "100px"
     }
 }
-
-function CartTable({items}) {
+function OrderTable({items}) {
     return (
         <table class="table" style = {styles.table}>
             <thead>
                 <tr>
-                <th><abbr title="Product Details">Product Details</abbr></th>
+                <th><abbr title="Order Details">Order Details</abbr></th>
                 <th><abbr title="Quantity">Quantity</abbr></th>
-                <th><abbr title="Price">Price</abbr></th>
-                <th><abbr title="Date Added">Date Added</abbr></th>
+                <th><abbr title="Address">Address</abbr></th>
+                <th><abbr title="Source">Source</abbr></th>
+                <th><abbr title="Date Ordered">Date Ordered</abbr></th>
                 <th><abbr title="Status">Status</abbr></th>
                 </tr>
             </thead>
@@ -24,8 +24,9 @@ function CartTable({items}) {
                 <tr>
                 <th>{item.details}</th>
                 <td>{item.quantity}</td>
-                <td>{item.price}</td>
-                <td>{item.dateAdded}</td>
+                <td>{item.address}</td>
+                <td>{item.sourceName}</td>
+                <td>{item.dateOrdered}</td>
                 <td>{item.status}</td>
                 </tr>
             </tbody>
@@ -34,5 +35,4 @@ function CartTable({items}) {
     )
 }
 
-export default CartTable;
-
+export default OrderTable;

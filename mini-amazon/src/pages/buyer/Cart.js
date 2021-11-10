@@ -5,40 +5,32 @@ import CartHeader from "../../components/CartHeader"
 
 const rows = [
     {
-        details: "macbook pro 11111",
+        details: "macbook pro 11111 (MG3NDLAA)",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
-        amountSold: "123",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
         status: "IN STOCK"
     },
     {
-        details: "macbook pro 11111",
+        details: "macbook pro 11111 (MG3NDLAA)",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
-        amountSold: "123",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
+        status: "NO LONGER AVAILABLE - AWAITING RESTOCK"
+    },
+    {
+        details: "macbook pro 11111 (MG3NDLAA)",
+        quantity: "10",
+        price: "$999",
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
         status: "IN STOCK"
     },
     {
-        details: "macbook pro 11111",
+        details: "macbook pro 11111 (MG3NDLAA)",
         quantity: "10",
         price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
-        amountSold: "123",
-        status: "IN STOCK"
-    },
-    {
-        details: "macbook pro 11111",
-        quantity: "10",
-        price: "$999",
-        dateAdded: "May 26, 2019. 6:30PM",
-        lastUpdated: "May 29, 2019. 6:30PM",
-        amountSold: "123",
-        status: "IN STOCK"
+        dateAdded: "Tuesday May 26, 2019. 6:30PM",
+        status: "NO LONGER AVAILABLE - AWAITING RESTOCK"
     },
 ]
 function Cart() {
