@@ -1,6 +1,7 @@
 import React from "react"
 import SideBarComponent from "../../components/SideBarComponent"
-
+import DashBoardHeader from "../../components/DashBoardHeader"
+import SideBrowse from "../../components/SideBrowse"
 
 function BuyerDashboard() {
     return (
@@ -11,7 +12,9 @@ function BuyerDashboard() {
                 </div>
                 <div className={"column"}>
                     <div className={"container"}>
-                        Buyer Dashboard
+                        <DashBoardHeader/>
+                        <SideBrowse title={'Recommended For You'}/>
+                        <SideBrowse title={'Explore Trending Products'}/>
                     </div>
                 </div>
             </div>

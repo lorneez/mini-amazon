@@ -1,7 +1,46 @@
 import React from "react"
 import SideBarComponent from "../../components/SideBarComponent"
+import CartTable from "../../components/CartTable"
+import CartHeader from "../../components/CartHeader"
 
-
+const rows = [
+    {
+        details: "macbook pro 11111",
+        quantity: "10",
+        price: "$999",
+        dateAdded: "May 26, 2019. 6:30PM",
+        lastUpdated: "May 29, 2019. 6:30PM",
+        amountSold: "123",
+        status: "IN STOCK"
+    },
+    {
+        details: "macbook pro 11111",
+        quantity: "10",
+        price: "$999",
+        dateAdded: "May 26, 2019. 6:30PM",
+        lastUpdated: "May 29, 2019. 6:30PM",
+        amountSold: "123",
+        status: "IN STOCK"
+    },
+    {
+        details: "macbook pro 11111",
+        quantity: "10",
+        price: "$999",
+        dateAdded: "May 26, 2019. 6:30PM",
+        lastUpdated: "May 29, 2019. 6:30PM",
+        amountSold: "123",
+        status: "IN STOCK"
+    },
+    {
+        details: "macbook pro 11111",
+        quantity: "10",
+        price: "$999",
+        dateAdded: "May 26, 2019. 6:30PM",
+        lastUpdated: "May 29, 2019. 6:30PM",
+        amountSold: "123",
+        status: "IN STOCK"
+    },
+]
 function Cart() {
     return (
         <div>
@@ -10,8 +49,9 @@ function Cart() {
                     <SideBarComponent type={"buyer"}/>
                 </div>
                 <div className={"column"}>
-                    <div className={"container"}>
-                        Cart
+                    <div>
+                        <CartHeader/>
+                        <CartTable items={rows}/>
                     </div>
                 </div>
             </div>
