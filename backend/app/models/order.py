@@ -3,12 +3,12 @@ from flask import current_app as app
 class Order:
     def __init__(self, id, user_id, product_id, quantity, final_price, time_stamp, fulfillment_status):
         self.id = id
-        self.uid = user_id
-        self.pid = product_id
-        self.quant = quantity
-        self.fin_price = final_price
-        self.time = time_stamp
-        self.status = fulfillment_status
+        self.user_id = user_id
+        self.product_id = product_id
+        self.quantity = quantity
+        self.final_price = final_price
+        self.time_stamp = time_stamp
+        self.fulfillment_status = fulfillment_status
 
     @staticmethod
     def get(id, uid, pid):
@@ -25,11 +25,11 @@ AND product_id = :pid
     @staticmethod
     def get_all_user(uid):
         rows = app.db.execute('''
-SELECT *
-FROM OrderItem
+SELECT o.id, o.user_id, o.product_id, o.quantity, o.final_price, o.time_stamp, o.fulfillment_status
+FROM OrderItem as o
 INNER JOIN Products
-ON Products.id = OrderItem.product_id
-WHERE OrderItem.user_id = :uid
+ON Products.id = o.product_id
+WHERE o.user_id = :uid
 ''', uid=uid)
         return [Order(*row) for row in rows]
 

@@ -4,12 +4,12 @@ from flask import Flask, request, jsonify, flash, Blueprint
 # Configure application
 cart = Blueprint('cart',__name__)
 
-@cart.route("/api_user_cart", methods=["GET"])
+@cart.route("/api_user_cart/", methods=["GET"])
 def all_products():
     cart = Cart.get_all_user(request.args["user_id"])
     return json.dumps([item.__dict__ for item in cart])
 
-@cart.route("/api/add_cart", methods=["POST"])
+@cart.route("/api/add_cart/", methods=["POST"])
 def add_to_cart():
     '''
     '''
@@ -19,7 +19,7 @@ def add_to_cart():
         return None
     return jsonify(product = request.args['product_id'])
 
-@cart.route("/api/update_cart_quantity", methods=["POST"])
+@cart.route("/api/update_cart_quantity/", methods=["POST"])
 def update_quantity():
     '''
     '''
@@ -32,7 +32,7 @@ def update_quantity():
         return None
     return jsonify(product = request.args['product_id'])
 
-@cart.route("/api/remove_cart_item", methods=["POST"])
+@cart.route("/api/remove_cart_item/", methods=["POST"])
 def remove_item():
     '''
     '''

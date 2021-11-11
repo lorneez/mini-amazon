@@ -9,7 +9,7 @@ saved = Blueprint('saved',__name__)
 def all_saved():
     print("connected")
     saved = Saved.get_all_user(request.args["user_id"])
-    return json.dumps([item.__dict__ for item in saved])
+    return json.dumps([item.__dict__ for item in saved], default=str)
 
 @saved.route("/api/add_saved/", methods=["POST"])
 def add_saved_item():
@@ -24,7 +24,7 @@ def add_saved_item():
         return None
     return jsonify(product = request.args['product_id'])
 
-@saved.route("/api/remove_saved_item", methods=["POST"])
+@saved.route("/api/remove_saved_item/", methods=["POST"])
 def remove_item():
     '''
     '''
