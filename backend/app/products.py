@@ -1,6 +1,7 @@
 from flask import Flask, request, Blueprint
 from backend.app.models.product_review import PReview
 from backend.app.models.product import Product
+import json
 
 
 # Configure application

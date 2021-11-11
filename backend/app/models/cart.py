@@ -1,5 +1,5 @@
 from flask import current_app as app
-from product import Product
+from backend.app.models.product import Product
 
 class Cart:
     def __init__(self, id, user_id, product_id, quantity):

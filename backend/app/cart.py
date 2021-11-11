@@ -1,4 +1,4 @@
-from models.cart import Cart
+from backend.app.models.cart import Cart
 from flask import Flask, request, jsonify, flash, Blueprint
 
 # Configure application

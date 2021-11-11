@@ -1,4 +1,4 @@
-from models.svaed import Saved
+from backend.app.models.saved import Saved
 from flask import Flask, request, jsonify, flash, Blueprint
 
 # Configure application

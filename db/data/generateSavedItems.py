@@ -5,8 +5,8 @@ import datetime
 # id,user_id,product_id,time_stamp
 
 if __name__ == "__main__":
-    file = open("./backend/db/data/SavedItem.csv", "w")
-    file.write("id,user_id,product_id,time_stamp\n")
+    file = open("./db/data/SavedItem.csv", "w")
+    # file.write("id,user_id,product_id,time_stamp\n")
 
     # generate data for 50 saved items
     for saved_id in range(50):

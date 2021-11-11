@@ -5,8 +5,8 @@ import datetime
 # ID,name,category,price,available_quantity,inventory_status,image_id
 
 if __name__ == "__main__":
-    file = open("./backend/db/data/Products.csv", "w")
-    file.write("id,name,seller_id,price,available_quantity,inventory_status,category,image_id\n")
+    file = open("./db/data/Products.csv", "w")
+    # file.write("id,name,seller_id,price,available_quantity,inventory_status,category,image_id\n")
 
     # generate data for 50 products
     for product_id in range(50):

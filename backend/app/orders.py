@@ -1,4 +1,4 @@
-from models.order import Order
+from backend.app.models.order import Order
 from flask import Flask, request, jsonify, flash, Blueprint
 
 # Configure application
@@ -16,7 +16,7 @@ def single_order():
 
 @orders.route("/api/add_order_item", methods=["POST"])
 def add_order():
-    updated_prod =Order.add_order(request.args['id'], request.args['user_id'], request.args['product_id'], request.args['quantity']], request.args['final_price']], request.args['fulfillment_status'])
+    updated_prod =Order.add_order(request.args['id'], request.args['user_id'], request.args['product_id'], request.args['quantity'], request.args['final_price'], request.args['fulfillment_status'])
     if updated_prod is None:
         flash('Could not add product to orders')
         return None

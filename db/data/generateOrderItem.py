@@ -5,8 +5,8 @@ import datetime
 # ID,uid,productId,quantity,final_price,time_stamp,fulfillment_status
 
 if __name__ == "__main__":
-    file = open("./backend/db/data/OrderItem.csv", "w")
-    file.write("id,user_id,product_id,quantity,final_price,time_stamp,fulfillment_status\n")
+    file = open("./db/data/OrderItem.csv", "w")
+    # file.write("id,user_id,product_id,quantity,final_price,time_stamp,fulfillment_status\n")
 
     # generate data for 50 orders
     for order_id in range(50):

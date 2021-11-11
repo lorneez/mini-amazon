@@ -1,4 +1,3 @@
-id,name,seller_id,price,available_quantity,inventory_status,category,image_id
 0,product0,0,10,10,True,category0,0
 1,product1,2,10,10,True,category1,1
 2,product2,4,10,10,True,category2,2

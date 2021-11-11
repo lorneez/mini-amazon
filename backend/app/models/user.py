@@ -5,16 +5,18 @@ import datetime
 from flask_login import UserMixin
 
 class User(UserMixin):
-    def __init__(self, id, email, firstname, lastname):
+    def __init__(self, id, email, name, is_seller, balance, address):
         self.id = id
         self.email = email
-        self.firstname = firstname
-        self.lastname = lastname
+        self.name = name
+        self.is_seller = is_seller
+        self.balance = balance
+        self.address = address
 
     @staticmethod
     def get_by_auth(email, password):
         rows = app.db.execute("""
-SELECT password, id, email, name
+SELECT password, id, email, name, is_seller, balance, address
 FROM Users
 WHERE email = :email
 """,

@@ -14,7 +14,7 @@ class Product:
     @staticmethod
     def get(id):
         rows = app.db.execute('''
-SELECT id, name, price, available_quantity, inventory_status, category, image_id
+SELECT *
 FROM Products
 WHERE id = :id
 ''',
@@ -24,9 +24,9 @@ WHERE id = :id
     @staticmethod
     def get_all(available=True):
         rows = app.db.execute('''
-SELECT id, name, price, available_quantity, inventory_status, category, image_id
+SELECT *
 FROM Products
-WHERE available > 0
+WHERE available_quantity > 0
 ''')
         return [Product(*row) for row in rows]
 
@@ -42,7 +42,7 @@ WHERE seller_id = :seller_id
     @staticmethod
     def get_category(category):
         rows = app.db.execute('''
-SELECT id, name, price, available_quantity, inventory_status, category, image_id
+SELECT *
 FROM Products
 WHERE category = :category
 ''', category=category)
