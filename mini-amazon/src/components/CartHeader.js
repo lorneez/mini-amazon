@@ -8,7 +8,9 @@ const styles = {
         marginLeft: "40px",
         display: 'flex',
         flexDirection: 'row',
-        gap: '250px'
+        gap: '250px',
+        fontWeight: '900',
+        fontSize: '25px'
     },
     button:{
         width: '100px',

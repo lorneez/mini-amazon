@@ -1,9 +1,16 @@
 import React from "react";
 
 function DashBoardHeader(props) {
+
+    const styles = {
+        header: {
+            fontWeight: "Bold"
+        }
+    }
+    
     return(
     <div class = "card">
-        <div class="card-content">
+        <div class="card-content" style = {styles.header}>
             <div class="content">
                 WELCOME LORNE
             </div>
