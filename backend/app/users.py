@@ -1,15 +1,15 @@
-from flask import flash, request, jsonify, Flask
+from flask import flash, request, jsonify, Flask, Blueprint
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_babel import _, lazy_gettext as _l
 from datetime import timedelta
 from models.user import User
 
-app = Flask(__name__)
+users = Blueprint('users',__name__)
 
 # @bp.route('/login', methods=['GET', 'POST'])
 # return the login status, token, and time in seconds the time of expiration of token
-@app.route("/api/user_login", methods=["POST"])
+@users.route("/api/user_login", methods=["POST"])
 def login():
     '''
     if a valid user, this will provide info to front end necessary for logging the user in
@@ -26,7 +26,7 @@ def login():
         token, expiration = User.encode_auth_token(request.args['email'])
     return jsonify(login_status=status, auth_token = token, expir = expiration)
 
-@app.route("/api/create_user", methods=["POST"])
+@users.route("/api/create_user", methods=["POST"])
 def register():
     '''
     '''

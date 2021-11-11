@@ -1,15 +1,15 @@
 from models.svaed import Saved
-from flask import Flask, request, jsonify, flash
+from flask import Flask, request, jsonify, flash, Blueprint
 
 # Configure application
-app = Flask(__name__)
+saved = Blueprint('saved',__name__)
 
-@app.route("/api/user_all_saved", methods=["GET"])
+@saved.route("/api/user_all_saved", methods=["GET"])
 def all_saved():
     saved = Saved.get_all_user(request.args["user_id"])
     return json.dumps([item.__dict__ for item in saved])
 
-@app.route("/api/add_saved", methods=["POST"])
+@saved.route("/api/add_saved", methods=["POST"])
 def add_saved_item():
     '''
     '''
@@ -22,7 +22,7 @@ def add_saved_item():
         return None
     return jsonify(product = request.args['product_id'])
 
-@app.route("/api/remove_saved_item", methods=["POST"])
+@saved.route("/api/remove_saved_item", methods=["POST"])
 def remove_item():
     '''
     '''
