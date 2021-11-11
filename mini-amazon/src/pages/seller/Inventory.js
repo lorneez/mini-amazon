@@ -39,12 +39,16 @@ function Inventory() {
     const [data, setData] = useState([]);
 
     useEffect(async () => {
-        // const result = await axios(
-        //     'http://localhost:5000/api/all_products',
-        // );
-
+        const result = await axios(
+            'http://localhost:5000/api/all_products/', {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        );
+        console.log(result)
         // setData(result.data);
-        setData(rows)
+        // setData(rows)
     });
 
     return (
@@ -55,7 +59,7 @@ function Inventory() {
                 </div>
                 <div className={"column"}>
                     <div>
-                        <InventoryTable items={data}/>
+                        <InventoryTable items={rows}/>
                     </div>
                 </div>
             </div>
