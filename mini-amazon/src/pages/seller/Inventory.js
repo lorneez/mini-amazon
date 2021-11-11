@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import SideBarComponent from "../../components/SideBarComponent"
 import InventoryTable from "../../components/seller/InventoryTable";
+import axios from 'axios';
 
 const rows = [
     {
@@ -34,6 +35,18 @@ const rows = [
 ]
 
 function Inventory() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(async () => {
+        // const result = await axios(
+        //     'http://localhost:5000/api/all_products',
+        // );
+
+        // setData(result.data);
+        setData(rows)
+    });
+
     return (
         <div>
             <div className={"columns"}>
@@ -42,7 +55,7 @@ function Inventory() {
                 </div>
                 <div className={"column"}>
                     <div>
-                        <InventoryTable items={rows}/>
+                        <InventoryTable items={data}/>
                     </div>
                 </div>
             </div>
