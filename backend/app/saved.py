@@ -1,15 +1,17 @@
 from backend.app.models.saved import Saved
 from flask import Flask, request, jsonify, flash, Blueprint
+import json
 
 # Configure application
 saved = Blueprint('saved',__name__)
 
-@saved.route("/api/user_all_saved", methods=["GET"])
+@saved.route("/api/user_all_saved/", methods=["GET"])
 def all_saved():
+    print("connected")
     saved = Saved.get_all_user(request.args["user_id"])
     return json.dumps([item.__dict__ for item in saved])
 
-@saved.route("/api/add_saved", methods=["POST"])
+@saved.route("/api/add_saved/", methods=["POST"])
 def add_saved_item():
     '''
     '''

@@ -22,16 +22,14 @@ WHERE id = :id
     @staticmethod
     def get_all_user(uid):
         rows = app.db.execute('''
-SELECT *
-FROM Products
-WHERE id IN (
-    SELECT product_id
-    FROM SavedItem
-    WHERE user_id = :uid
-)
-ORDER BY time_stamp DESCENDING
+SELECT p.id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
+FROM Products AS p
+INNER JOIN SavedItem
+ON SavedItem.product_id = p.id
+WHERE SavedItem.user_id = :uid
+ORDER BY time_stamp DESC
 ''', uid=uid)
-        return [Saved(*row) for row in rows]
+        return [Product(*row) for row in rows]
 
     @staticmethod
     def product_exists(uid, pid):

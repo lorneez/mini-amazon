@@ -7,12 +7,13 @@ users = Blueprint('users',__name__)
 
 # @bp.route('/login', methods=['GET', 'POST'])
 # return the login status, token, and time in seconds the time of expiration of token
-@users.route("/api/user_login", methods=["POST"])
+@users.route("/api/user_login/", methods=["POST"])
 def login():
     '''
     if a valid user, this will provide info to front end necessary for logging the user in
     return: json object with login status, encoded jwt token, expiration time (datetime)
     '''
+    print("connection made")
     status=False
     token = None
     expiration = None
@@ -24,7 +25,7 @@ def login():
         token, expiration = User.encode_auth_token(request.args['email'])
     return jsonify(login_status=status, auth_token = token, expir = expiration)
 
-@users.route("/api/create_user", methods=["POST"])
+@users.route("/api/create_user/", methods=["POST"])
 def register():
     '''
     '''
