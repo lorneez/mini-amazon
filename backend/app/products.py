@@ -1,6 +1,7 @@
-from models.product import Product
-from models.product_review import PReview
 from flask import Flask, request
+from backend.app.models.product_review import PReview
+from backend.app.models.product import Product
+
 
 # Configure application
 from  backend.app import create_app

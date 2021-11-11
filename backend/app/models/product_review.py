@@ -1,5 +1,5 @@
 from flask import current_app as app
-from product import Product
+from backend.app.models.product import Product
 
 class PReview:
     def __init__(self, from_id, product_id, time_stamp, review_text, numDownVotes, numUpVotes, numStars):
