@@ -7,8 +7,9 @@ from  backend.app import create_app
 
 app = create_app()
 
-@app.route("/api/all_products", methods=["GET"])
+@app.route("/api/all_products/", methods=["GET"])
 def all_products():
+    print("Successfully called!")
     products = Product.get_all()
     return json.dumps([item.__dict__ for item in products])
 
