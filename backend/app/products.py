@@ -3,7 +3,9 @@ from models.product_review import PReview
 from flask import Flask, request
 
 # Configure application
-app = Flask(__name__)
+from  backend.app import create_app
+
+app = create_app()
 
 @app.route("/api/all_products", methods=["GET"])
 def all_products():
