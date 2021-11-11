@@ -3,7 +3,7 @@ import React from 'react'
 // import * as AiIcons from 'react-icons/Ai'
 
 
-function renderDescription(description) {
+function ProductDetails(description) {
     return (
         <section class="section is-large">
             <h1 class="title"> Product description</h1>
@@ -13,4 +13,6 @@ function renderDescription(description) {
         </section>
     )
 }
+
+export default ProductDetails;
 

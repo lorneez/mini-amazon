@@ -35,4 +35,26 @@ export const products = [
         rating: 5
     }
 ]
+
+export const reviews = [
+    {
+        id: 1,
+        userName: "Steph C.",
+        title: "Oculus Quest All-in-one VR Gaming Headset – 64GB",
+        image: "https://images-na.ssl-images-amazon.com/images/I/31pEe2taIPL._AC_US327_FMwebp_QL65_.jpg",
+        description: "Came in used condition",
+        rating: 1,
+        date: "October 1, 2020"
+    },
+    {
+        id: 2,
+        userName: "Lebron J.",
+        title: "Oculus Quest All-in-one VR Gaming Headset – 64GB",
+        image: "https://images-na.ssl-images-amazon.com/images/I/31pEe2taIPL._AC_US327_FMwebp_QL65_.jpg",
+        description: "I was concerned.",
+        rating: 5,
+        date: "November 10, 2021"
+    },
+]
+
 export const bannerImg = "https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg"
