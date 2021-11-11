@@ -9,7 +9,6 @@ products = Blueprint('products',__name__)
 
 @products.route("/api/all_products/", methods=["GET"])
 def all_products():
-    print("Successfully called!")
     products = Product.get_all()
     return json.dumps([item.__dict__ for item in products])
 
