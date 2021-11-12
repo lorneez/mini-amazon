@@ -1,0 +1,72 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      height:100vh;
+}
+
+.emailbox {
+    position: absolute;
+    width: 381px;
+    height: 37px;
+    left: 726px;
+    bottom: 585px;
+
+    /* Bold 19 (0.4 px) */
+
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.4px;
+
+    color: #000000;
+}
+
+.welcometext {
+    position: absolute;
+    width: 894px;
+    height: 208px;
+    left: 462px;
+    top: 147px;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 55px;
+    line-height: 67px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.017em;
+
+    color: #000000;
+}
+
+.text {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 55px;
+    line-height: 67px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.017em;
+
+    color: #000000;
+}
+
+.landingbutton {
+    position: absolute;
+    left: 40%;
+    right: 60%;
+    top: 90%;
+    bottom: 10%;
+    background: #E1E1E3;
+    border-radius: 99px;
+}
+

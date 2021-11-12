@@ -32,8 +32,8 @@ function LandingPage() {
                     <SideBarComponent type={"landing"}/>
                 </div>
                 <div className={"column"}>
-                    <div className={"container"}>
-                        Landing Page
+                    <div className={"container has-text-centered is-size-1 has-text-weight-semibold pt-6 welcometext"}>
+                        Welcome to Zest!
                     </div>
                 </div>
             </div>

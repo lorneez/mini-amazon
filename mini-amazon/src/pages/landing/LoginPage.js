@@ -1,8 +1,9 @@
 import React, {useState, useContext} from "react"
 import { useHistory } from "react-router-dom";
-
+import './Style.css';
 import SideBarComponent from "../../components/SideBarComponent";
 import {AuthContext} from "../../contexts/AuthContext";
+import PasswordInput from "../../components/PasswordInput";
 
 function LoginPage() {
     const history = useHistory();
@@ -32,24 +33,23 @@ function LoginPage() {
 
     return (
         <div>
-            <div className={"columns"}>
+            <div className={"columns center"}>
                 <div className={"column is-one-fifth"}>
                     <SideBarComponent type={"landing"}/>
                 </div>
-                <div className={"column"}>
+                <div className={"column center"}>
+                    <flexbox className={"is-align-items-end"}>
                     <div className={"container"}>
                         Login Page
-                        <div>
-                            <input className="input is-primary" value={username} type="text" placeholder="Username"
+                        <div style={{width: 400}}>
+                            <input className="input is-primary"  value={username} type="text" placeholder="Username"
                                    onChange={(e)=>setUsername(e.target.value)}
                             />
-                            <input className="input is-primary" value={password} type="text" placeholder="Password"
-                                   onChange={(e)=>setPassword(e.target.value)}
-                            />
-                            <button className="button" onClick={() => handleSubmit()}>Login</button>
+                            <PasswordInput value = {password}/>
+                            <button className="button landingbutton" onClick={() => handleSubmit()}>Login</button>
                         </div>
-                        Username: {username}
                     </div>
+                    </flexbox>
                 </div>
             </div>
         </div>
