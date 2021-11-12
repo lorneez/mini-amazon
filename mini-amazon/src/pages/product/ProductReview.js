@@ -2,8 +2,24 @@ import React from "react"
 import Review from "../../components/Review";
 import { reviews } from './testProducts.js';
 import SideBarComponent from "../../components/SideBarComponent"
+import axios from "axios";
 
 function ProductReview() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(async () => {
+        const result = await axios(
+            'http://localhost:5000/api/all_product_reviews/', {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        );
+        console.log(result.data)
+        setData(result.data);
+    }, []);
+
     return (
         <div>
             <div className={"columns"}>
@@ -16,7 +32,7 @@ function ProductReview() {
                     </div>
                     <div className={"container"}>
                         <div className="ProductReview-Row">
-                            {reviews.map(item => {
+                            {data.map(item => {
                                 return (
                                     <Review
                                         id={item.id}

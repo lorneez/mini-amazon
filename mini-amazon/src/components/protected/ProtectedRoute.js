@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from "react"
 import {AuthContext} from "../../contexts/AuthContext";
 import LoadingComponent from "./LoadingComponent";
 import {clearAuthentication, getAuthentication, validateAuthentication} from "../../api/localStorage";
+import ProtectedComponent from "./ProtectedComponent";
 
 function ProtectedRoute(props) {
     const auth = useContext(AuthContext);
@@ -45,7 +46,13 @@ function ProtectedRoute(props) {
         }
         else {
             if(protectedComponent) {
-                return props.component()
+                // return props.component()
+                return (
+                    <div>
+                        <ProtectedComponent component={props.component}></ProtectedComponent>
+                    </div>  
+                )
+                
             }
             else {
                 return <div>invalid auth</div>
@@ -53,11 +60,8 @@ function ProtectedRoute(props) {
         }
     }
 
-    return (
-        <div>
-            {renderPage()}
-        </div>
-    )
+    return renderPage()
+    
 }
 
 export default ProtectedRoute
