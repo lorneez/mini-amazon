@@ -2,6 +2,8 @@ from flask import flash, request, jsonify, Flask, Blueprint
 from werkzeug.urls import url_parse
 from datetime import timedelta
 from backend.app.models.user import User
+from backend.app.models.seller_review import SReview
+import json
 
 users = Blueprint('users',__name__)
 
@@ -38,6 +40,11 @@ def register():
         return None
     flash('Congratulations! You are now registered')
     return jsonify(email = request.args['email'])
+
+@users.route("/api/all_seller_reviews/", methods=["GET"])
+def all_product_reviews():
+    reviews = SReview.get_all_for_seller(request.args['seller_id'])
+    return json.dumps([r.__dict__ for r in reviews], default=str)
 
 # @bp.route('/logout')
 # def logout():

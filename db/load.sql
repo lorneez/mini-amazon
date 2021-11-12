@@ -4,3 +4,4 @@
 \COPY SavedItem FROM '~/mini-amazon/db/data/SavedItem.csv' WITH DELIMITER ',' NULL '' CSV
 \COPY CartItem FROM '~/mini-amazon/db/data/CartItem.csv' WITH DELIMITER ',' NULL '' CSV
 \COPY ProductReview FROM '~/mini-amazon/db/data/ProductReview.csv' WITH DELIMITER ',' NULL '' CSV
+\COPY SellerReview FROM '~/mini-amazon/db/data/SellerReview.csv' WITH DELIMITER ',' NULL '' CSV

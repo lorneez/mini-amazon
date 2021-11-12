@@ -17,7 +17,7 @@ class PReview:
 SELECT *
 FROM ProductReview
 WHERE from_id = :uid
-AND product_id = := pid
+AND product_id = :pid
 ''',
                               uid=uid, pid=pid)
         return PReview(*(rows[0])) if rows is not None else None
