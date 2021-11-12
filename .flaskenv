@@ -6,5 +6,5 @@ FLASK_RUN_PORT=5000
 SECRET_KEY='ssq26oo85384q99gka972ke42gk6x44d06oq5g_1i1hggjd6uc'
 
 DB_NAME=amazon
-DB_USER=jcho_1260
+DB_USER=vagrant
 DB_PASSWORD=dbpasswd

@@ -38,6 +38,18 @@ function SideBarComponent(props) {
         {
             route: "/orders",
             name: "Orders"
+        },
+        {
+            route: "/product/review",
+            name: "Product Review"
+        },
+        {
+            route: "/product/create",
+            name: "Product Create"
+        },
+        {
+            route: "/seller/dashboard",
+            name: "Go To Seller"
         }
     ]
 
@@ -57,6 +69,14 @@ function SideBarComponent(props) {
         {
             route: "/seller/reviews",
             name: "Reviews"
+        },
+        {
+            route: "/seller/create-review",
+            name: "Create Review"
+        },
+        {
+            route: "/dashboard",
+            name: "Go To Buyer"
         }
     ]
 
@@ -74,9 +94,9 @@ function SideBarComponent(props) {
                 {links.map(function(link, index){
                     return (
                         <li key={index}>
-                            <Link style={{color: "white"}} to={link.route}>
+                            <a style={{color: "white"}} href={link.route}>
                                 {link.name}
-                            </Link>
+                            </a>
                         </li>
                     )
                 })}
