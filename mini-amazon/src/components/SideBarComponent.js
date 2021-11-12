@@ -57,6 +57,10 @@ function SideBarComponent(props) {
         {
             route: "/seller/reviews",
             name: "Reviews"
+        },
+        {
+            route: "/seller/create-review",
+            name: "Create Review"
         }
     ]
 
@@ -74,9 +78,9 @@ function SideBarComponent(props) {
                 {links.map(function(link, index){
                     return (
                         <li key={index}>
-                            <Link style={{color: "white"}} to={link.route}>
+                            <a style={{color: "white"}} href={link.route}>
                                 {link.name}
-                            </Link>
+                            </a>
                         </li>
                     )
                 })}
