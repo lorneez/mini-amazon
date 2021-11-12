@@ -1,6 +1,7 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import SideBarComponent from "../../components/SideBarComponent"
 import ReviewTable from "../../components/seller/ReviewTable";
+import axios from "axios";
 
 const rows = [
     {test: 1},
@@ -27,6 +28,23 @@ const rows = [
 ]
 
 function Reviews() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(async () => {
+        console.log("called")
+        const result = await axios(
+            'http://localhost:5000/api/all_seller_reviews/?seller_id=1', {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        );
+        setData(result.data);
+        console.log(result.data)
+    }, []);
+
+
     return (
         <div>
             <div className={"columns"}>
@@ -45,7 +63,7 @@ function Reviews() {
                         </div>
                     </section>
                     <div className={"container"}>
-                        <ReviewTable items={rows}/>
+                        <ReviewTable items={data}/>
                     </div>
                 </div>
             </div>
