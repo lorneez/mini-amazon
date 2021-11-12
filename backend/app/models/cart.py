@@ -1,6 +1,20 @@
 from flask import current_app as app
 from backend.app.models.product import Product
 
+class CartProduct:
+    def __init__(self, cid, cquant, uid, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage):
+        self.cart_id = cid
+        self.cart_item_quantity = cquant
+        self.user_id = uid
+        self.product_id = pid
+        self.product_name = pname
+        self.product_seller = pseller
+        self.product_price = pprice
+        self.product_quantity = pquant
+        self.product_staus = pstat
+        self.product_category = pcat
+        self.product_image = pimage 
+
 class Cart:
     def __init__(self, id, user_id, product_id, quantity):
         self.id = id
@@ -18,18 +32,17 @@ WHERE id = :id
                               id=id)
         return Product(*(rows[0])) if rows is not None else None
 
+# self, cid, cquant, uid, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage
     @staticmethod
     def get_all_user(uid):
         rows = app.db.execute('''
-SELECT *
-FROM Products
-WHERE id IN (
-    SELECT product_id
-    FROM CartItem
-    WHERE user_id = :uid
-)
+SELECT c.id, c.quantity, c.user_id, c.product_id,  p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
+FROM Products AS p
+INNER JOIN CartItem AS c
+ON p.id = c.product_id
+WHERE user_id = :uid
 ''', uid=uid)
-        return [Cart(*row) for row in rows]
+        return [CartProduct(*row) for row in rows]
 
     @staticmethod
     def cart_item_exists(uid, pid):

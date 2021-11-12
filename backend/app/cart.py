@@ -1,10 +1,11 @@
 from backend.app.models.cart import Cart
 from flask import Flask, request, jsonify, flash, Blueprint
+import json
 
 # Configure application
 cart = Blueprint('cart',__name__)
 
-@cart.route("/api_user_cart/", methods=["GET"])
+@cart.route("/api/user_cart/", methods=["GET"])
 def all_products():
     cart = Cart.get_all_user(request.args["user_id"])
     return json.dumps([item.__dict__ for item in cart])

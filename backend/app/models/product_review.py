@@ -1,6 +1,23 @@
 from flask import current_app as app
 from backend.app.models.product import Product
 
+class PReviewProd:
+    def __init__(self, from_id, rtime, rtext, down, up, stars, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage):
+        self.from_id = from_id
+        self.post_time = rtime
+        self.text = rtext
+        self.down_votes = down
+        self.up_votes = up
+        self.stars = stars
+        self.product_id = pid
+        self.product_name = pname
+        self.product_seller = pseller
+        self.product_price = pprice
+        self.product_quantity = pquant
+        self.product_staus = pstat
+        self.product_category = pcat
+        self.product_image = pimage  
+
 class PReview:
     def __init__(self, from_id, product_id, time_stamp, review_text, numDownVotes, numUpVotes, numStars):
         self.uid = from_id
@@ -22,15 +39,18 @@ AND product_id = := pid
                               uid=uid, pid=pid)
         return PReview(*(rows[0])) if rows is not None else None
 
+# self, from_id, rtime, rtext, down, up, stars, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage
     @staticmethod
     def get_all_for_product(pid):
         rows = app.db.execute('''
-SELECT *
-FROM ProductReview
-WHERE product_id=:pid
-ORDER BY numUpVotes DESCENDING, time_stamp DESCENDING
+SELECT pr.from_id, pr.time_stamp, pr.review_text, pr.numDownVotes, pr.numUpVotes, pr.numStars, p.id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
+FROM ProductReview AS pr
+INNER JOIN Products AS p
+ON pr.product_id = p.id
+WHERE pr.product_id=:pid
+ORDER BY numUpVotes DESC, time_stamp DESC
 ''', pid=pid)
-        return [PReview(*row) for row in rows]
+        return [PReviewProd(*row) for row in rows]
 
     @staticmethod
     def product_review_exists(uid, pid):
