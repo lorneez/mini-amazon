@@ -57,6 +57,10 @@ function SideBarComponent(props) {
         {
             route: "/seller/reviews",
             name: "Reviews"
+        },
+        {
+            route: "/seller/create-review",
+            name: "Create Review"
         }
     ]
 

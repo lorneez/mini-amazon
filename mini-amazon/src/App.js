@@ -18,6 +18,7 @@ import Inventory from "./pages/seller/Inventory";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import { AuthStore } from './contexts/AuthContext';
 import SideBarComponent from "./components/SideBarComponent";
+import CreateReview from "./pages/seller/CreateReview";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                     <ProtectedRoute path="/seller/inventory" exact component={Inventory} />
                     <ProtectedRoute path="/seller/orders" exact component={SellerOrders} />
                     <ProtectedRoute path="/seller/reviews" exact component={Reviews} />
+                    <ProtectedRoute path="/seller/create-review" exact component={CreateReview} />
                 </Switch>
             </BrowserRouter>
         </AuthStore>
