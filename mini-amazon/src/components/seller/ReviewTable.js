@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import InventoryItem from "./InventoryItem";
+import ReviewItem from "./ReviewItem";
 
 function ReviewTable(props) {
 
@@ -59,7 +59,7 @@ function ReviewTable(props) {
 
     return (
         <div className={"table"}>
-            <div className={"columns m-2"} style={{background: "#F2AA56", borderRadius: "5px"}}>
+            <div className={"columns m-2 p-3"} style={{background: "#F2AA56", borderRadius: "5px"}}>
                 Reviews
             </div>
             {renderPage()}
