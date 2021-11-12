@@ -4,10 +4,11 @@ import InventoryItem from "./InventoryItem";
 function InventoryTable(props) {
 
     const [page, setPage] = useState(1)
+    const itemsPerPage = 6;
 
     function renderPage() {
-        const start = (page - 1) * 10
-        const end = Math.min(props.items.length, page * 10)
+        const start = (page - 1) * itemsPerPage
+        const end = Math.min(props.items.length, page * itemsPerPage)
         const slicedItems = props.items.slice(start, end);
         console.log(slicedItems)
         return (
@@ -26,13 +27,13 @@ function InventoryTable(props) {
     }
 
     function handleNext() {
-        if(page < (props.items.length)/10 + 1) {
+        if(page < (props.items.length)/itemsPerPage + 1) {
             setPage(page + 1)
         }
     }
 
     function renderButtons() {
-        if(page > 1 && page < (props.items.length)/10 + 1) {
+        if(page > 1 && page < (props.items.length)/itemsPerPage + 1) {
             return (
                 <div>
                     <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
