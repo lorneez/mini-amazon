@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Review from "../../components/Review";
 import { reviews } from './testProducts.js';
 import SideBarComponent from "../../components/SideBarComponent"
@@ -10,7 +10,7 @@ function ProductReview() {
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_product_reviews/', {
+            'http://127.0.0.1:5000/api/all_product_reviews/?product_id=1', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -35,13 +35,13 @@ function ProductReview() {
                             {data.map(item => {
                                 return (
                                     <Review
-                                        id={item.id}
+                                        id={item.product_id}
                                         userName={item.userName}
-                                        title={item.title}
-                                        image={item.image}
-                                        description={item.description}
-                                        rating={item.rating}
-                                        date={item.date}
+                                        title={item.product_name}
+                                        image={item.product_image}
+                                        description={item.text}
+                                        rating={item.stars}
+                                        date={item.post_time}
                                     />
                                 )
                             })}

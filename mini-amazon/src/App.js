@@ -17,13 +17,9 @@ import SellerOrders from "./pages/seller/SellerOrders";
 import Inventory from "./pages/seller/Inventory";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import { AuthStore } from './contexts/AuthContext';
-<<<<<<< HEAD
-import ReactDOM from 'react-dom'
-=======
 import SideBarComponent from "./components/SideBarComponent";
 import CreateReview from "./pages/seller/CreateReview";
 
->>>>>>> 2646a29f68e6516b32f620c821d98daed6b39067
 
 function App() {
     return (
