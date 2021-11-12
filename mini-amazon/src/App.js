@@ -17,7 +17,13 @@ import SellerOrders from "./pages/seller/SellerOrders";
 import Inventory from "./pages/seller/Inventory";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import { AuthStore } from './contexts/AuthContext';
+<<<<<<< HEAD
 import ReactDOM from 'react-dom'
+=======
+import SideBarComponent from "./components/SideBarComponent";
+import CreateReview from "./pages/seller/CreateReview";
+
+>>>>>>> 2646a29f68e6516b32f620c821d98daed6b39067
 
 function App() {
     return (
@@ -39,6 +45,7 @@ function App() {
                     <ProtectedRoute path="/seller/inventory" exact component={Inventory} />
                     <ProtectedRoute path="/seller/orders" exact component={SellerOrders} />
                     <ProtectedRoute path="/seller/reviews" exact component={Reviews} />
+                    <ProtectedRoute path="/seller/create-review" exact component={CreateReview} />
                 </Switch>
             </BrowserRouter>
         </AuthStore>

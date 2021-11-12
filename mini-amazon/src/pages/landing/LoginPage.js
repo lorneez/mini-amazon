@@ -22,7 +22,7 @@ function LoginPage() {
             payload: {
                 isSignedIn: true,
                 username: username,
-                userType: "seller",
+                userType: "buyer",
                 token: "jwt-token",
                 expireDate: Math.floor(new Date().getTime() / 1000 + 2000)
             }

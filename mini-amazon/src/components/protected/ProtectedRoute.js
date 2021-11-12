@@ -46,13 +46,11 @@ function ProtectedRoute(props) {
         }
         else {
             if(protectedComponent) {
-                // return props.component()
                 return (
                     <div>
                         <ProtectedComponent component={props.component}></ProtectedComponent>
-                    </div>  
+                    </div>
                 )
-                
             }
             else {
                 return <div>invalid auth</div>
@@ -61,7 +59,6 @@ function ProtectedRoute(props) {
     }
 
     return renderPage()
-    
 }
 
 export default ProtectedRoute
