@@ -63,6 +63,16 @@ function SellerOrders() {
                     <SideBarComponent type={"seller"}/>
                 </div>
                 <div className={"column"}>
+                    <section className="hero">
+                        <div className="hero-body">
+                            <p className="title">
+                                Orders
+                            </p>
+                            <p className="subtitle">
+                                Here are the orders you currently have!
+                            </p>
+                        </div>
+                    </section>
                     <div className={"container"}>
                         <OrderTable items={data}/>
                     </div>

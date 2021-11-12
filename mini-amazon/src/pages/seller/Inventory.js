@@ -57,6 +57,16 @@ function Inventory() {
                     <SideBarComponent type={"seller"}/>
                 </div>
                 <div className={"column"}>
+                    <section className="hero">
+                        <div className="hero-body">
+                            <p className="title">
+                                Inventory
+                            </p>
+                            <p className="subtitle">
+                                Here are the products you currently have!
+                            </p>
+                        </div>
+                    </section>
                     <div className={"container"}>
                         <InventoryTable items={data}/>
                     </div>

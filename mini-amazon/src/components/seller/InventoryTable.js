@@ -9,7 +9,7 @@ function InventoryTable(props) {
         const start = (page - 1) * 10
         const end = Math.min(props.items.length, page * 10)
         const slicedItems = props.items.slice(start, end);
-
+        console.log(slicedItems)
         return (
             <div>
                 {slicedItems.map((item)=>(
@@ -35,22 +35,22 @@ function InventoryTable(props) {
         if(page > 1 && page < (props.items.length)/10 + 1) {
             return (
                 <div>
-                    <button className="button" onClick={() => handlePrev()}>Prev</button>
-                    <button className="button" onClick={() => handleNext()}>Next</button>
+                    <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
+                    <button className="button m-2" onClick={() => handleNext()}>Next</button>
                 </div>
             )
         }
         if(page === 1) {
             return (
                 <div>
-                    <button className="button" onClick={() => handleNext()}>Next</button>
+                    <button className="button m-2" onClick={() => handleNext()}>Next</button>
                 </div>
             )
         }
         else {
             return (
                 <div>
-                    <button className="button" onClick={() => handlePrev()}>Prev</button>
+                    <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
                 </div>
             )
         }
@@ -58,7 +58,7 @@ function InventoryTable(props) {
 
     return (
         <div className={"table"}>
-            <div className={"columns"}>
+            <div className={"columns m-2"} style={{background: "#F2AA56", borderRadius: "5px"}}>
                 <div className={"column"}>
                     Product Details
                 </div>

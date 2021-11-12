@@ -3,7 +3,7 @@ import React from "react";
 function InventoryItem(props) {
     return (
         <div>
-            <div className={"columns"}>
+            <div className={"columns m-2"} style={{background: "#E1E1E3", borderRadius: "5px"}}>
                 <div className={"column"}>
                     {props.item.name}
                 </div>
@@ -17,7 +17,7 @@ function InventoryItem(props) {
                     Date Created
                 </div>
                 <div className={"column"}>
-                    Status
+                    {props.item.inventory_status ? <div>ACTIVE</div> : <div>INACTIVE</div>}
                 </div>
             </div>
         </div>

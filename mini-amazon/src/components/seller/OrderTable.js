@@ -1,32 +1,89 @@
-import React from "react";
+import React, {useState} from "react";
+import InventoryItem from "./InventoryItem";
+import OrderItem from "./OrderItem";
 
 function OrderTable(props) {
+
+    const [page, setPage] = useState(1)
+
+    function renderPage() {
+        const start = (page - 1) * 10
+        const end = Math.min(props.items.length, page * 10)
+        const slicedItems = props.items.slice(start, end);
+
+        return (
+            <div>
+                {slicedItems.map((item)=>(
+                    <OrderItem item={item}/>
+                ))}
+            </div>
+        )
+    }
+
+    function handlePrev() {
+        if(page > 1) {
+            setPage(page - 1)
+        }
+    }
+
+    function handleNext() {
+        if(page < (props.items.length)/10 + 1) {
+            setPage(page + 1)
+        }
+    }
+
+    function renderButtons() {
+        if(page > 1 && page < (props.items.length)/10 + 1) {
+            return (
+                <div>
+                    <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
+                    <button className="button m-2" onClick={() => handleNext()}>Next</button>
+                </div>
+            )
+        }
+        if(page === 1) {
+            return (
+                <div>
+                    <button className="button m-2" onClick={() => handleNext()}>Next</button>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
+                </div>
+            )
+        }
+    }
+
     return (
         <div className={"table"}>
-            <thead>
-            <tr>
-                <th><abbr title="Product Name">Product Name</abbr></th>
-                <th><abbr title="Item Quantity">Item Quantity</abbr></th>
-                <th><abbr title="Final Price">Final Price</abbr></th>
-                <th><abbr title="Shipping Address">Shipping Address</abbr></th>
-                <th><abbr title="Customer Name">Customer Name</abbr></th>
-                <th><abbr title="Date Created">Date Created</abbr></th>
-                <th><abbr title="Status">Status</abbr></th>
-            </tr>
-            </thead>
-            {props.items.map((item)=>(
-                <tbody>
-                <tr>
-                    <th>{item.product_id}</th>
-                    <td>{item.quantity}</td>
-                    <td>{item.final_price}</td>
-                    <td>Address</td>
-                    <td>{item.user_id}</td>
-                    <td>{item.time_stamp}</td>
-                    <td>{item.fulfillment_status}</td>
-                </tr>
-                </tbody>
-            ))}
+            <div className={"columns m-2"} style={{background: "#F2AA56", borderRadius: "5px"}}>
+                <div className={"column"}>
+                    Product Name
+                </div>
+                <div className={"column"}>
+                    Item Quantity
+                </div>
+                <div className={"column"}>
+                    Final Price
+                </div>
+                <div className={"column"}>
+                    Shipping Address
+                </div>
+                <div className={"column"}>
+                    Customer Name
+                </div>
+                <div className={"column"}>
+                    Date Created
+                </div>
+                <div className={"column"}>
+                    Status
+                </div>
+            </div>
+            {renderPage()}
+            {renderButtons()}
         </div>
     )
 }
