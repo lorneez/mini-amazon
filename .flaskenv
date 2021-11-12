@@ -3,8 +3,8 @@ FLASK_ENV=development
 FLASK_RUN_HOST=0.0.0.0
 FLASK_RUN_PORT=5000
 
-SECRET_KEY='z3a-oh_ww4w0_gc76bxh7ok1p8w6wyg4ol9bczsvc646nv90ga'
+SECRET_KEY='wk21k67-k9ivzz8bnjvupkc-9wz5za-qaz_h4hloh-bz65w6hv'
 
 DB_NAME=amazon
-DB_USER=jcho_1260
+DB_USER=vagrant
 DB_PASSWORD=dbpasswd

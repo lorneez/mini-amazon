@@ -1,6 +1,8 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import SideBarComponent from "../../components/SideBarComponent"
 import OrderTable from "../../components/seller/OrderTable";
+import axios from "axios";
+import InventoryTable from "../../components/seller/InventoryTable";
 
 const rows = [
     {
@@ -39,6 +41,21 @@ const rows = [
 
 
 function SellerOrders() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(async () => {
+        const result = await axios(
+            'http://localhost:5000/api/all_user_orders/?user_id=2', {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        );
+        console.log(result.data)
+        setData(result.data);
+    }, []);
+
     return (
         <div>
             <div className={"columns"}>
@@ -46,8 +63,8 @@ function SellerOrders() {
                     <SideBarComponent type={"seller"}/>
                 </div>
                 <div className={"column"}>
-                    <div>
-                        <OrderTable items={rows}/>
+                    <div className={"container"}>
+                        <OrderTable items={data}/>
                     </div>
                 </div>
             </div>

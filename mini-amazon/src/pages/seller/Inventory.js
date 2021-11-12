@@ -39,6 +39,7 @@ function Inventory() {
     const [data, setData] = useState([]);
 
     useEffect(async () => {
+        console.log("called")
         const result = await axios(
             'http://localhost:5000/api/all_products/', {
                 headers: {
@@ -46,10 +47,8 @@ function Inventory() {
                 },
             }
         );
-        console.log(result)
-        // setData(result.data);
-        // setData(rows)
-    });
+        setData(result.data);
+    }, []);
 
     return (
         <div>
@@ -58,8 +57,8 @@ function Inventory() {
                     <SideBarComponent type={"seller"}/>
                 </div>
                 <div className={"column"}>
-                    <div>
-                        <InventoryTable items={rows}/>
+                    <div className={"container"}>
+                        <InventoryTable items={data}/>
                     </div>
                 </div>
             </div>

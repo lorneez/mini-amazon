@@ -1,29 +1,83 @@
-import React from "react";
+import React, {useState} from "react";
+import InventoryItem from "./InventoryItem";
 
-function InventoryTable({items}) {
+function InventoryTable(props) {
+
+    const [page, setPage] = useState(1)
+
+    function renderPage() {
+        const start = (page - 1) * 10
+        const end = Math.min(props.items.length, page * 10)
+        const slicedItems = props.items.slice(start, end);
+
+        return (
+            <div>
+                {slicedItems.map((item)=>(
+                    <InventoryItem item={item}/>
+                ))}
+            </div>
+        )
+    }
+
+    function handlePrev() {
+        if(page > 1) {
+            setPage(page - 1)
+        }
+    }
+
+    function handleNext() {
+        if(page < (props.items.length)/10 + 1) {
+            setPage(page + 1)
+        }
+    }
+
+    function renderButtons() {
+        if(page > 1 && page < (props.items.length)/10 + 1) {
+            return (
+                <div>
+                    <button className="button" onClick={() => handlePrev()}>Prev</button>
+                    <button className="button" onClick={() => handleNext()}>Next</button>
+                </div>
+            )
+        }
+        if(page === 1) {
+            return (
+                <div>
+                    <button className="button" onClick={() => handleNext()}>Next</button>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <button className="button" onClick={() => handlePrev()}>Prev</button>
+                </div>
+            )
+        }
+    }
+
     return (
-        <table class="table">
-            <thead>
-            <tr>
-                <th><abbr title="Product Details">Product Details</abbr></th>
-                <th><abbr title="Available">Available</abbr></th>
-                <th><abbr title="Price">Price</abbr></th>
-                <th><abbr title="Date Created">Date Created</abbr></th>
-                <th><abbr title="Status">Status</abbr></th>
-            </tr>
-            </thead>
-            {items.map((item)=>(
-                <tbody>
-                <tr>
-                    <th>{item.details}</th>
-                    <td>{item.quantity}</td>
-                    <td>{item.price}</td>
-                    <td>{item.dateAdded}</td>
-                    <td>{item.status}</td>
-                </tr>
-                </tbody>
-            ))}
-        </table>
+        <div className={"table"}>
+            <div className={"columns"}>
+                <div className={"column"}>
+                    Product Details
+                </div>
+                <div className={"column"}>
+                    Available
+                </div>
+                <div className={"column"}>
+                    Price
+                </div>
+                <div className={"column"}>
+                    Date Created
+                </div>
+                <div className={"column"}>
+                    Status
+                </div>
+            </div>
+            {renderPage()}
+            {renderButtons()}
+        </div>
     )
 }
 

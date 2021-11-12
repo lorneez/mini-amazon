@@ -17,6 +17,7 @@ import SellerOrders from "./pages/seller/SellerOrders";
 import Inventory from "./pages/seller/Inventory";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import { AuthStore } from './contexts/AuthContext';
+import SideBarComponent from "./components/SideBarComponent";
 
 
 function App() {

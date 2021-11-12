@@ -1,5 +1,6 @@
 import React from "react"
 import SideBarComponent from "../../components/SideBarComponent"
+import InventoryTable from "../../components/seller/InventoryTable";
 
 
 function Reviews() {

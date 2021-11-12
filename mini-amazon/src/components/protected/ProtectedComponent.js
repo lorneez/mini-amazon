@@ -1,4 +1,5 @@
 import React from "react";
+import SideBarComponent from "../SideBarComponent";
 
 function ProtectedComponent(props) {
     return (
