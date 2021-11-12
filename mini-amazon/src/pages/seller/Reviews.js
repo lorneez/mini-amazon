@@ -1,8 +1,30 @@
 import React from "react"
 import SideBarComponent from "../../components/SideBarComponent"
-import InventoryTable from "../../components/seller/InventoryTable";
-import OrderTable from "../../components/seller/OrderTable";
+import ReviewTable from "../../components/seller/ReviewTable";
 
+const rows = [
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1},
+    {test: 1}
+]
 
 function Reviews() {
     return (
@@ -23,7 +45,7 @@ function Reviews() {
                         </div>
                     </section>
                     <div className={"container"}>
-                        Reviews
+                        <ReviewTable items={rows}/>
                     </div>
                 </div>
             </div>
