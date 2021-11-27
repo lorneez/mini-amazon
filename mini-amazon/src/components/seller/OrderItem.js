@@ -8,10 +8,10 @@ function OrderItem(props) {
                     {props.item.product_id}
                 </div>
                 <div className={"column"}>
-                    {props.item.quantity}
+                    {props.item.order_quantity}
                 </div>
                 <div className={"column"}>
-                    {props.item.final_price}
+                    {props.item.order_price}
                 </div>
                 <div className={"column"}>
                     Address
@@ -20,7 +20,7 @@ function OrderItem(props) {
                     {props.item.user_id}
                 </div>
                 <div className={"column"}>
-                    {props.item.time_stamp}
+                    {props.item.order_time}
                 </div>
                 <div className={"column"}>
                     {props.item.fulfillment_status ? <div>SHIPPED</div> : <div>NOT SHIPPED</div>}
