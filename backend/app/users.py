@@ -15,7 +15,6 @@ def login():
     if a valid user, this will provide info to front end necessary for logging the user in
     return: json object with login status, encoded jwt token, expiration time (datetime)
     '''
-    print("connection made")
     status=False
     token = None
     expiration = None
@@ -32,12 +31,10 @@ def register():
     '''
     '''
     if User.email_exists(request.args['email']):
-        print("here1")
         # flash('Account with email already exists. Please try a different email.')
         return jsonify(status=False, email = request.args['email'])
     user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'])
     if user is None:
-        print("here2")
         # flash('Cannot create account.')
         return jsonify(status=False, email = request.args['email'])
     

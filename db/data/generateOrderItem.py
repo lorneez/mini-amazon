@@ -15,7 +15,7 @@ if __name__ == "__main__":
         for order_id in range(100):
             id = order_id
             # time stamp of order placed 
-            time_stamp = "2020-11-10 10:30:30+02"
+            time_stamp = "2020-"+str(random.randint(9,12))+"-"+str(random.randint(1,29))+" 10:30:30+02"
             # fulfillment status is true half of the time 
             fulfillment_status = order_id % 2 == 0
             # each order can contain multiple products (2)
