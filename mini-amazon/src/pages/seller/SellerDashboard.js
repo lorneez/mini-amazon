@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import { PieChart, Pie, Sector, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
+import {AuthContext} from "../../contexts/AuthContext";
 
 import SideBarComponent from "../../components/SideBarComponent"
 import axios from "axios";
@@ -32,6 +33,10 @@ const data = [
 
 function SellerDashboard() {
 
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { userId } = state;
+
     const formatYAxis = (tickItem) => {
         return "$" + tickItem;
     }
@@ -42,7 +47,7 @@ function SellerDashboard() {
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_user_orders/?user_id=1001', {
+            'http://localhost:5000/api/all_user_orders/?user_id=' + userId, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
