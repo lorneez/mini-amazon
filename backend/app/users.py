@@ -19,26 +19,30 @@ def login():
     status=False
     token = None
     expiration = None
-    user = User.get_by_auth(request.args['email'], request.args['password'])
-    if user is None:
+    user_id = User.get_by_auth(request.args['email'], request.args['password'])
+    if user_id is None:
         flash('Invalid email or password')
     else:
         status = True
-        token, expiration = User.encode_auth_token(request.args['email'])
-    return jsonify(login_status=status, auth_token = token, expir = expiration)
+        token = User.encode_auth_token(user_id)
+    return jsonify(login_status=status, uid = user_id)
 
 @users.route("/api/create_user/", methods=["POST"])
 def register():
     '''
     '''
     if User.email_exists(request.args['email']):
-        flash('Account with email already exists. Please try a different email.')
+        print("here1")
+        # flash('Account with email already exists. Please try a different email.')
         return None
-    user = User.register(request.args['email'], request.args['password'], request.args['name'])
+    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'], True)
     if user is None:
-        flash('Cannot create account.')
+        print("here2")
+        # flash('Cannot create account.')
         return None
-    flash('Congratulations! You are now registered')
+    
+    print("here3")
+    # flash('Congratulations! You are now registered')
     return jsonify(email = request.args['email'])
 
 @users.route("/api/all_seller_reviews/", methods=["GET"])

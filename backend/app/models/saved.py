@@ -86,7 +86,7 @@ RETURNING :pid
 
     @staticmethod
     def remove_product(uid, pid):
-        if cart_item_exists(uid, pid):
+        if Saved.product_exists(uid, pid):
             try:
                 rows = app.db.execute("""
                 DELETE FROM SavedItem
