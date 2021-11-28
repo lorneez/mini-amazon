@@ -19,13 +19,13 @@ def login():
     status=False
     token = None
     expiration = None
-    user_id = User.get_by_auth(request.args['email'], request.args['password'])
-    if user_id is None:
+    user = User.get_by_auth(request.args['email'], request.args['password'])
+    if user is None:
         flash('Invalid email or password')
     else:
         status = True
-        token = User.encode_auth_token(user_id)
-    return jsonify(login_status=status, uid = user_id)
+        token = User.encode_auth_token(user[0])
+    return jsonify(login_status=status, uid = user[0], is_seller = user[1])
 
 @users.route("/api/create_user/", methods=["POST"])
 def register():
@@ -35,7 +35,7 @@ def register():
         print("here1")
         # flash('Account with email already exists. Please try a different email.')
         return None
-    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'], True)
+    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'])
     if user is None:
         print("here2")
         # flash('Cannot create account.')

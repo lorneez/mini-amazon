@@ -16,7 +16,7 @@ class User(UserMixin):
     @staticmethod
     def get_by_auth(email, password):
         rows = app.db.execute("""
-SELECT password, id
+SELECT password, id, is_seller
 FROM Users
 WHERE email = :email
 """,
@@ -27,7 +27,7 @@ WHERE email = :email
         elif check_password_hash(rows[0][0], password):
             # incorrect password
             print("here2")
-            return rows[0][1]
+            return [rows[0][1], rows[0][2]]
         else:
             print("here3")
             return None
