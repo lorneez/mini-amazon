@@ -68,7 +68,7 @@ ORDER BY numUpVotes DESC, time_stamp DESC
             rows = app.db.execute('''
             UPDATE ProductReview
             SET review_text = :text
-            WHERE user_id = :uid 
+            WHERE from_id = :uid 
             AND product_id = :pid
             RETURNING :uid, :pid
             ''', uid=uid, pid=pid, text=text)
