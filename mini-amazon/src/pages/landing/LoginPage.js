@@ -34,6 +34,7 @@ function LoginPage() {
                         isSignedIn: true,
                         username: username,
                         userType: "buyer",
+                        userId: 1,
                         token: response.data.auth_token,
                         expireDate: Math.floor(new Date().getTime() / 1000 + 2000) // response.data.expir
                     }
