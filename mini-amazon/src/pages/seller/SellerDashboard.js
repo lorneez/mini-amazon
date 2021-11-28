@@ -42,12 +42,13 @@ function SellerDashboard() {
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_user_orders/?user_id=2', {
+            'http://localhost:5000/api/all_user_orders/?user_id=1001', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
             }
         );
+        console.log(result)
         let temp1 = 0
         let temp2 = 0
         let graphData = {}

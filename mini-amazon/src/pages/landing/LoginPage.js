@@ -33,8 +33,8 @@ function LoginPage() {
                     payload: {
                         isSignedIn: true,
                         username: username,
-                        userType: "buyer",
-                        userId: 1,
+                        userType: response.data.is_seller ? "seller" : "buyer",
+                        userId: response.data.uid,
                         token: response.data.auth_token,
                         expireDate: Math.floor(new Date().getTime() / 1000 + 2000) // response.data.expir
                     }
