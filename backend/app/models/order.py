@@ -1,22 +1,5 @@
 from flask import current_app as app
 
-class OrderProduct:
-    def __init__(self, oid, oquant, oprice, otime, ostat, uid, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage):
-        self.order_id = oid
-        self.order_quantity = oquant
-        self.order_price = oprice
-        self.order_time = otime
-        self.order_status = ostat
-        self.user_id = uid
-        self.product_id = pid
-        self.product_name = pname
-        self.product_seller = pseller
-        self.product_price = pprice
-        self.product_quantity = pquant
-        self.product_staus = pstat
-        self.product_category = pcat
-        self.product_image = pimage 
-
 class Order:
     def __init__(self, id, user_id, product_id, quantity, final_price, time_stamp, fulfillment_status):
         self.id = id
@@ -37,19 +20,18 @@ AND user_id = :uid
 AND product_id = :pid
 ''',
                               id=id, uid=uid, pid=pid)
-        return Order(*(rows[0])) if rows is not None else None
+        return OrderItem(*(rows[0])) if rows is not None else None
 
-# self, oid, oquant, oprice, otime, ostat, uid, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage
     @staticmethod
     def get_all_user(uid):
         rows = app.db.execute('''
-SELECT o.id, o.quantity, o.final_price, o.time_stamp, o.fulfillment_status, o.user_id, o.product_id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
-FROM OrderItem AS o
-INNER JOIN Products AS p
-ON p.id = o.product_id
+SELECT o.id, o.user_id, o.product_id, o.quantity, o.final_price, o.time_stamp, o.fulfillment_status
+FROM OrderItem as o
+INNER JOIN Products
+ON Products.id = o.product_id
 WHERE o.user_id = :uid
 ''', uid=uid)
-        return [OrderProduct(*row) for row in rows]
+        return [Order(*row) for row in rows]
 
     @staticmethod
     def get_all_user_order(uid):
@@ -63,14 +45,12 @@ WHERE o.user_id = :uid
     @staticmethod
     def get_single_user_order(id, uid):
         rows = app.db.execute('''
-    SELECT o.id, o.quantity, o.final_price, o.time_stamp, o.fulfillment_status, o.user_id, o.product_id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
-    FROM OrderItem AS o
-    INNER JOIN Products AS p
-    ON p.id = o.product_id
-    WHERE o.user_id = :uid 
-    AND o.id = :id
+    SELECT *
+    FROM OrderItem
+    WHERE user_id = :uid 
+    AND id = :id
     ''', uid=uid, id=id)
-        return [OrderProduct(*row) for row in rows]
+        return [Order(*row) for row in rows]
 
     @staticmethod
     def add_order(id, uid, pid, quantity, final_price, fulfillment_status):
