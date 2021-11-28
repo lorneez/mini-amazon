@@ -4,7 +4,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthContext";
 
-function CreateReview() {
+function CreateReview(props) {
     const history = useHistory();
     const auth = useContext(AuthContext);
     const { state } = auth;
@@ -18,8 +18,8 @@ function CreateReview() {
             'http://localhost:5000/api/seller/create-review/', {
                 title: title,
                 description: description,
-                sellerId: userId,
-                userId: 1,
+                sellerId: props.sellerId,
+                userId: userId,
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
