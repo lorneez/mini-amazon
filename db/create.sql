@@ -69,7 +69,7 @@ CREATE TABLE SellerReview (
     from_id INT NOT NULL,
     to_id INT NOT NULL,
     time_stamp timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
-    text VARCHAR(255) NOT NULL,
+    review_text VARCHAR(255) NOT NULL,
     numDownVotes INT NOT NULL DEFAULT 0 CHECK(numDownVotes >= 0),
     numUpVotes INT NOT NULL DEFAULT 0 CHECK(numUpVotes >= 0),
     numStars INT NOT NULL DEFAULT 0 CHECK(numStars >= 0),

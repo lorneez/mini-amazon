@@ -46,9 +46,30 @@ def register():
     return jsonify(status=True, email = request.args['email'])
 
 @users.route("/api/all_seller_reviews/", methods=["GET"])
-def all_product_reviews():
+def all_seller_reviews():
     reviews = SReview.get_all_for_seller(request.args['seller_id'])
     return json.dumps([r.__dict__ for r in reviews], default=str)
+
+@users.route("/api/update_seller_review_text/", methods=["POST"])
+def edit_product_review_text():
+    review = SReview.update_text(request.args['user_id'], request.args['seller_id'], request.args['new_text'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
+
+@users.route("/api/update_seller_review_stars/", methods=["POST"])
+def edit_product_review_stars():
+    review = SReview.update_stars(request.args['user_id'], request.args['seller_id'], request.args['stars'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
+
+@users.route("/api/add_seller_review/", methods=["POST"])
+def add_product_review():
+    review = SReview.add_product_review(request.args['user_id'], request.args['seller_id'], request.args['review_text'], request.args['stars'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
 
 # @bp.route('/logout')
 # def logout():
