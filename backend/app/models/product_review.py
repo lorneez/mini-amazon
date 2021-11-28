@@ -78,13 +78,28 @@ ORDER BY numUpVotes DESC, time_stamp DESC
             return None
 
     @staticmethod
-    def add_product_review(uid, pid, text):
+    def update_stars(uid, pid, stars):
+        try:
+            rows = app.db.execute('''
+            UPDATE ProductReview
+            SET numStars = :stars
+            WHERE from_id = :uid 
+            AND product_id = :pid
+            RETURNING :uid, :pid
+            ''', uid=uid, pid=pid, stars=stars)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def add_product_review(uid, pid, text, no_stars):
         try:
             rows = app.db.execute("""
-INSERT INTO ProductReview(from_id, product_id, review_text)
-VALUES(:uid, :pid, :text)
+INSERT INTO ProductReview(from_id, product_id, review_text, numStars)
+VALUES(:uid, :pid, :text, :stars)
 RETURNING :uid, :pid
-""", uid=uid, pid=pid, text=text)
+""", uid=uid, pid=pid, text=text, stars=no_stars)
             uid, pid = rows[0]
             return PReview.get(uid, pid)
         except Exception:

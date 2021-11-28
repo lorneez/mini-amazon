@@ -34,16 +34,16 @@ def register():
     if User.email_exists(request.args['email']):
         print("here1")
         # flash('Account with email already exists. Please try a different email.')
-        return None
+        return jsonify(status=False, email = request.args['email'])
     user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'])
     if user is None:
         print("here2")
         # flash('Cannot create account.')
-        return None
+        return jsonify(status=False, email = request.args['email'])
     
     print("here3")
     # flash('Congratulations! You are now registered')
-    return jsonify(email = request.args['email'])
+    return jsonify(status=True, email = request.args['email'])
 
 @users.route("/api/all_seller_reviews/", methods=["GET"])
 def all_product_reviews():

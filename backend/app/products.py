@@ -34,9 +34,16 @@ def edit_product_review_text():
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
 
+@products.route("/api/update_product_review_stars/", methods=["POST"])
+def edit_product_review_stars():
+    review = PReview.update_stars(request.args['user_id'], request.args['product_id'], request.args['stars'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
+
 @products.route("/api/add_product_review/", methods=["POST"])
 def add_product_review():
-    review = PReview.add_product_review(request.args['user_id'], request.args['product_id'], request.args['review_text'])
+    review = PReview.add_product_review(request.args['user_id'], request.args['product_id'], request.args['review_text'], request.args['stars'])
     if review is None:
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
