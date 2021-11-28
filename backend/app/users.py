@@ -15,7 +15,6 @@ def login():
     if a valid user, this will provide info to front end necessary for logging the user in
     return: json object with login status, encoded jwt token, expiration time (datetime)
     '''
-    print("connection made")
     status=False
     token = None
     expiration = None
@@ -24,27 +23,50 @@ def login():
         flash('Invalid email or password')
     else:
         status = True
-        token, expiration = User.encode_auth_token(request.args['email'])
-    return jsonify(login_status=status, auth_token = token, expir = expiration)
+        token = User.encode_auth_token(user[0])
+    return jsonify(login_status=status, uid = user[0], is_seller = user[1])
 
 @users.route("/api/create_user/", methods=["POST"])
 def register():
     '''
     '''
     if User.email_exists(request.args['email']):
-        flash('Account with email already exists. Please try a different email.')
-        return None
-    user = User.register(request.args['email'], request.args['password'], request.args['name'])
+        # flash('Account with email already exists. Please try a different email.')
+        return jsonify(status=False, email = request.args['email'])
+    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'])
     if user is None:
-        flash('Cannot create account.')
-        return None
-    flash('Congratulations! You are now registered')
-    return jsonify(email = request.args['email'])
+        # flash('Cannot create account.')
+        return jsonify(status=False, email = request.args['email'])
+    
+    print("here3")
+    # flash('Congratulations! You are now registered')
+    return jsonify(status=True, email = request.args['email'])
 
 @users.route("/api/all_seller_reviews/", methods=["GET"])
-def all_product_reviews():
+def all_seller_reviews():
     reviews = SReview.get_all_for_seller(request.args['seller_id'])
     return json.dumps([r.__dict__ for r in reviews], default=str)
+
+@users.route("/api/update_seller_review_text/", methods=["POST"])
+def edit_product_review_text():
+    review = SReview.update_text(request.args['user_id'], request.args['seller_id'], request.args['new_text'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
+
+@users.route("/api/update_seller_review_stars/", methods=["POST"])
+def edit_product_review_stars():
+    review = SReview.update_stars(request.args['user_id'], request.args['seller_id'], request.args['stars'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
+
+@users.route("/api/add_seller_review/", methods=["POST"])
+def add_product_review():
+    review = SReview.add_product_review(request.args['user_id'], request.args['seller_id'], request.args['review_text'], request.args['stars'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
 
 # @bp.route('/logout')
 # def logout():

@@ -46,7 +46,7 @@ ORDER BY time_stamp DESC
         try:
             rows = app.db.execute('''
             UPDATE SavedItem
-            SET product_id = :pid
+            SET time_stamp = current_timestamp AT TIME ZONE 'UTC'
             WHERE user_id = :uid 
             AND product_id = :pid
             RETURNING :pid
@@ -71,7 +71,7 @@ RETURNING :pid
 
     @staticmethod
     def remove_product(uid, pid):
-        if cart_item_exists(uid, pid):
+        if Saved.product_exists(uid, pid):
             try:
                 rows = app.db.execute("""
                 DELETE FROM SavedItem

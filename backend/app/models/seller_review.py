@@ -60,33 +60,48 @@ ORDER BY sr.numUpVotes DESC, sr.time_stamp DESC
 #     ''', uid=uid, pid=pid)
 #         return len(rows)>0
 
-#     @staticmethod
-#     def update_text(uid, pid, text):
-#         try:
-#             rows = app.db.execute('''
-#             UPDATE ProductReview
-#             SET review_text = :text
-#             WHERE user_id = :uid 
-#             AND product_id = :pid
-#             RETURNING :uid, :pid
-#             ''', uid=uid, pid=pid, text=text)
-#             uid, pid = rows[0]
-#             return PReview.get(uid, pid)
-#         except Exception:
-#             return None
+    @staticmethod
+    def update_text(uid, sid, text):
+        try:
+            rows = app.db.execute('''
+            UPDATE SellerReview
+            SET review_text = :text
+            WHERE from_id = :uid 
+            AND to_id = :sid
+            RETURNING :uid, :sid
+            ''', uid=uid, sid=sid, text=text)
+            uid, sid = rows[0]
+            return SReview.get(uid, sid)
+        except Exception:
+            return None
 
-#     @staticmethod
-#     def add_product_review(uid, pid, text):
-#         try:
-#             rows = app.db.execute("""
-# INSERT INTO ProductReview(from_id, product_id, review_text)
-# VALUES(:uid, :pid, :text)
-# RETURNING :uid, :pid
-# """, uid=uid, pid=pid, text=text)
-#             uid, pid = rows[0]
-#             return PReview.get(uid, pid)
-#         except Exception:
-#             return None
+    @staticmethod
+    def update_stars(uid, sid, stars):
+        try:
+            rows = app.db.execute('''
+            UPDATE SellerReview
+            SET numStars = :stars
+            WHERE from_id = :uid 
+            AND to_id = :sid
+            RETURNING :uid, :sid
+            ''', uid=uid, sid=sid, stars=stars)
+            uid, sid = rows[0]
+            return PReview.get(uid, sid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def add_product_review(uid, sid, text, stars):
+        try:
+            rows = app.db.execute("""
+INSERT INTO SellerReview(from_id, to_id, review_text, numStars)
+VALUES(:uid, :sid, :text, :stars)
+RETURNING :uid, :sid
+""", uid=uid, sid=sid, text=text, stars=stars)
+            uid, sid = rows[0]
+            return SReview.get(uid, sid)
+        except Exception:
+            return None
 
 #     @staticmethod
 #     def remove_product_review(uid, pid):
