@@ -1,10 +1,14 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import SideBarComponent from "../../components/SideBarComponent";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import {AuthContext} from "../../contexts/AuthContext";
 
 function CreateReview() {
     const history = useHistory();
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { userId } = state;
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -14,7 +18,7 @@ function CreateReview() {
             'http://localhost:5000/api/seller/create-review/', {
                 title: title,
                 description: description,
-                sellerId: 1,
+                sellerId: userId,
                 userId: 1,
                 headers: {
                     'Access-Control-Allow-Origin': '*',
