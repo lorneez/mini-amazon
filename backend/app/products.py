@@ -22,6 +22,13 @@ def all_products_seller():
     products = Product.get_by_seller(request.args['seller_id'])
     return json.dumps([item.__dict__ for item in products])
 
+@products.route("/api/add_product/", methods=["POST"])
+def add_product():
+    product_info = Product.add_product(request.args['name'], request.args['seller_id'], request.args['price'], request.args['quantity'], request.args['inventory_status'], request.args['category'], request.args['image'])
+    if product_info is None:
+        return jsonify(add_status=False)
+    return json.dumps(product_info.__dict__, default=str)
+
 @products.route("/api/all_product_reviews/", methods=["GET"])
 def all_product_reviews():
     reviews = PReview.get_all_for_product(request.args['product_id'])
