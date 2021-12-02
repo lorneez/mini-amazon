@@ -37,8 +37,9 @@ WHERE email = :email
         # Generates the Auth Token
         # return: encoded jwt token and datetime object of expiration
         try:
+            expiration = datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5)
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5),
+                'exp': expiration,
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id
             }
@@ -47,7 +48,7 @@ WHERE email = :email
                 app.config.get('SECRET_KEY'),
                 algorithm='HS256'
             )
-            return token
+            return [token, expiration]
         except Exception as e:
             return e
 

@@ -24,7 +24,7 @@ def login():
     else:
         status = True
         token = User.encode_auth_token(user[0])
-    return jsonify(login_status=status, uid = user[0], is_seller = user[1])
+    return jsonify(login_status=status, uid = user[0], is_seller = user[1], auth_token=token[0], expiration=token[1])
 
 @users.route("/api/create_user/", methods=["POST"])
 def register():
