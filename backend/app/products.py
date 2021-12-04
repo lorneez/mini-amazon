@@ -17,6 +17,11 @@ def all_products_category():
     products = Product.get_category(request.args['category'])
     return json.dumps([item.__dict__ for item in products])
 
+@products.route("/api/products_keyword/", methods=["GET"])
+def all_products_keyword():
+    products = Product.get_by_name(request.args['keyword'])
+    return json.dumps([item.__dict__ for item in products])
+
 @products.route("/api/products_seller/", methods=["GET"])
 def all_products_seller():
     products = Product.get_by_seller(request.args['seller_id'])

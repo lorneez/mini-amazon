@@ -60,3 +60,14 @@ FROM Products
 WHERE category = :category
 ''', category=category)
         return [Product(*row) for row in rows]
+
+    @staticmethod
+    def get_by_name(name):
+        keyword = '%'+name.lower()+'%'
+        rows = app.db.execute('''
+SELECT *
+FROM Products
+WHERE LOWER(name) LIKE :keyword
+''', keyword=keyword)
+        return [Product(*row) for row in rows]
+
