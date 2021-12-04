@@ -16,8 +16,7 @@ class SavedProduct:
         self.product_image = pimage  
 
 class Saved:
-    def __init__(self, id, user_id, product_id, time_stamp):
-        self.id = id
+    def __init__(self, user_id, product_id, time_stamp):
         self.uid = user_id
         self.pid = product_id
         self.time = time_stamp
@@ -30,7 +29,7 @@ FROM SavedItem
 WHERE id = :id
 ''',
                               id=id)
-        return SavedItem(*(rows[0])) if rows is not None else None
+        return Saved(*(rows[0])) if rows is not None else None
 
     @staticmethod
     def get_all_user(uid):
