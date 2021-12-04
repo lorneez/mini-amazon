@@ -2,6 +2,19 @@ from flask import current_app as app
 from backend.app.models.product import Product
 from backend.app.models.cart import Cart
 
+class SavedProduct:
+    def __init__(self, stime, uid, pid, pname, pseller, pprice, pquant, pstat, pcat, pimage):
+        self.saved_time = stime
+        self.user_id = uid
+        self.product_id = pid
+        self.product_name = pname
+        self.product_seller = pseller
+        self.product_price = pprice
+        self.product_quantity = pquant
+        self.product_staus = pstat
+        self.product_category = pcat
+        self.product_image = pimage  
+
 class Saved:
     def __init__(self, id, user_id, product_id, time_stamp):
         self.id = id
@@ -22,14 +35,14 @@ WHERE id = :id
     @staticmethod
     def get_all_user(uid):
         rows = app.db.execute('''
-SELECT p.id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
+SELECT s.time_stamp, s.user_id, s.product_id, p.name, p.selled_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
 FROM Products AS p
-INNER JOIN SavedItem
-ON SavedItem.product_id = p.id
-WHERE SavedItem.user_id = :uid
-ORDER BY time_stamp DESC
+INNER JOIN SavedItem AS s
+ON s.product_id = p.id
+WHERE s.user_id = :uid
+ORDER BY s.time_stamp DESC
 ''', uid=uid)
-        return [Product(*row) for row in rows]
+        return [SavedProduct(*row) for row in rows]
 
     @staticmethod
     def product_exists(uid, pid):
@@ -60,8 +73,8 @@ ORDER BY time_stamp DESC
     def add_product(uid, pid):
         try:
             rows = app.db.execute("""
-INSERT INTO SavedItem(id, user_id, product_id)
-VALUES(NEWID(), :uid, :pid)
+INSERT INTO SavedItem(user_id, product_id)
+VALUES(:uid, :pid)
 RETURNING :pid
 """, uid=uid, pid=pid)
             pid = rows[0][0]
