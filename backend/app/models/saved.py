@@ -35,7 +35,7 @@ WHERE id = :id
     @staticmethod
     def get_all_user(uid):
         rows = app.db.execute('''
-SELECT s.time_stamp, s.user_id, s.product_id, p.name, p.selled_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
+SELECT s.time_stamp, s.user_id, s.product_id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
 FROM Products AS p
 INNER JOIN SavedItem AS s
 ON s.product_id = p.id
