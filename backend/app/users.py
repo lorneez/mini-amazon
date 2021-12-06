@@ -42,7 +42,7 @@ def register():
     # flash('Congratulations! You are now registered')
     return jsonify(status=True, email = request.args['email'])
 
-@users.route("/api/get_name/", methods=["POST"])
+@users.route("/api/get_name/", methods=["GET"])
 def get_name():
     user = User.get(request.args['uid'])
     return user.name

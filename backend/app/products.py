@@ -12,6 +12,13 @@ def all_products():
     products = Product.get_all()
     return json.dumps([item.__dict__ for item in products])
 
+@products.route("/api/product_by_id/", methods=["GET"])
+def single_product():
+    products = Product.get(request.args['id'])
+    if products is None:
+        return jsonify(status=False)
+    return json.dumps([item.__dict__ for item in products])
+
 @products.route("/api/products_category/", methods=["GET"])
 def all_products_category():
     products = Product.get_category(request.args['category'])
