@@ -76,13 +76,6 @@ function SideBarComponent(props) {
         }
     ]
 
-    if(userType === "seller") {
-        buyerLinks.push({
-            route: "/seller/dashboard",
-            name: "Go To Seller"
-        })
-    }
-
     function renderNavigationTitle(label) {
         return (
             <p className="menu-label" style={{color: "white"}}>
@@ -108,6 +101,17 @@ function SideBarComponent(props) {
     }
 
     function renderPage() {
+        console.log(userType)
+        console.log(userType == "seller")
+
+        if(userType === "seller") {
+            console.log("hello")
+            buyerLinks.push({
+                route: "/seller/dashboard",
+                name: "Go To Seller"
+            })
+        }
+        console.log(buyerLinks)
         switch(sideBarType) {
             case "landing":
                 return (
