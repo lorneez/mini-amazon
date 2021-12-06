@@ -7,7 +7,7 @@ function SideBarComponent(props) {
 
     const auth = useContext(AuthContext);
     const { state, dispatch } = auth;
-    const { username, isSignedIn,  } = state;
+    const { username, isSignedIn, userType } = state;
 
     const sideBarType = props.type;
 
@@ -47,10 +47,6 @@ function SideBarComponent(props) {
             route: "/product/create",
             name: "Product Create"
         },
-        {
-            route: "/seller/dashboard",
-            name: "Go To Seller"
-        }
     ]
 
     const sellerLinks = [
@@ -79,6 +75,13 @@ function SideBarComponent(props) {
             name: "Go To Buyer"
         }
     ]
+
+    if(userType === "seller") {
+        buyerLinks.push({
+            route: "/seller/dashboard",
+            name: "Go To Seller"
+        })
+    }
 
     function renderNavigationTitle(label) {
         return (

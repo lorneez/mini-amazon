@@ -22,7 +22,7 @@ function SignUpPage() {
     async function handleSubmit() {
 
         await axios.post(
-            'http://localhost:5000/api/create_user/?email=' + email + '&password=' + password + '&name=' + name + '&address=' + address + '&is_seller=' + isSeller? "true":"false", {
+            'http://localhost:5000/api/create_user/?email=' + email + '&password=' + password + '&name=' + name + '&address=' + address + '&is_seller=' + (isSeller? "true":"false"), {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },

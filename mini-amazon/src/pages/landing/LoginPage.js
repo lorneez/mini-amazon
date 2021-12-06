@@ -39,7 +39,7 @@ function LoginPage() {
                         expireDate: Math.floor(new Date().getTime() / 1000 + 2000) // response.data.expir
                     }
                 });
-                history.push("/seller/dashboard");
+                history.push("/dashboard");
             }
             else {
                 console.log("invalid auth")
