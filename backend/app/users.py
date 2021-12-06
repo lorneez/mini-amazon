@@ -42,6 +42,11 @@ def register():
     # flash('Congratulations! You are now registered')
     return jsonify(status=True, email = request.args['email'])
 
+@users.route("/api/get_name/", methods=["POST"])
+def get_name():
+    user = User.get(request.args['uid'])
+    return user.name
+
 @users.route("/api/all_seller_reviews/", methods=["GET"])
 def all_seller_reviews():
     reviews = SReview.get_all_for_seller(request.args['seller_id'])
