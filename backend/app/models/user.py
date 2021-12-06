@@ -92,3 +92,18 @@ WHERE id = :id
 """,
                               id=id)
         return User(*(rows[0])) if rows else None
+    
+    @staticmethod
+    def change_balance(id, difference):
+        try:
+            rows = app.db.execute('''
+        UPDATE Users
+        SET balance = balance+:difference
+        WHERE id=:id
+        RETURNING :id
+        ''', difference=difference, id=id)
+            if rows is None:
+                return None
+            return rows[0][0]
+        except Exception:
+            return None

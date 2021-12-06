@@ -125,3 +125,6 @@ def delete_product_review():
     return jsonify(update_status=True)
 
 
+
+
+
