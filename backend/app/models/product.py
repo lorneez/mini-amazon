@@ -40,7 +40,7 @@ WHERE available_quantity > 0
     def add_product(name, sid, price, quantity, inventory, category, image):
         try:
             rows = app.db.execute("""
-INSERT INTO OrderItem(name, seller_id, price, available_quantity, inventory_status, category, image_id)
+INSERT INTO Products(name, seller_id, price, available_quantity, inventory_status, category, image_id)
 VALUES(:name, :sid, :price, :quantity, :inventory, :category, :image)
 RETURNING :id, :sid, :name
 """, name=name, sid=sid, price=price, quantity=quantity, inventory=inventory, category=category, image=image)

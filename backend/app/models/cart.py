@@ -76,12 +76,14 @@ WHERE c.user_id = :uid
             try:
                 rows = app.db.execute("""
     INSERT INTO CartItem(id, user_id, product_id, quantity)
-    VALUES(NEWID(), :uid, :pid, :quant)
-    RETURNING pid
+    VALUES(:uid, :uid, :pid, :quant)
+    RETURNING :pid
     """, uid=uid, pid=pid, quant=quant)
                 pid = rows[0][0]
+                print(pid)
                 return Product.get(pid)
             except Exception:
+                print('here')
                 return None
 
     @staticmethod
