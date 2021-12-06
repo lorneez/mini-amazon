@@ -1,10 +1,10 @@
 
 export function setAuthentication(auth) {
-    window.localStorage.setItem("zestToken", JSON.stringify(auth.token));
-    window.localStorage.setItem("zestDate", JSON.stringify(auth.expireDate));
-    window.localStorage.setItem("zestUsername", JSON.stringify(auth.username));
-    window.localStorage.setItem("zestUserType", JSON.stringify(auth.userType));
-    window.localStorage.setItem("zestUserId", JSON.stringify(auth.userId));
+    window.localStorage.setItem("zestToken", auth.token);
+    window.localStorage.setItem("zestDate", auth.expireDate);
+    window.localStorage.setItem("zestUsername", auth.username);
+    window.localStorage.setItem("zestUserType", auth.userType);
+    window.localStorage.setItem("zestUserId", auth.userId);
 }
 
 export function getAuthentication() {
