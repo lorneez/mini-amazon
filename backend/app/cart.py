@@ -93,6 +93,7 @@ def buy_cart():
             buyer_undo = User.change_balance(buyer_id, seller_profit) 
             continue
         cart_purchase_success[item.product_name] = True
+        Cart.remove_product(buyer_id, pid)
     return json.dumps(cart_purchase_success)
 
 
