@@ -1,15 +1,16 @@
 import React from "react";
 
 function ProductPreview(props) {
+    console.log(props)
     return(
         <div style = {styles.container}>
             <img style={styles.image} src={props.picture}/>
             <div>
-                <div style = {styles.title}>(Renewed) Apple iPhone 8, US Version, 64GB, Gold - GSM Carriers, Latest Version</div>
-                <div style = {styles.title}>$500</div>
-                <div style = {styles.title}>Get it Wed, Oct 13 - Fri, Oct 15</div>
-                <div style = {styles.title}>FREE SHIPPING</div>
-                <div style = {styles.title}>Only 1 left in stock - order soon.</div>
+                <div style = {styles.title}>{props.data.name}</div>
+                <div style = {styles.title}>${props.data.price}</div>
+                <div style = {styles.title}>Sold by {props.data.seller}</div>
+                <div style = {styles.title}>Only {props.data.available_quantity} left in stock!</div>
+                <div style = {styles.title}>Status: {props.data.inventory_status ? 'IN STOCK' : 'OUT OF STOCK'}</div>
             </div>
         </div>
     )

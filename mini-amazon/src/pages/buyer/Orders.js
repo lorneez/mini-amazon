@@ -1,52 +1,26 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import OrderHeader from "../../components/OrderHeader"
 import OrderTable from "../../components/OrderTable"
 import SideBarComponent from "../../components/SideBarComponent"
+import axios from "axios"
 
-const rows = [
-    {
-        details: "macbook pro 11111",
-        quantity: "10",
-        address: "2964 Erwin Road Apt 3",
-        sourceName: "Apple",
-        dateOrdered: "Tuesday May 26, 2019. 6:30PM",
-        status: "DELIVERED TO FRONT DOOR"
-    },
-    {
-        details: "macbook pro 11111",
-        quantity: "10",
-        address: "2964 Erwin Road Apt 3",
-        sourceName: "Etsy",
-        dateOrdered: "Tuesday May 26, 2019. 6:30PM",
-        status: "SHIPPED FROM SELLER"
-    },
-    {
-        details: "macbook pro 11111",
-        quantity: "10",
-        address: "2964 Erwin Road Apt 3",
-        sourceName: "Best Buy",
-        dateOrdered: "Tuesday May 26, 2019. 6:30PM",
-        status: "IN TRANSIT - D.C."
-    },
-    {
-        details: "macbook pro 11111",
-        quantity: "10",
-        address: "2964 Erwin Road Apt 3",
-        sourceName: "Apple",
-        dateOrdered: "Tuesday May 26, 2019. 6:30PM",
-        status: "ORDERED"
-    },
-    {
-        details: "macbook pro 11111",
-        quantity: "10",
-        address: "2964 Erwin Road Apt 3",
-        sourceName: "Etsy",
-        dateOrdered: "Tuesday May 26, 2019. 6:30PM",
-        status: "ORDERED"
-    },
-]
 
 function Orders() {
+
+    const [data, setData] = useState([]);
+
+    useEffect(async () => {
+        const result = await axios(
+            'http://0.0.0.0:5000/api/all_user_orders/?user_id=2', {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        );
+        console.log(result.data)
+        setData(result.data);
+    }, []);
+
     return (
         <div>
             <div className={"columns"}>
@@ -56,7 +30,7 @@ function Orders() {
                 <div className={"column"}>
                     <div className={"container"}>
                         <OrderHeader/>
-                        <OrderTable items={rows}/>
+                        <OrderTable items={data}/>
                     </div>
                 </div>
             </div>
