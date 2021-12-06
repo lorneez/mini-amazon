@@ -51,7 +51,7 @@ function SellerOrders() {
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_user_orders/?user_id=' + userId, {
+            'http://localhost:5000/api/all_seller_orders/?seller_id=' + userId, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
