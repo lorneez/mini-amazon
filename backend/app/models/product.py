@@ -13,13 +13,19 @@ class Product:
 
     @staticmethod
     def get(id):
-        rows = app.db.execute('''
-SELECT *
-FROM Products
-WHERE id = :id
-''',
-                              id=id)
-        return Product(*(rows[0])) if rows is not None else None
+        try:   
+            rows = app.db.execute('''
+    SELECT *
+    FROM Products
+    WHERE id = :id
+    ''',
+                                id=id)
+            print(rows)
+            if rows is None:
+                return None
+            return [Product(*row) for row in rows]
+        except Exception:
+            return None
 
     @staticmethod
     def get_all(available=True):
@@ -34,7 +40,7 @@ WHERE available_quantity > 0
     def add_product(name, sid, price, quantity, inventory, category, image):
         try:
             rows = app.db.execute("""
-INSERT INTO OrderItem(name, seller_id, price, available_quantity, inventory_status, category, image_id)
+INSERT INTO Products(name, seller_id, price, available_quantity, inventory_status, category, image_id)
 VALUES(:name, :sid, :price, :quantity, :inventory, :category, :image)
 RETURNING :id, :sid, :name
 """, name=name, sid=sid, price=price, quantity=quantity, inventory=inventory, category=category, image=image)

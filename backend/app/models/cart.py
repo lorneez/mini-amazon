@@ -76,12 +76,14 @@ WHERE c.user_id = :uid
             try:
                 rows = app.db.execute("""
     INSERT INTO CartItem(id, user_id, product_id, quantity)
-    VALUES(NEWID(), :uid, :pid, :quant)
-    RETURNING pid
+    VALUES(:uid, :uid, :pid, :quant)
+    RETURNING :pid
     """, uid=uid, pid=pid, quant=quant)
                 pid = rows[0][0]
+                print(pid)
                 return Product.get(pid)
             except Exception:
+                print('here')
                 return None
 
     @staticmethod
@@ -90,9 +92,22 @@ WHERE c.user_id = :uid
             try:
                 rows = app.db.execute("""
                 DELETE FROM CartItem
-                WHERE uid=:uid
+                WHERE user_id=:uid
                 AND pid=:pid
                 """, uid=uid, pid=pid)
             except Exception:
                 return None
+
+    @staticmethod
+    def remove_all_user_cart(uid):
+        try:
+            rows = app.db.execute("""
+            DELETE FROM CartItem
+            WHERE user_id=:uid
+            RETURNING :uid
+            """, uid=uid)
+            print(rows)
+            return rows[0][0]
+        except Exception:
+            return None
 
