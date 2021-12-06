@@ -1,33 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import {RatingView} from "react-simple-star-rating";
 
 function ReviewItem(props) {
+    const [upVotes, setUpVotes] = useState(props.item.up_votes)
+    const [downVotes, setDownVotes] = useState(props.item.down_votes)
     return (
         <div className={"m-2 p-3"} style={{background: "#E1E1E3", borderRadius: "5px"}}>
             <div>
-                Macbook Pro 111
+                <RatingView ratingValue={props.item.stars}></RatingView>
+            </div>
+            <div>
+                Reviewed by {props.item.from_id} on {props.item.post_time}
+            </div>
+            <div>
+                {props.item.text}
             </div>
             <div className={"columns p-3"}>
                 <div className={"pr-2"}>
-                    * * * * *
+                    <button className={"button"} onClick={() => setUpVotes(upVotes+1)}>
+                        {upVotes} Up Votes
+                    </button>
                 </div>
                 <div className={"pl-2"}>
-                    Amazing Macbook!
-                </div>
-            </div>
-            <div>
-                Reviewed by Lorne on August 3rd, 2021
-            </div>
-            <div>
-                I really enjoyed this product. It was the best product in the world. I hope to order some more soon!
-                I really enjoyed this product. It was the best product in the world. I hope to order some more soon!
-                I really enjoyed this product. It was the best product in the world. I hope to order some more soon!
-            </div>
-            <div className={"columns p-3"}>
-                <div className={"pr-2"}>
-                    5 Up Votes
-                </div>
-                <div className={"pl-2"}>
-                    6 Down Votes
+                    <button className={"button"} onClick={() => setDownVotes(downVotes+1)}>
+                        {downVotes} Down Votes
+                    </button>
                 </div>
             </div>
         </div>
