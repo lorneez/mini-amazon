@@ -53,6 +53,13 @@ def update_balance():
         return jsonify(update_status=False)
     return jsonify(update_status=True)
 
+@users.route("/api/get_balance/", methods=["GET"])
+def get_balance():
+    user_balance = User.get_balance(request.args['uid'])
+    if user_balance is None:
+        return jsonify(get_status=False)
+    return jsonify(user_balance=user_balance)
+
 @users.route("/api/all_seller_reviews/", methods=["GET"])
 def all_seller_reviews():
     reviews = SReview.get_all_for_seller(request.args['seller_id'])
