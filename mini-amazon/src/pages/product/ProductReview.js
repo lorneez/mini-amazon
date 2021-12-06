@@ -4,13 +4,14 @@ import { reviews } from './testProducts.js';
 import SideBarComponent from "../../components/SideBarComponent"
 import axios from "axios";
 
-function ProductReview() {
+function ProductReview(props) {
 
     const [data, setData] = useState([]);
 
     useEffect(async () => {
+        console.log("called backend for reviews")
         const result = await axios(
-            'http://localhost:5000/api/all_product_reviews/?product_id=1', {
+            'http://localhost:5000/api/all_product_reviews/?product_id=' + props.id, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },

@@ -18,42 +18,48 @@ function CreateProduct() {
     console.log("Hello")
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label> Enter product name
-                <input 
-                    type="text" 
-                    name="name"
-                    value={inputs.name}
-                    onChange={handleChange}
-                    // dataValidation="not-blank"
-                />
-            </label>
-            <label> Enter listing price 
-                <input 
-                    type="text" 
-                    name="price"
-                    value={inputs.price || ""}
-                    onChange={handleChange}
-                />
-            </label>
-            <label> Enter product description 
-                <input 
-                    type="text"
-                    name="description" 
-                    value={inputs.description || ""}
-                    onChange={handleChange}
-                />
-            </label>
-            <label> Insert image of product 
-                <input 
-                    type="text" 
-                    name="image"
-                    value={inputs.image || ""}
-                    onChange={handleChange}
-                />
-            </label>
-            <input type="submit" value="Submit"/>
-        </form>
+        <div class="mt-5 ml-5">
+            <div className={"rows"}>]
+            <div className="row">
+            <form onSubmit={handleSubmit}>
+                <label is-fullwidth> Enter product name
+                    <input 
+                        type="text" 
+                        name="name"
+                        value={inputs.name}
+                        onChange={handleChange}
+                        // dataValidation="not-blank"
+                    />
+                </label>
+                <label> Enter listing price 
+                    <input 
+                        type="text" 
+                        name="price"
+                        value={inputs.price || ""}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label> Enter product description 
+                    <input 
+                        type="text"
+                        name="description" 
+                        value={inputs.description || ""}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label> Insert image of product 
+                    <input 
+                        type="text" 
+                        name="image"
+                        value={inputs.image || ""}
+                        onChange={handleChange}
+                    />
+                </label>
+                <input type="submit" value="Submit"/>
+            </form>
+            </div>
+            </div>
+        </div>
         
     )
 }
