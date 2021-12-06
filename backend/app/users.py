@@ -33,7 +33,7 @@ def register():
     if User.email_exists(request.args['email']):
         # flash('Account with email already exists. Please try a different email.')
         return jsonify(status=False, email = request.args['email'])
-    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'])
+    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'], request.args['is_seller'])
     if user is None:
         # flash('Cannot create account.')
         return jsonify(status=False, email = request.args['email'])

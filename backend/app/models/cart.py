@@ -90,9 +90,22 @@ WHERE c.user_id = :uid
             try:
                 rows = app.db.execute("""
                 DELETE FROM CartItem
-                WHERE uid=:uid
+                WHERE user_id=:uid
                 AND pid=:pid
                 """, uid=uid, pid=pid)
             except Exception:
                 return None
+
+    @staticmethod
+    def remove_all_user_cart(uid):
+        try:
+            rows = app.db.execute("""
+            DELETE FROM CartItem
+            WHERE user_id=:uid
+            RETURNING :uid
+            """, uid=uid)
+            print(rows)
+            return rows[0][0]
+        except Exception:
+            return None
 

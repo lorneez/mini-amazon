@@ -38,9 +38,18 @@ def remove_item():
     '''
     '''
     if not Cart.cart_item_exists(request.args['user_id'], request.args['product_id']):
-        flash('Product is not in cart. Cannot remove.')
         return None
     Cart.remove_product(request.args['user_id'], request.args['product_id'])
     return jsonify(product = request.args['product_id'])
+
+@cart.route("/api/clear_user_cart/", methods=["POST"])
+def clear_user_cart():
+    user = Cart.remove_all_user_cart(request.args['user_id'])
+    return jsonify(user_id = user)
+
+@cart.route("/api/create_user_cart/", methods=["POST"])
+def clear_user_cart():
+    user = Cart.remove_all_user_cart(request.args['user_id'])
+    return jsonify(user_id = user)
 
 
