@@ -122,7 +122,7 @@ ORDER BY sr.numUpVotes DESC, sr.time_stamp DESC
             return None
 
     @staticmethod
-    def add_product_review(uid, sid, text, stars):
+    def add_seller_review(uid, sid, text, stars):
         try:
             rows = app.db.execute("""
 INSERT INTO SellerReview(from_id, to_id, review_text, numStars)
@@ -141,6 +141,8 @@ RETURNING :uid, :sid
             DELETE FROM ProductReview
             WHERE from_id=:uid
             AND to_id=:tid
+            RETURNING :uid, :tid
             """, uid=uid, tid=tid)
+            return rows[0]
         except Exception:
             return None

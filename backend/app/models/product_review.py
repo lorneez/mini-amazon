@@ -137,12 +137,13 @@ RETURNING :uid, :pid
 
     @staticmethod
     def remove_product_review(uid, pid):
-        if PReview.product_review_exists(uid, pid):
-            try:
-                rows = app.db.execute("""
-                DELETE FROM ProductReview
-                WHERE from_id=:uid
-                AND product_id=:pid
-                """, uid=uid, pid=pid)
-            except Exception:
-                return None
+        try:
+            rows = app.db.execute("""
+            DELETE FROM ProductReview
+            WHERE from_id=:uid
+            AND product_id=:pid
+            RETURNING :uid, :pid
+            """, uid=uid, pid=pid)
+            return rows[0]
+        except Exception:
+            return None

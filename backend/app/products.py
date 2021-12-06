@@ -102,4 +102,11 @@ def add_product_review():
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
 
+@products.route("/api/delete_product_review/", methods=["POST"])
+def delete_product_review():
+    review = PReview.remove_product_review(request.args['user_id'], request.args['product_id'])
+    if review is None:
+        return jsonify(update_status=False)
+    return jsonify(update_status=True)
+
 
