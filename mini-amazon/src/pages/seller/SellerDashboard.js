@@ -115,7 +115,7 @@ function SellerDashboard() {
         else {
             return (
                 <div>
-                    <div className={"p-6"} style={{width: 600, height: 300}}>
+                    <div className={"p-6 mt-5"} style={{width: 600, height: 400, borderRadius: "5px", borderWidth: "2px", borderStyle: "solid"}}>
                         <div style={{height: "100%", width: "100%"}}>
                             <h1 className="title">Profit Statistics</h1>
                             <ResponsiveContainer width="100%" height="100%">
@@ -135,7 +135,7 @@ function SellerDashboard() {
                             </ResponsiveContainer>
                         </div>
                     </div>
-                    <div className={"p-6"} style={{width: 600, height: 300}}>
+                    <div className={"p-6 mt-5"} style={{width: 600, height: 400, borderRadius: "5px", borderWidth: "2px", borderStyle: "solid"}}>
                         <div style={{height: "100%", width: "100%"}}>
                             <h1 className="title">Current Order Status</h1>
                             <ResponsiveContainer width="100%" height="100%">
