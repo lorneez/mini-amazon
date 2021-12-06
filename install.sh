@@ -26,3 +26,4 @@ virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
 db/setup.sh
+pip install pyjwt
