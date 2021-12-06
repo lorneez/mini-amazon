@@ -4,6 +4,7 @@ import './Style.css';
 import SideBarComponent from "../../components/SideBarComponent";
 import {AuthContext} from "../../contexts/AuthContext";
 import PasswordInput from "../../components/PasswordInput";
+import axios from "axios";
 
 function LoginPage() {
     const history = useHistory();
@@ -14,21 +15,36 @@ function LoginPage() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    function handleSubmit() {
+    async function handleSubmit() {
         console.log(username, password)
 
-        dispatch({
-            type: "LOGIN",
-            payload: {
-                isSignedIn: true,
-                username: username,
-                userType: "buyer",
-                token: "jwt-token",
-                expireDate: Math.floor(new Date().getTime() / 1000 + 2000)
+        const result = await axios.post(
+            'http://localhost:5000/api/user_login/?email=' + username + '&password=' + password, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
             }
-        });
-
-        history.push("/seller/dashboard");
+        ).then((response) => {
+            console.log(response.data)
+            // response.data.login_status
+            if(true) {
+                dispatch({
+                    type: "LOGIN",
+                    payload: {
+                        isSignedIn: true,
+                        username: username,
+                        userType: response.data.is_seller ? "seller" : "buyer",
+                        userId: response.data.uid,
+                        token: response.data.auth_token,
+                        expireDate: Math.floor(new Date().getTime() / 1000 + 2000) // response.data.expir
+                    }
+                });
+                history.push("/seller/dashboard");
+            }
+            else {
+                console.log("invalid auth")
+            }
+        })
     }
 
     return (

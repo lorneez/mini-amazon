@@ -2,6 +2,7 @@ from  backend.app import create_app
 from flask_cors import CORS
 
 app = create_app()
+
 CORS(app)
 
 from backend.app.products import products
@@ -15,6 +16,8 @@ app.register_blueprint(cart)
 app.register_blueprint(orders)
 app.register_blueprint(saved)
 app.register_blueprint(users)
+CORS(app)
+
 
 @app.route('/hello/', methods=['GET', 'POST'])
 def welcome():

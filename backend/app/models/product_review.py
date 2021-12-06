@@ -68,7 +68,7 @@ ORDER BY numUpVotes DESC, time_stamp DESC
             rows = app.db.execute('''
             UPDATE ProductReview
             SET review_text = :text
-            WHERE user_id = :uid 
+            WHERE from_id = :uid 
             AND product_id = :pid
             RETURNING :uid, :pid
             ''', uid=uid, pid=pid, text=text)
@@ -78,13 +78,58 @@ ORDER BY numUpVotes DESC, time_stamp DESC
             return None
 
     @staticmethod
-    def add_product_review(uid, pid, text):
+    def update_stars(uid, pid, stars):
+        try:
+            rows = app.db.execute('''
+            UPDATE ProductReview
+            SET numStars = :stars
+            WHERE from_id = :uid 
+            AND product_id = :pid
+            RETURNING :uid, :pid
+            ''', uid=uid, pid=pid, stars=stars)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def update_upvote(uid, pid, difference):
+        try:
+            rows = app.db.execute('''
+            UPDATE ProductReview
+            SET numUpVotes = numUpVotes + difference
+            WHERE from_id = :uid 
+            AND product_id = :pid
+            RETURNING :uid, :pid
+            ''', uid=uid, pid=pid, difference=difference)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def update_downvote(uid, pid, difference):
+        try:
+            rows = app.db.execute('''
+            UPDATE ProductReview
+            SET numDownVotes = numDownVotes + difference
+            WHERE from_id = :uid 
+            AND product_id = :pid
+            RETURNING :uid, :pid
+            ''', uid=uid, pid=pid, difference=difference)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def add_product_review(uid, pid, text, no_stars):
         try:
             rows = app.db.execute("""
-INSERT INTO ProductReview(from_id, product_id, review_text)
-VALUES(:uid, :pid, :text)
+INSERT INTO ProductReview(from_id, product_id, review_text, numStars)
+VALUES(:uid, :pid, :text, :stars)
 RETURNING :uid, :pid
-""", uid=uid, pid=pid, text=text)
+""", uid=uid, pid=pid, text=text, stars=no_stars)
             uid, pid = rows[0]
             return PReview.get(uid, pid)
         except Exception:
@@ -92,12 +137,26 @@ RETURNING :uid, :pid
 
     @staticmethod
     def remove_product_review(uid, pid):
-        if product_review_exists(uid, pid):
-            try:
-                rows = app.db.execute("""
-                DELETE FROM ProductReview
-                WHERE from_id=:uid
-                AND product_id=:pid
-                """, uid=uid, pid=pid)
-            except Exception:
-                return None
+        try:
+            rows = app.db.execute("""
+            DELETE FROM ProductReview
+            WHERE from_id=:uid
+            AND product_id=:pid
+            RETURNING :uid, :pid
+            """, uid=uid, pid=pid)
+            return rows[0]
+        except Exception:
+            return None
+
+    @staticmethod
+    def calculate_average_star(pid):
+        try:
+            rows = app.db.execute("""
+            SELECT AVG(numStars)
+            FROM ProductReview
+            GROUP BY product_id
+            HAVING product_id=:pid
+            """, pid=pid)
+            return rows[0][0]
+        except Exception:
+            return None

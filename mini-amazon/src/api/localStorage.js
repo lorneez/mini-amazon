@@ -4,6 +4,7 @@ export function setAuthentication(auth) {
     window.localStorage.setItem("zestDate", JSON.stringify(auth.expireDate));
     window.localStorage.setItem("zestUsername", JSON.stringify(auth.username));
     window.localStorage.setItem("zestUserType", JSON.stringify(auth.userType));
+    window.localStorage.setItem("zestUserId", JSON.stringify(auth.userId));
 }
 
 export function getAuthentication() {
@@ -11,11 +12,13 @@ export function getAuthentication() {
     const expireDate = window.localStorage.getItem("zestDate");
     const username = window.localStorage.getItem("zestUsername");
     const userType = window.localStorage.getItem("zestUserType");
-    if(token != null && expireDate != null && username != null && userType != null) {
+    const userId = window.localStorage.getItem("zestUserId");
+    if(token != null && expireDate != null && username != null && userType != null && userId != null) {
         return {
             isSignedIn: true,
             username: username,
             userType: userType,
+            userId: userId,
             token: token,
             expireDate: expireDate
         };
@@ -28,6 +31,7 @@ export function clearAuthentication() {
     window.localStorage.removeItem("zestDate");
     window.localStorage.removeItem("zestUsername");
     window.localStorage.removeItem("zestUserType");
+    window.localStorage.removeItem("zestUserId");
 }
 
 export function validateAuthentication() {

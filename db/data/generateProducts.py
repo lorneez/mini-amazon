@@ -8,6 +8,8 @@ if __name__ == "__main__":
     file = open("./db/data/Products.csv", "w")
     # file.write("id,name,seller_id,price,available_quantity,inventory_status,category,image_id\n")
 
+    
+
     # generate data for 50 products
     for product_id in range(50):
         id = product_id

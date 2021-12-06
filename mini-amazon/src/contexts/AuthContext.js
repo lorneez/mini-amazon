@@ -5,6 +5,7 @@ let initialState = {
     isSignedIn: false,
     username: null,
     userType: null,
+    userId: null,
     token: null,
     expireDate: null
 };
@@ -13,7 +14,8 @@ export const AuthContext = React.createContext(initialState);
 
 const authReducer = (state, action) => {
     const { payload } = action;
-    console.log("REDUCER CALLED")
+    console.log("REDUCER CALLED: " + action.type)
+    console.log(payload)
     switch (action.type) {
         case "LOGIN":
             setAuthentication(payload);
@@ -22,6 +24,7 @@ const authReducer = (state, action) => {
                 isSignedIn: true,
                 username: payload.username,
                 userType: payload.userType,
+                userId: payload.userId,
                 token: payload.token,
                 expireDate: payload.expireDate
             };
@@ -32,6 +35,7 @@ const authReducer = (state, action) => {
                 isSignedIn: false,
                 username: null,
                 userType: null,
+                userId: null,
                 token: null,
                 expireDate: null
             };
@@ -41,6 +45,7 @@ const authReducer = (state, action) => {
                 isSignedIn: payload.isSignedIn,
                 username: payload.username,
                 userType: payload.userType,
+                userId: payload.userId,
                 token: payload.token,
                 expireDate: payload.expireDate
             }

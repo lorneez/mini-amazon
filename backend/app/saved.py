@@ -30,6 +30,7 @@ def remove_item():
     '''
     if not Saved.product_exists(request.args['user_id'], request.args['product_id']):
         flash('Product is not saved. Cannot remove.')
-        return None
-    Saved.remove_product(request.args['user_id'], request.args['product_id'])
+        # return None
+    else:
+        Saved.remove_product(request.args['user_id'], request.args['product_id'])
     return jsonify(product = request.args['product_id'])

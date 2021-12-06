@@ -4,6 +4,7 @@ import './Style.css';
 import SideBarComponent from "../../components/SideBarComponent";
 import {AuthContext} from "../../contexts/AuthContext";
 import PasswordInput from "../../components/PasswordInput";
+import axios from "axios";
 
 function SignUpPage() {
     const history = useHistory();
@@ -11,22 +12,25 @@ function SignUpPage() {
     const auth = useContext(AuthContext);
     const { dispatch } = auth;
 
-    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+    const [address, setAddress] = useState("")
 
-    function handleSubmit() {
-        console.log(username, password)
 
-        dispatch({
-            type: "LOGIN",
-            payload: {
-                isSignedIn: true,
-                username: username,
-                userType: "buyer"
+    async function handleSubmit() {
+
+        await axios.post(
+            'http://localhost:5000/api/create_user/?email=' + email + '&password=' + password + '&name=' + name + '&address=' + address, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
             }
-        });
+        ).then((response) => {
+            console.log(response)
+        })
 
-        history.push("/dashboard");
+        history.push("/login");
     }
 
     return (
@@ -40,8 +44,14 @@ function SignUpPage() {
                     <div className={"container "}>
                         Sign Up Page
                         <div style={{width: 400}}>
-                            <input className="input is-primary"  value={username} type="text" placeholder="Username"
-                                   onChange={(e)=>setUsername(e.target.value)}
+                            <input className="input is-primary"  value={name} type="text" placeholder="Name"
+                                   onChange={(e)=>setName(e.target.value)}
+                            />
+                            <input className="input is-primary"  value={email} type="text" placeholder="Email"
+                                   onChange={(e)=>setEmail(e.target.value)}
+                            />
+                            <input className="input is-primary"  value={address} type="text" placeholder="Address"
+                                   onChange={(e)=>setAddress(e.target.value)}
                             />
                             <PasswordInput value = {password}/>
                             {/* <input className="input is-primary" value={password} type="text" placeholder="Password"
