@@ -17,7 +17,7 @@ CREATE TABLE Products (
     available_quantity INT CHECK(available_quantity >= 0),
     inventory_status BOOLEAN NOT NULL,
     category VARCHAR(255) NOT NULL,
-    image_id INT,
+    image_id VARCHAR(255) NOT NULL,
     FOREIGN KEY (seller_id) REFERENCES Users(id)
 );
 
