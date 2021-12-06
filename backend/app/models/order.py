@@ -50,6 +50,17 @@ WHERE o.user_id = :uid
         return [OrderProduct(*row) for row in rows]
 
     @staticmethod
+    def get_all_seller_products(uid):
+        rows = app.db.execute('''
+SELECT o.id, o.time_stamp, o.quantity, o.fulfillment_status, o.user_id, o.product_id, p.name, p.seller_id, p.price, p.available_quantity, p.inventory_status, p.category, p.image_id
+FROM OrderItem as o
+INNER JOIN Products as p
+ON p.id = o.product_id
+WHERE p.seller_id = :uid
+''', uid=uid)
+        return [OrderProduct(*row) for row in rows]
+
+    @staticmethod
     def get_all_user_order(uid):
         rows = app.db.execute('''
     SELECT id
