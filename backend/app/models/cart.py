@@ -70,8 +70,8 @@ WHERE c.user_id = :uid
 
     @staticmethod
     def add_product(uid, pid, quant):
-        if cart_item_exists(uid, pid):
-            return update_quantity(uid, pid, quant)
+        if Cart.cart_item_exists(uid, pid):
+            return Cart.update_quantity(uid, pid, quant)
         else:
             try:
                 rows = app.db.execute("""
@@ -86,7 +86,7 @@ WHERE c.user_id = :uid
 
     @staticmethod
     def remove_product(uid, pid):
-        if cart_item_exists(uid, pid):
+        if Cart.cart_item_exists(uid, pid):
             try:
                 rows = app.db.execute("""
                 DELETE FROM CartItem

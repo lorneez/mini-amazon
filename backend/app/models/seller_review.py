@@ -1,5 +1,6 @@
 from flask import current_app as app
 from backend.app.models.user import User
+from backend.app.models.product_review import PReview
 
 class SReviewSeller:
     def __init__(self, from_id, rtime, rtext, down, up, stars, sid, semail, sname, sseller, sbal, saddr):

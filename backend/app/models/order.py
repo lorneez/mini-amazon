@@ -47,7 +47,7 @@ INNER JOIN Products as p
 ON p.id = o.product_id
 WHERE o.user_id = :uid
 ''', uid=uid)
-        return [OrdeProduct(*row) for row in rows]
+        return [OrderProduct(*row) for row in rows]
 
     @staticmethod
     def get_all_user_order(uid):

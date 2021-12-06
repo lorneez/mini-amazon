@@ -122,7 +122,7 @@ RETURNING :uid, :pid
 
     @staticmethod
     def remove_product_review(uid, pid):
-        if product_review_exists(uid, pid):
+        if PReview.product_review_exists(uid, pid):
             try:
                 rows = app.db.execute("""
                 DELETE FROM ProductReview
