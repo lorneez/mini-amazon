@@ -15,8 +15,15 @@ function SellerOrders() {
     const [data, setData] = useState([]);
 
     useEffect(async () => {
+        // const result = await axios(
+        //     'http://localhost:5000/api/all_seller_orders/?seller_id=' + userId, {
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //         },
+        //     }
+        // );
         const result = await axios(
-            'http://localhost:5000/api/all_seller_orders/?seller_id=' + userId, {
+            'http://localhost:5000/api/all_seller_orders/?seller_id=0', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },

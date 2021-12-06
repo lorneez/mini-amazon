@@ -37,9 +37,15 @@ function Reviews() {
     const [data, setData] = useState([]);
 
     useEffect(async () => {
-        console.log("called")
+        // const result = await axios(
+        //     'http://localhost:5000/api/all_seller_reviews/?seller_id=' + userId, {
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //         },
+        //     }
+        // );
         const result = await axios(
-            'http://localhost:5000/api/all_seller_reviews/?seller_id=' + userId, {
+            'http://localhost:5000/api/all_seller_reviews/?seller_id=0', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },

@@ -46,8 +46,15 @@ function SellerDashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(async () => {
+        // const result = await axios(
+        //     'http://localhost:5000/api/all_seller_orders/?seller_id=' + userId, {
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //         },
+        //     }
+        // );
         const result = await axios(
-            'http://localhost:5000/api/all_user_orders/?user_id=' + userId, {
+            'http://localhost:5000/api/all_seller_orders/?seller_id=0', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -60,12 +67,12 @@ function SellerDashboard() {
         for (var i = 0; i < result.data.length; i++) {
             let time = result.data[i].order_time.split(" ")[0]
             if (time in graphData) {
-                graphData[time] += result.data[i].order_price;
+                graphData[time] += result.data[i].order_quantity * result.data[i].product_price;
             }
             else {
-                graphData[time] = result.data[i].order_price;
+                graphData[time] = result.data[i].order_quantity * result.data[i].product_price;
             }
-            if(result.data[i].order_status) {
+            if(result.data[i].order_fulfill) {
                 temp1 += 1
             }
             else {
