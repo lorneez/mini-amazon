@@ -1,50 +1,50 @@
-0,product0,0,10,10,True,category0,0
-1,product1,2,10,10,True,category1,1
-2,product2,4,10,10,True,category2,2
-3,product3,6,10,10,True,category3,3
-4,product4,8,10,10,True,category4,4
-5,product5,10,10,10,True,category0,5
-6,product6,12,10,10,True,category1,6
-7,product7,14,10,10,True,category2,7
-8,product8,16,10,10,True,category3,8
-9,product9,18,10,10,True,category4,9
-10,product10,20,10,10,True,category0,10
-11,product11,22,10,10,True,category1,11
-12,product12,24,10,10,True,category2,12
-13,product13,26,10,10,True,category3,13
-14,product14,28,10,10,True,category4,14
-15,product15,30,10,10,True,category0,15
-16,product16,32,10,10,True,category1,16
-17,product17,34,10,10,True,category2,17
-18,product18,36,10,10,True,category3,18
-19,product19,38,10,10,True,category4,19
-20,product20,40,10,10,True,category0,20
-21,product21,42,10,10,True,category1,21
-22,product22,44,10,10,True,category2,22
-23,product23,46,10,10,True,category3,23
-24,product24,48,10,10,True,category4,24
-25,product25,50,10,10,True,category0,25
-26,product26,52,10,10,True,category1,26
-27,product27,54,10,10,True,category2,27
-28,product28,56,10,10,True,category3,28
-29,product29,58,10,10,True,category4,29
-30,product30,60,10,10,True,category0,30
-31,product31,62,10,10,True,category1,31
-32,product32,64,10,10,True,category2,32
-33,product33,66,10,10,True,category3,33
-34,product34,68,10,10,True,category4,34
-35,product35,70,10,10,True,category0,35
-36,product36,72,10,10,True,category1,36
-37,product37,74,10,10,True,category2,37
-38,product38,76,10,10,True,category3,38
-39,product39,78,10,10,True,category4,39
-40,product40,80,10,10,True,category0,40
-41,product41,82,10,10,True,category1,41
-42,product42,84,10,10,True,category2,42
-43,product43,86,10,10,True,category3,43
-44,product44,88,10,10,True,category4,44
-45,product45,90,10,10,True,category0,45
-46,product46,92,10,10,True,category1,46
-47,product47,94,10,10,True,category2,47
-48,product48,96,10,10,True,category3,48
-49,product49,98,10,10,True,category4,49
+0,Book Product 0,0,10,10,True,Books,https://images-na.ssl-images-amazon.com/images/I/41oYsXjLvZL._SX348_BO1,204,203,200_.jpg
+1,Electronics Product 0,2,10,10,True,Electronics,https://m.media-amazon.com/images/I/71hhgeQCrOL._AC_SX960_SY720_.jpg
+2,Clothing Product 0,4,10,10,True,Clothing,https://m.media-amazon.com/images/I/91z1+DpSXIL._AC_UL640_FMwebp_QL65_.jpg
+3,Game Product 0,6,10,10,True,Games,https://m.media-amazon.com/images/I/814IztfQ5LL._AC_UY436_FMwebp_QL65_.jpg
+4,Grocery Product 0,8,10,10,True,Groceries,https://m.media-amazon.com/images/I/71kQY4DDlNL._AC_UL640_FMwebp_QL65_.jpg
+5,Book Product 1,10,10,10,True,Books,https://images-na.ssl-images-amazon.com/images/I/51OOCVBfCQL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg
+6,Electronics Product 1,12,10,10,True,Electronics,https://m.media-amazon.com/images/I/71+2H96GHZL._AC_SX960_SY720_.jpg
+7,Clothing Product 1,14,10,10,True,Clothing,https://m.media-amazon.com/images/I/71A6F+t7AoL._AC_UL640_FMwebp_QL65_.jpg
+8,Game Product 1,16,10,10,True,Games,https://m.media-amazon.com/images/I/817zvXdCgSL._AC_UY436_FMwebp_QL65_.jpg
+9,Grocery Product 1,18,10,10,True,Groceries,https://m.media-amazon.com/images/I/81u6mQeOSmL._AC_UL640_FMwebp_QL65_.jpg
+10,Book Product 2,20,10,10,True,Books,https://images-na.ssl-images-amazon.com/images/I/51KElbJ7EqL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg
+11,Electronics Product 2,22,10,10,True,Electronics,https://m.media-amazon.com/images/I/71zRcqRQGOL._AC_SX960_SY720_.jpg
+12,Clothing Product 2,24,10,10,True,Clothing,https://m.media-amazon.com/images/I/81Sv3Z2suBL._AC_UL640_FMwebp_QL65_.jpg
+13,Game Product 2,26,10,10,True,Games,https://m.media-amazon.com/images/I/818iETWG-aL._AC_UL640_FMwebp_QL65_.jpg
+14,Grocery Product 2,28,10,10,True,Groceries,https://m.media-amazon.com/images/I/81DF9tHWcbL._AC_UL640_FMwebp_QL65_.jpg
+15,Book Product 3,30,10,10,True,Books,https://m.media-amazon.com/images/I/61rFgbqlcrL._AC_UY436_FMwebp_QL65_.jpg
+16,Electronics Product 3,32,10,10,True,Electronics,https://m.media-amazon.com/images/I/81eRAX3sB6L._AC_SX960_SY720_.jpg
+17,Clothing Product 3,34,10,10,True,Clothing,https://m.media-amazon.com/images/I/812m6InUlzL._AC_UL640_FMwebp_QL65_.jpg
+18,Game Product 3,36,10,10,True,Games,https://m.media-amazon.com/images/I/611sCBctXuL._AC_UY436_FMwebp_QL65_.jpg
+19,Grocery Product 3,38,10,10,True,Groceries,https://m.media-amazon.com/images/I/81p6f569R0L._AC_UL640_FMwebp_QL65_.jpg
+20,Book Product 4,40,10,10,True,Books,https://m.media-amazon.com/images/I/71QVHBdFzAL._AC_UY436_FMwebp_QL65_.jpg
+21,Electronics Product 4,42,10,10,True,Electronics,https://m.media-amazon.com/images/I/81w3miL-DHL._AC_SX960_SY720_.jpg
+22,Clothing Product 4,44,10,10,True,Clothing,https://m.media-amazon.com/images/I/61s+ft92apL._AC_UL640_FMwebp_QL65_.jpg
+23,Game Product 4,46,10,10,True,Games,https://m.media-amazon.com/images/I/51PfIGfAutL._AC_UY436_FMwebp_QL65_.jpg
+24,Grocery Product 4,48,10,10,True,Groceries,https://m.media-amazon.com/images/I/71luFg8EBjS._AC_UL640_FMwebp_QL65_.jpg
+25,Book Product 5,50,10,10,True,Books,https://m.media-amazon.com/images/I/71QVHBdFzAL._AC_UY436_FMwebp_QL65_.jpg
+26,Electronics Product 5,52,10,10,True,Electronics,https://m.media-amazon.com/images/I/81suFCdoD6L._AC_SX960_SY720_.jpg
+27,Clothing Product 5,54,10,10,True,Clothing,https://m.media-amazon.com/images/I/81te-8XgnlL._AC_UL640_FMwebp_QL65_.jpg
+28,Game Product 5,56,10,10,True,Games,https://m.media-amazon.com/images/I/71H2kx9wTqL._AC_UY436_FMwebp_QL65_.jpg
+29,Grocery Product 5,58,10,10,True,Groceries,https://m.media-amazon.com/images/I/81te0dgkN4L._AC_UL640_FMwebp_QL65_.jpg
+30,Book Product 6,60,10,10,True,Books,https://m.media-amazon.com/images/I/61q1IqrlhyL._AC_UL640_FMwebp_QL65_.jpg
+31,Electronics Product 6,62,10,10,True,Electronics,https://m.media-amazon.com/images/I/61xT7CDtrwS._AC_UY436_FMwebp_QL65_.jpg
+32,Clothing Product 6,64,10,10,True,Clothing,https://m.media-amazon.com/images/I/61y-w4bewQL._MCnd_AC_UL640_FMwebp_QL65_.jpg
+33,Game Product 6,66,10,10,True,Games,https://m.media-amazon.com/images/I/71PIucvgepL._AC_UY436_QL65_.jpg
+34,Grocery Product 6,68,10,10,True,Groceries,https://m.media-amazon.com/images/I/61jTpExBMAL._AC_UL640_FMwebp_QL65_.jpg
+35,Book Product 7,70,10,10,True,Books,https://m.media-amazon.com/images/I/71nSoeWRPNL._AC_UL640_FMwebp_QL65_.jpg
+36,Electronics Product 7,72,10,10,True,Electronics,https://m.media-amazon.com/images/I/51utxdpV8cS._AC_UY436_FMwebp_QL65_.jpg
+37,Clothing Product 7,74,10,10,True,Clothing,https://m.media-amazon.com/images/I/81ZAKQ1jzeL._AC_UL640_FMwebp_QL65_.jpg
+38,Game Product 7,76,10,10,True,Games,https://m.media-amazon.com/images/I/71YC7GYYKAL._AC_UY436_QL65_.jpg
+39,Grocery Product 7,78,10,10,True,Groceries,https://m.media-amazon.com/images/I/81I75zgQ1-L._AC_UL640_FMwebp_QL65_.jpg
+40,Book Product 8,80,10,10,True,Books,https://m.media-amazon.com/images/I/710aLBwkr7L._AC_UL640_FMwebp_QL65_.jpg
+41,Electronics Product 8,82,10,10,True,Electronics,https://m.media-amazon.com/images/I/61Kq-Pz8d-L._AC_UY436_FMwebp_QL65_.jpg
+42,Clothing Product 8,84,10,10,True,Clothing,https://m.media-amazon.com/images/I/71VQsF2tupL._AC_UL640_FMwebp_QL65_.jpg
+43,Game Product 8,86,10,10,True,Games,https://m.media-amazon.com/images/I/81-FD3tzUlL._AC_UY436_QL65_.jpg
+44,Grocery Product 8,88,10,10,True,Groceries,https://m.media-amazon.com/images/I/817x89Wnc5S._AC_UL640_FMwebp_QL65_.jpg
+45,Book Product 9,90,10,10,True,Books,https://m.media-amazon.com/images/I/71BkEu-sVzL._AC_UL640_FMwebp_QL65_.jpg
+46,Electronics Product 9,92,10,10,True,Electronics,https://m.media-amazon.com/images/I/71LJJrKbezL._AC_UY436_FMwebp_QL65_.jpg
+47,Clothing Product 9,94,10,10,True,Clothing,https://m.media-amazon.com/images/I/71F2tjW19JS._AC_UL640_FMwebp_QL65_.jpg
+48,Game Product 9,96,10,10,True,Games,https://m.media-amazon.com/images/I/61+AtsQkQ6S._AC_UY436_FMwebp_QL65_.jpg
+49,Grocery Product 9,98,10,10,True,Groceries,https://m.media-amazon.com/images/I/816flmsx1JL._AC_UL640_FMwebp_QL65_.jpg
