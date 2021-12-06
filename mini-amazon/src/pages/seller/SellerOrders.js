@@ -1,17 +1,22 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import SideBarComponent from "../../components/SideBarComponent"
 import OrderTable from "../../components/OrderTable";
 import axios from "axios";
 import InventoryTable from "../../components/seller/InventoryTable";
+import {AuthContext} from "../../contexts/AuthContext";
 
 
 function SellerOrders() {
+
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { userId } = state;
 
     const [data, setData] = useState([]);
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_user_orders/?user_id=2', {
+            'http://localhost:5000/api/all_seller_orders/?seller_id=' + userId, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },

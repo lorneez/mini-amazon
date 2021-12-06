@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, {useContext, useEffect, useState} from "react"
 import SideBarComponent from "../../components/SideBarComponent"
 import InventoryTable from "../../components/seller/InventoryTable";
 import axios from 'axios';
+import {AuthContext} from "../../contexts/AuthContext";
 
 const rows = [
     {
@@ -36,12 +37,16 @@ const rows = [
 
 function Inventory() {
 
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { userId } = state;
+
     const [data, setData] = useState([]);
 
     useEffect(async () => {
         console.log("called")
         const result = await axios(
-            'http://localhost:5000/api/all_products/', {
+            'http://localhost:5000/api/all_products/?seller_id=' + userId, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },

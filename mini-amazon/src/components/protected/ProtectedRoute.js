@@ -16,7 +16,7 @@ function ProtectedRoute(props) {
         if(valid) {
             if(state.token == null) { // make for all
                 const localStorageAuth = getAuthentication();
-                const { token, username, userType, expireDate } = localStorageAuth;
+                const { token, username, userType, expireDate, userId } = localStorageAuth;
                 dispatch({
                     type: "REFRESH",
                     payload: {
@@ -24,6 +24,7 @@ function ProtectedRoute(props) {
                         token: token,
                         username: username,
                         userType: userType,
+                        userId: userId,
                         expireDate: expireDate
                     }
                 });
