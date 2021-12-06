@@ -3,6 +3,8 @@ from flask_cors import CORS
 
 app = create_app()
 
+CORS(app)
+
 from backend.app.products import products
 from backend.app.cart import cart
 from backend.app.orders import orders

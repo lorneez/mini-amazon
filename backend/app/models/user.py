@@ -16,34 +16,39 @@ class User(UserMixin):
     @staticmethod
     def get_by_auth(email, password):
         rows = app.db.execute("""
-SELECT password, id, email, name, is_seller, balance, address
+SELECT password, id, is_seller
 FROM Users
 WHERE email = :email
 """,
                               email=email)
         if not rows:  # email not found
+            print("here1")
             return None
-        elif not check_password_hash(rows[0][0], password):
+        elif check_password_hash(rows[0][0], password):
             # incorrect password
-            return None
+            print("here2")
+            return [rows[0][1], rows[0][2]]
         else:
-            return User(*(rows[0][1:]))
+            print("here3")
+            return None
 
     @staticmethod
-    def encode_auth_token(self, user_id):
+    def encode_auth_token(user_id):
         # Generates the Auth Token
         # return: encoded jwt token and datetime object of expiration
         try:
+            expiration = datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5)
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=0, hours=5),
+                'exp': expiration,
                 'iat': datetime.datetime.utcnow(),
                 'sub': user_id
             }
-            return jwt.encode(
+            token = jwt.encode(
                 payload,
                 app.config.get('SECRET_KEY'),
                 algorithm='HS256'
-            ), payload['exp']
+            )
+            return [token, expiration]
         except Exception as e:
             return e
 
@@ -58,16 +63,19 @@ WHERE email = :email
         return len(rows) > 0
 
     @staticmethod
-    def register(email, password, name):
+    def register(email, password, name, address, is_seller=False):
         try:
             rows = app.db.execute("""
-INSERT INTO Users(email, password, name)
-VALUES(:email, :password, :name)
+INSERT INTO Users(email, password, name, is_seller, balance, address)
+VALUES(:email, :password, :name, :is_seller, :balance, :address)
 RETURNING id
 """,
                                   email = email,
                                   password = generate_password_hash(password),
-                                  name = name)
+                                  name = name,
+                                  is_seller = is_seller,
+                                  balance = 0,
+                                  address = address)
             id = rows[0][0]
             return User.get(id)
         except Exception:
@@ -75,13 +83,12 @@ RETURNING id
             # reporting needed
             return None
 
-#     @staticmethod
-#     @login.user_loader
-#     def get(id):
-#         rows = app.db.execute("""
-# SELECT id, email, name
-# FROM Users
-# WHERE id = :id
-# """,
-#                               id=id)
-#         return User(*(rows[0])) if rows else None
+    @staticmethod
+    def get(id):
+        rows = app.db.execute("""
+SELECT id, email, name, is_seller, balance, address
+FROM Users
+WHERE id = :id
+""",
+                              id=id)
+        return User(*(rows[0])) if rows else None

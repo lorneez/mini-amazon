@@ -5,9 +5,14 @@ import json
 # Configure application
 orders = Blueprint('orders',__name__)
 
-@orders.route("/api/all_user_orders/", methods=["GET"])
-def all_orders_user():
+@orders.route("/api/all_buyer_orders/", methods=["GET"])
+def all_orders_buyer():
     orders = Order.get_all_user(request.args["user_id"])
+    return json.dumps([item.__dict__ for item in orders], default=str)
+
+@orders.route("/api/all_seller_orders/", methods=["GET"])
+def all_orders_seller_products():
+    orders = Order.get_all_seller_products(request.args["seller_id"])
     return json.dumps([item.__dict__ for item in orders], default=str)
 
 @orders.route("/api/single_user_order/", methods=["GET"])

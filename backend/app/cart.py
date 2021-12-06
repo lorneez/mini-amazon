@@ -1,5 +1,6 @@
 from backend.app.models.cart import Cart
 from flask import Flask, request, jsonify, flash, Blueprint
+import json
 
 # Configure application
 cart = Blueprint('cart',__name__)
