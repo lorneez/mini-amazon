@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import InventoryItem from "./InventoryItem";
-import OrderItem from "./OrderItem";
+import InventoryItem from "../seller/InventoryItem"
+import CartItem from "./CartItem";
 
-function OrderTable(props) {
+function CartTable(props) {
 
     const [page, setPage] = useState(1)
     const itemsPerPage = 6;
@@ -15,7 +15,7 @@ function OrderTable(props) {
         return (
             <div>
                 {slicedItems.map((item)=>(
-                    <OrderItem item={item}/>
+                    <CartItem item={item}/>
                 ))}
             </div>
         )
@@ -62,25 +62,25 @@ function OrderTable(props) {
         <div className={"table"}>
             <div className={"columns m-2"} style={{background: "#F2AA56", borderRadius: "5px"}}>
                 <div className={"column"}>
-                    Product Name
+                Product Image
                 </div>
                 <div className={"column"}>
-                    Item Quantity
+                Product Seller
                 </div>
                 <div className={"column"}>
-                    Final Price
+                Product ID
                 </div>
                 <div className={"column"}>
-                    Shipping Address
+                Product Name
                 </div>
                 <div className={"column"}>
-                    Customer Name
+                Quantity
                 </div>
                 <div className={"column"}>
-                    Date Created
+                Price (USD)
                 </div>
                 <div className={"column"}>
-                    Status
+                In Stock
                 </div>
             </div>
             {renderPage()}
@@ -89,4 +89,5 @@ function OrderTable(props) {
     )
 }
 
-export default OrderTable;
+export default CartTable;
+
