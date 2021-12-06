@@ -40,9 +40,9 @@ function Search() {
     }
 
     async function search (searchValue) {
-        console.log('http://0.0.0.0:5000/api/products_keyword/?keyword='+JSON.stringify(searchInput))
+        console.log('http://0.0.0.0:5000/api/products_keyword/?keyword='+searchInput)
         const result = await axios(
-            'http://0.0.0.0:5000/api/products_keyword/?keyword=product', {
+            'http://0.0.0.0:5000/api/products_keyword/?keyword='+searchInput, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
