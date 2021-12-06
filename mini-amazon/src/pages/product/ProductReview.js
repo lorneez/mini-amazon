@@ -10,7 +10,7 @@ function ProductReview() {
 
     useEffect(async () => {
         const result = await axios(
-            'http://127.0.0.1:5000/api/all_product_reviews/?product_id=1', {
+            'http://localhost:5000/api/all_product_reviews/?product_id=1', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
