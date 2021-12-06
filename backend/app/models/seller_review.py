@@ -92,6 +92,36 @@ ORDER BY sr.numUpVotes DESC, sr.time_stamp DESC
             return None
 
     @staticmethod
+    def update_upvote(uid, tid, difference):
+        try:
+            rows = app.db.execute('''
+            UPDATE SellerReview
+            SET numUpVotes = numUpVotes + difference
+            WHERE from_id = :uid 
+            AND to_id = :tid
+            RETURNING :uid, :tid
+            ''', uid=uid, tid=tid, difference=difference)
+            uid, tid = rows[0]
+            return SReview.get(uid, tid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def update_downvote(uid, tid, difference):
+        try:
+            rows = app.db.execute('''
+            UPDATE SellerReview
+            SET numDownVotes = numDownVotes + difference
+            WHERE from_id = :uid 
+            AND to_id = :tid
+            RETURNING :uid, :tid
+            ''', uid=uid, tid=tid, difference=difference)
+            uid, tid = rows[0]
+            return SReview.get(uid, tid)
+        except Exception:
+            return None
+
+    @staticmethod
     def add_product_review(uid, sid, text, stars):
         try:
             rows = app.db.execute("""
@@ -104,14 +134,13 @@ RETURNING :uid, :sid
         except Exception:
             return None
 
-#     @staticmethod
-#     def remove_product_review(uid, pid):
-#         if product_review_exists(uid, pid):
-#             try:
-#                 rows = app.db.execute("""
-#                 DELETE FROM ProductReview
-#                 WHERE from_id=:uid
-#                 AND product_id=:pid
-#                 """, uid=uid, pid=pid)
-#             except Exception:
-#                 return None
+    @staticmethod
+    def remove_seller_review(uid, tid):
+        try:
+            rows = app.db.execute("""
+            DELETE FROM ProductReview
+            WHERE from_id=:uid
+            AND to_id=:tid
+            """, uid=uid, tid=tid)
+        except Exception:
+            return None

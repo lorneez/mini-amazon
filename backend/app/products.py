@@ -82,14 +82,14 @@ def edit_product_review_stars():
     return json.dumps(review.__dict__, default=str)
 
 @products.route("/api/update_product_review_upvote/", methods=["POST"])
-def edit_product_review_stars():
+def edit_product_review_upvote():
     review = PReview.update_upvote(request.args['user_id'], request.args['product_id'], request.args['vote_difference'])
     if review is None:
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
 
 @products.route("/api/update_product_review_downvote/", methods=["POST"])
-def edit_product_review_stars():
+def edit_product_review_downvote():
     review = PReview.update_downvote(request.args['user_id'], request.args['product_id'], request.args['vote_difference'])
     if review is None:
         return jsonify(update_status=False)

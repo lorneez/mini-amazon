@@ -68,7 +68,16 @@ def add_product_review():
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
 
-# @bp.route('/logout')
-# def logout():
-#     logout_user()
-#     return redirect(url_for('index.index'))
+@users.route("/api/update_seller_review_upvote/", methods=["POST"])
+def edit_seller_review_upvote():
+    review = SReview.update_upvote(request.args['user_id'], request.args['to_id'], request.args['vote_difference'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
+
+@users.route("/api/update_seller_review_downvote/", methods=["POST"])
+def edit_seller_review_downvote():
+    review = SReview.update_downvote(request.args['user_id'], request.args['to_id'], request.args['vote_difference'])
+    if review is None:
+        return jsonify(update_status=False)
+    return json.dumps(review.__dict__, default=str)
