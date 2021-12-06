@@ -5,18 +5,26 @@ import ProductPreview from "./ProductPreview"
 function OrderTable(props) {
 
     const [page, setPage] = useState(1)
-    const itemsPerPage = 6;
+    const itemsPerPage = 4;
 
     function renderPage() {
         const start = (page - 1) * itemsPerPage
         const end = Math.min(props.data.length, page * itemsPerPage)
-        const slicedItems = props.data.slice(start, end);
+        const filteredItems = []
+
+        for (var i = 0; i<props.data.length; i++){
+            if(props.category.includes(props.data[i].category)){
+                filteredItems.push(props.data[i]);
+            }
+        }
+
+        const slicedItems = filteredItems.slice(start, end);
 
         return (
             <div>
                 {slicedItems.map((item)=>(
                     <ProductPreview data={item}/>
-                ))}
+                ))} 
             </div>
         )
     }

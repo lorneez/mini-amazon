@@ -8,6 +8,7 @@ function ProductPreview(props) {
             <div>
                 <div style = {styles.title}>{props.data.name}</div>
                 <div style = {styles.title}>${props.data.price}</div>
+                <div style = {styles.title}>Category: {props.data.category}</div>
                 <div style = {styles.title}>Sold by {props.data.seller}</div>
                 <div style = {styles.title}>Only {props.data.available_quantity} left in stock!</div>
                 <div style = {styles.title}>Status: {props.data.inventory_status ? 'IN STOCK' : 'OUT OF STOCK'}</div>
