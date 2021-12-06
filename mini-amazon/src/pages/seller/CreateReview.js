@@ -10,16 +10,11 @@ function CreateReview(props) {
     const { state } = auth;
     const { userId } = state;
 
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+    const [review, setReview] = useState("")
 
     async function submitReview() {
         const result = await axios(
-            'http://localhost:5000/api/seller/create-review/', {
-                title: title,
-                description: description,
-                sellerId: props.sellerId,
-                userId: userId,
+            'http://localhost:5000/api/add_seller_review/?seller_id=' + props.sellerId + '&user_id=' + userId + '&review_text=' + review, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -51,27 +46,14 @@ function CreateReview(props) {
                     <div className={"container m-2"}>
                         <div>
                             <div>
-                                Title
+                                Review
                             </div>
                             <input
                                 className="input is-primary"
-                                value={title}
+                                value={review}
                                 type="text"
-                                placeholder="Title"
-                                onChange={(e)=>setTitle(e.target.value)}
-                                style={{width: "50%"}}
-                            />
-                        </div>
-                        <div>
-                            <div>
-                                Description
-                            </div>
-                            <input
-                                className="input is-primary"
-                                value={description}
-                                type="text"
-                                placeholder="Description"
-                                onChange={(e)=>setDescription(e.target.value)}
+                                placeholder="Review"
+                                onChange={(e)=>setReview(e.target.value)}
                                 style={{width: "50%"}}
                             />
                         </div>

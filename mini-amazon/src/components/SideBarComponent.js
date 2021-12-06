@@ -7,7 +7,7 @@ function SideBarComponent(props) {
 
     const auth = useContext(AuthContext);
     const { state, dispatch } = auth;
-    const { username, isSignedIn } = state;
+    const { username, isSignedIn,  } = state;
 
     const sideBarType = props.type;
 

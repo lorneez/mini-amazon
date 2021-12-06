@@ -16,12 +16,13 @@ function SignUpPage() {
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
     const [address, setAddress] = useState("")
+    const [isSeller, setIsSeller] = useState(false)
 
 
     async function handleSubmit() {
 
         await axios.post(
-            'http://localhost:5000/api/create_user/?email=' + email + '&password=' + password + '&name=' + name + '&address=' + address, {
+            'http://localhost:5000/api/create_user/?email=' + email + '&password=' + password + '&name=' + name + '&address=' + address + '&is_seller=' + isSeller? "true":"false", {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -31,6 +32,10 @@ function SignUpPage() {
         })
 
         history.push("/login");
+    }
+
+    function changeIsSeller(e) {
+        setIsSeller(e.target.checked)
     }
 
     return (
@@ -47,6 +52,10 @@ function SignUpPage() {
                             <input className="input is-primary"  value={name} type="text" placeholder="Name"
                                    onChange={(e)=>setName(e.target.value)}
                             />
+                            <label className="checkbox">
+                                <input type="checkbox" value={isSeller} onChange={(e) => changeIsSeller(e)}/>
+                                Check this box if you want to sign up as a seller as well!
+                            </label>
                             <input className="input is-primary"  value={email} type="text" placeholder="Email"
                                    onChange={(e)=>setEmail(e.target.value)}
                             />
@@ -57,7 +66,9 @@ function SignUpPage() {
                             {/* <input className="input is-primary" value={password} type="text" placeholder="Password"
                                    onChange={(e)=>setPassword(e.target.value)}
                             /> */}
+
                             <button className="button landingbutton" onClick={() => handleSubmit()}>Sign Up</button>
+
                         </div>
                     </div>
                 </flexbox>
