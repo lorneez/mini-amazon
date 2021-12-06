@@ -93,7 +93,7 @@ WHERE c.user_id = :uid
                 rows = app.db.execute("""
                 DELETE FROM CartItem
                 WHERE user_id=:uid
-                AND pid=:pid
+                AND product_id=:pid
                 """, uid=uid, pid=pid)
             except Exception:
                 return None
