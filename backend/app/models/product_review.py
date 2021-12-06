@@ -92,16 +92,31 @@ ORDER BY numUpVotes DESC, time_stamp DESC
         except Exception:
             return None
 
-        @staticmethod
+    @staticmethod
     def update_upvote(uid, pid, difference):
         try:
             rows = app.db.execute('''
             UPDATE ProductReview
-            SET numStars = :stars
+            SET numUpVotes = numUpVotes + difference
             WHERE from_id = :uid 
             AND product_id = :pid
             RETURNING :uid, :pid
-            ''', uid=uid, pid=pid, stars=stars)
+            ''', uid=uid, pid=pid, difference=difference)
+            uid, pid = rows[0]
+            return PReview.get(uid, pid)
+        except Exception:
+            return None
+
+    @staticmethod
+    def update_downvote(uid, pid, difference):
+        try:
+            rows = app.db.execute('''
+            UPDATE ProductReview
+            SET numDownVotes = numDownVotes + difference
+            WHERE from_id = :uid 
+            AND product_id = :pid
+            RETURNING :uid, :pid
+            ''', uid=uid, pid=pid, difference=difference)
             uid, pid = rows[0]
             return PReview.get(uid, pid)
         except Exception:
