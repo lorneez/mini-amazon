@@ -82,6 +82,9 @@ function OrderTable(props) {
                 <div className={"column"}>
                 Date Ordered
                 </div>
+                <div className={"column"}>
+                    View Order
+                </div>
             </div>
             {renderPage()}
             {renderButtons()}
