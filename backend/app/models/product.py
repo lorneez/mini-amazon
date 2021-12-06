@@ -42,10 +42,11 @@ WHERE available_quantity > 0
             rows = app.db.execute("""
 INSERT INTO Products(name, seller_id, price, available_quantity, inventory_status, category, image_id)
 VALUES(:name, :sid, :price, :quantity, :inventory, :category, :image)
-RETURNING :id, :sid, :name
+RETURNING :name
 """, name=name, sid=sid, price=price, quantity=quantity, inventory=inventory, category=category, image=image)
-            id, sid, name = rows[0]
-            return [id, sid, name]
+            product= rows[0][0]
+            if product is not None:
+                return product
         except Exception:
             return None
 
