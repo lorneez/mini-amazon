@@ -7,7 +7,7 @@ function SideBarComponent(props) {
 
     const auth = useContext(AuthContext);
     const { state, dispatch } = auth;
-    const { username, isSignedIn } = state;
+    const { username, isSignedIn, userType } = state;
 
     const sideBarType = props.type;
 
@@ -47,10 +47,6 @@ function SideBarComponent(props) {
             route: "/product/create",
             name: "Product Create"
         },
-        {
-            route: "/seller/dashboard",
-            name: "Go To Seller"
-        }
     ]
 
     const sellerLinks = [
@@ -105,6 +101,17 @@ function SideBarComponent(props) {
     }
 
     function renderPage() {
+        console.log(userType)
+        console.log(userType == "seller")
+
+        if(userType === "seller") {
+            console.log("hello")
+            buyerLinks.push({
+                route: "/seller/dashboard",
+                name: "Go To Seller"
+            })
+        }
+        console.log(buyerLinks)
         switch(sideBarType) {
             case "landing":
                 return (
