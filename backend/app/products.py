@@ -12,6 +12,13 @@ def all_products():
     products = Product.get_all()
     return json.dumps([item.__dict__ for item in products])
 
+@products.route("/api/product_by_id/", methods=["GET"])
+def single_product():
+    products = Product.get(request.args['id'])
+    if products is None:
+        return jsonify(status=False)
+    return json.dumps([item.__dict__ for item in products])
+
 @products.route("/api/products_category/", methods=["GET"])
 def all_products_category():
     products = Product.get_category(request.args['category'])
@@ -32,7 +39,7 @@ def add_product():
     product_info = Product.add_product(request.args['name'], request.args['seller_id'], request.args['price'], request.args['quantity'], request.args['inventory_status'], request.args['category'], request.args['image'])
     if product_info is None:
         return jsonify(add_status=False)
-    return json.dumps(product_info.__dict__, default=str)
+    return jsonify(add_status=True)
 
 @products.route("/api/product_price_update/", methods=["POST"])
 def change_product_cost():
