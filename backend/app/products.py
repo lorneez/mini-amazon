@@ -34,6 +34,34 @@ def add_product():
         return jsonify(add_status=False)
     return json.dumps(product_info.__dict__, default=str)
 
+@products.route("/api/product_price_update/", methods=["POST"])
+def change_product_cost():
+    product_info = Product.change_price(request.args['id'], request.args['price_change'])
+    if product_info is None:
+        return jsonify(change_price_status=False)
+    return jsonify(change_price_status=True)
+
+@products.route("/api/product_status_update/", methods=["POST"])
+def change_product_status():
+    product_info = Product.change_status(request.args['id'], request.args['status'])
+    if product_info is None:
+        return jsonify(change_status=False)
+    return jsonify(change_status=True)
+
+@products.route("/api/remove_product/", methods=["POST"])
+def remove_product():
+    product_info = Product.remove_product(request.args['id'])
+    if product_info is None:
+        return jsonify(remove_status=False)
+    return jsonify(remove_status=True)
+
+@products.route("/api/update_product_quantity/", methods=["POST"])
+def update_product_quantity():
+    product_info = Product.change_quantity(request.args['id'], request.args['quantity_change'])
+    if product_info is None:
+        return jsonify(update_status=False)
+    return jsonify(update_status=True)
+
 @products.route("/api/all_product_reviews/", methods=["GET"])
 def all_product_reviews():
     reviews = PReview.get_all_for_product(request.args['product_id'])

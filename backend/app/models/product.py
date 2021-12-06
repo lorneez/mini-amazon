@@ -71,3 +71,63 @@ WHERE LOWER(name) LIKE :keyword
 ''', keyword=keyword)
         return [Product(*row) for row in rows]
 
+    @staticmethod
+    def change_quantity(pid, quantity_change):
+        try:
+            rows = app.db.execute('''
+                SELECT price
+                FROM Products
+                WHERE id=:pid
+            ''', pid=pid)
+            quantity = rows[0][0]
+            if (quantity < quantity_change):
+                return None
+            else:
+                rows = app.db.execute('''
+        UPDATE Products
+        SET available_quantity = available_quantity+:quantity_change
+        WHERE id=:pid
+        RETURNING :pid
+        ''', quantity_change=quantity_change, pid=pid)
+                return pid
+        except Exception:
+            return None
+
+    @staticmethod
+    def change_price(pid, price_change):
+        try:
+            rows = app.db.execute('''
+    UPDATE Products
+    SET price = price+:price_change
+    WHERE id=:pid
+    RETURNING :pid
+    ''', price_change=price_change, pid=pid)
+            return pid
+        except Exception:
+            return None
+
+    @staticmethod
+    def change_status(pid, status):
+        try:
+            rows = app.db.execute('''
+    UPDATE Products
+    SET inventory_status = :status
+    WHERE id=:pid
+    RETURNING :pid
+    ''', status=status)
+            return pid
+        except Exception:
+            return None
+
+    @staticmethod
+    def remove_product(pid):
+        try:
+            rows = app.db.execute('''
+                DELETE FROM Products
+                WHERE id=:pid
+                RETURNING :pid
+    ''', pid=pid)
+            return pid
+        except Exception as e:
+            return None
+

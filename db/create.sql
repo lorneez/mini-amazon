@@ -27,7 +27,7 @@ CREATE TABLE CartItem (
     product_id INT NOT NULL,
     quantity INT NOT NULL CHECK(quantity >= 0),
     FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (product_id) REFERENCES Products(id),
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (id, user_id, product_id)
 );
 
@@ -40,7 +40,7 @@ CREATE TABLE OrderItem (
     time_stamp timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
     fulfillment_status BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (product_id) REFERENCES Products(id),
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (id, user_id, product_id)
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE SavedItem (
     product_id INT NOT NULL,
     time_stamp timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE 'UTC'),
     FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (product_id) REFERENCES Products(id),
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (user_id, product_id)
 );
 
@@ -61,7 +61,6 @@ CREATE TABLE Messages (
     text VARCHAR(255) NOT NULL,
     FOREIGN KEY (from_id) REFERENCES Users(id),
     FOREIGN KEY (to_id) REFERENCES Users(id),
-    -- FOREIGN KEY (order_id) REFERENCES OrderItem(id),
     PRIMARY KEY (from_id, to_id, order_id, time_stamp)
 );
 
@@ -87,7 +86,7 @@ CREATE TABLE ProductReview (
     numUpVotes INT NOT NULL DEFAULT 0 CHECK(numUpVotes >= 0),
     numStars INT NOT NULL DEFAULT 0 CHECK(numStars >= 0),
     FOREIGN KEY (from_id) REFERENCES Users(id),
-    FOREIGN KEY (product_id) REFERENCES Products(id),
+    FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (from_id, product_id)
 );
 
@@ -172,4 +171,19 @@ CREATE TRIGGER TG_CART_QUANTITY
     AFTER UPDATE ON CartItem
     FOR EACH ROW
 EXECUTE PROCEDURE TF_CART_QUANTITY();
+
+CREATE FUNCTION TF_PRODUCT_QUANTITY() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.quantity == 0 THEN
+        BEGIN
+            UPDATE Products SET inventory_status=FALSE WHERE quantity <= 0;
+        END;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER TG_PRODUCT_QUANTITY
+    AFTER UPDATE ON Product
+    FOR EACH ROW
+EXECUTE PROCEDURE TF_PRODUCT_QUANTITY();
 
