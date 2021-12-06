@@ -81,6 +81,14 @@ def edit_product_review_stars():
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
 
+@products.route("/api/avg_product_review_stars/", methods=["GET"])
+def avg_product_review_stars():
+    average = PReview.calculate_average_star(request.args['product_id'])
+    if average is None:
+        return jsonify(status=False)
+    average = "{:.2f}".format(average)
+    return jsonify(average=average)
+
 @products.route("/api/update_product_review_upvote/", methods=["POST"])
 def edit_product_review_upvote():
     review = PReview.update_upvote(request.args['user_id'], request.args['product_id'], request.args['vote_difference'])

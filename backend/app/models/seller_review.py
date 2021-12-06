@@ -146,3 +146,16 @@ RETURNING :uid, :sid
             return rows[0]
         except Exception:
             return None
+
+    @staticmethod
+    def calculate_average_star(tid):
+        try:
+            rows = app.db.execute("""
+            SELECT AVG(numStars)
+            FROM SellerReview
+            GROUP BY to_id
+            HAVING to_id=:tid
+            """, tid=tid)
+            return rows[0][0]
+        except Exception:
+            return None

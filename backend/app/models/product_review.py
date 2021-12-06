@@ -147,3 +147,16 @@ RETURNING :uid, :pid
             return rows[0]
         except Exception:
             return None
+
+    @staticmethod
+    def calculate_average_star(pid):
+        try:
+            rows = app.db.execute("""
+            SELECT AVG(numStars)
+            FROM ProductReview
+            GROUP BY product_id
+            HAVING product_id=:pid
+            """, pid=pid)
+            return rows[0][0]
+        except Exception:
+            return None

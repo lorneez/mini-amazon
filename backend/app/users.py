@@ -88,3 +88,11 @@ def edit_seller_review_downvote():
     if review is None:
         return jsonify(update_status=False)
     return json.dumps(review.__dict__, default=str)
+
+@users.route("/api/avg_seller_review_stars/", methods=["GET"])
+def avg_product_review_stars():
+    average = SReview.calculate_average_star(request.args['to_id'])
+    if average is None:
+        return jsonify(status=False)
+    average = "{:.2f}".format(average)
+    return jsonify(average=average)
