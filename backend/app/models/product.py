@@ -87,7 +87,7 @@ WHERE LOWER(name) LIKE :keyword
                 WHERE id=:pid
             ''', pid=pid)
             quantity = rows[0][0]
-            if (quantity < quantity_change):
+            if (quantity is None or quantity < quantity_change):
                 return None
             else:
                 rows = app.db.execute('''
