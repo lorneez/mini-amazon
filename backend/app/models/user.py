@@ -113,6 +113,7 @@ WHERE id = :id
         try:
             rows = app.db.execute('''
         SELECT balance
+        FROM Users
         WHERE id=:uid
         ''', uid=uid)
             if rows is None:

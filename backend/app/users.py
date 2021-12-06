@@ -48,14 +48,14 @@ def get_name():
 
 @users.route("/api/update_balance/", methods=["POST"])
 def update_balance():
-    user_balance = User.change_balance(request.args['uid'], request.args['difference'])
+    user_balance = User.change_balance(request.args['user_id'], request.args['difference'])
     if user_balance is None:
         return jsonify(update_status=False)
     return jsonify(update_status=True)
 
 @users.route("/api/get_balance/", methods=["GET"])
 def get_balance():
-    user_balance = User.get_balance(request.args['uid'])
+    user_balance = User.get_balance(request.args['user_id'])
     if user_balance is None:
         return jsonify(get_status=False)
     return jsonify(user_balance=user_balance)
