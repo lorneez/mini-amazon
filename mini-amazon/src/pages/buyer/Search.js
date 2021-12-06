@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import axios from 'axios';
 import SideBarComponent from "../../components/SideBarComponent"
+import SearchTable from "../../components/SearchTable"
 import SearchBar from "../../components/SearchBar"
 import ProductPreview from "../../components/ProductPreview"
 
@@ -34,6 +35,8 @@ const styles = {
 function Search() {
     const [searchInput, setSearchInput] = useState('');
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(1)
+    const itemsPerPage = 6;
 
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
@@ -68,15 +71,8 @@ function Search() {
                     </div>
                     <div className={"column"}>
                         {
-                            data.map((item)=>(
-                                <div>
-                                <ProductPreview data={item}/>
-                                </div>
-                            ))
+                            <SearchTable data={data}/>
                         }
-                    </div>
-                    <div>
-                        {JSON.stringify(data)}
                     </div>
                 </div>
             </div>
