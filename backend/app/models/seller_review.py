@@ -42,7 +42,7 @@ AND to_id = :sid
     @staticmethod
     def get_all_for_seller(sid):
         rows = app.db.execute('''
-SELECT sr.from_id, sr.time_stamp, sr.text, sr.numDownVotes, sr.numUpVotes, sr.numStars, u.id, u.email, u.name, u.is_seller, u.balance, u.address
+SELECT sr.from_id, sr.time_stamp, sr.review_text, sr.numDownVotes, sr.numUpVotes, sr.numStars, u.id, u.email, u.name, u.is_seller, u.balance, u.address
 FROM SellerReview AS sr
 INNER JOIN Users AS u
 ON sr.to_id = u.id

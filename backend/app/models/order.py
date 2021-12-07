@@ -84,15 +84,15 @@ ORDER BY o.time_stamp DESC
         return [OrderProduct(*row) for row in rows]
 
     @staticmethod
-    def add_order(id, uid, pid, quantity, final_price, fulfillment_status):
+    def add_order(uid, pid, quantity, final_price, fulfillment_status):
         try:
             rows = app.db.execute("""
-INSERT INTO OrderItem(id, user_id, product_id, quantity, final_price, fulfillment_status)
-VALUES(:id, :uid, :pid, :quantity, :final_price, :fulfillment_status)
-RETURNING :id, :uid, :pid
-""", uid=uid, pid=pid)
-            id, uid, pid = rows[0]
-            return id, uid, pid
+INSERT INTO OrderItem(user_id, product_id, quantity, final_price, fulfillment_status)
+VALUES(:uid, :pid, :quantity, :final_price, :fulfillment_status)
+RETURNING product_id
+""", uid=uid, pid=pid, quantity=quantity, final_price=final_price, fulfillment_status=fulfillment_status)
+            pid = rows[0][0]
+            return pid
         except Exception:
             return None
 

@@ -33,24 +33,43 @@ def register():
     if User.email_exists(request.args['email']):
         # flash('Account with email already exists. Please try a different email.')
         return jsonify(status=False, email = request.args['email'])
-    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'])
+    user = User.register(request.args['email'], request.args['password'], request.args['name'], request.args['address'], request.args['is_seller'])
     if user is None:
         # flash('Cannot create account.')
         return jsonify(status=False, email = request.args['email'])
     
-    print("here3")
     # flash('Congratulations! You are now registered')
     return jsonify(status=True, email = request.args['email'])
 
-@users.route("/api/get_name/", methods=["POST"])
+@users.route("/api/get_name/", methods=["GET"])
 def get_name():
     user = User.get(request.args['uid'])
     return user.name
 
+@users.route("/api/update_balance/", methods=["POST"])
+def update_balance():
+    user_balance = User.change_balance(request.args['user_id'], request.args['difference'])
+    if user_balance is None:
+        return jsonify(update_status=False)
+    return jsonify(update_status=True)
+
+@users.route("/api/get_balance/", methods=["GET"])
+def get_balance():
+    user_balance = User.get_balance(request.args['user_id'])
+    if user_balance is None:
+        return jsonify(get_status=False)
+    return jsonify(user_balance=user_balance)
+
 @users.route("/api/all_seller_reviews/", methods=["GET"])
 def all_seller_reviews():
     reviews = SReview.get_all_for_seller(request.args['seller_id'])
-    return json.dumps([r.__dict__ for r in reviews], default=str)
+    all_info = []
+    for r in reviews:
+        info = r.__dict__
+        user = User.get(info['from_id'])
+        info['from_name'] = user.name
+        all_info.append(info)
+    return json.dumps(all_info, default=str)
 
 @users.route("/api/update_seller_review_text/", methods=["POST"])
 def edit_seller_review_text():
