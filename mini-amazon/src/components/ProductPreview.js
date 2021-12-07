@@ -12,6 +12,7 @@ function ProductPreview(props) {
                 <div style = {styles.title}>Sold by {props.data.seller}</div>
                 <div style = {styles.title}>Only {props.data.available_quantity} left in stock!</div>
                 <div style = {styles.title}>Status: {props.data.inventory_status ? 'IN STOCK' : 'OUT OF STOCK'}</div>
+                {/* <button class='button' onClick={()=>getProductDetails()}>Buy All Cart Items</button> */}
             </div>
         </div>
     )

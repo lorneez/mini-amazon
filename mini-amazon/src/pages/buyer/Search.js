@@ -28,6 +28,7 @@ const styles = {
         height: '40px',
         marginLeft: '2px'
     }
+    
 }
 
 let categories = [
