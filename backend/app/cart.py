@@ -1,4 +1,6 @@
 from backend.app.models.cart import Cart
+from backend.app.models.product import Product
+from backend.app.models.user import User
 from flask import Flask, request, jsonify, flash, Blueprint
 import json
 
@@ -57,5 +59,41 @@ def create_user_cart():
         if added_prod is None:
             return jsonify(add_status=False)
     return jsonify(user_id = user_id)
+
+@cart.route("/api/buy_cart/", methods=["POST"])
+def buy_cart():
+    # get all products associated to cart
+    cartItems = Cart.get_all_user(request.args['user_id'])
+    # decrement product quantity
+    cart_purchase_success = {}
+    if cartItems is None:
+        return jsonify(purchase_status=False)
+    for item in cartItems:
+        cart_purchase_success[item.product_name] = False
+        pid = item.product_id
+        quantity = item.cart_quantity * -1
+        cost = abs(quantity) * item.product_price
+        print(pid, quantity, cost)
+        purchased = Product.change_quantity(pid, quantity)
+        if purchased is None:
+            continue
+        # decrement buyer money
+        # increment seller money
+        buyer_cost = cost*-1
+        seller_profit = cost
+        buyer_id = request.args['user_id']
+        seller_id = item.product_seller
+        buyer_balance = User.change_balance(buyer_id, buyer_cost)
+        if buyer_balance is None:
+            purchased = Product.change_quantity(pid, quantity*-1)
+            continue
+        seller_balance = User.change_balance(seller_id, seller_profit)
+        if seller_balance is None:
+            purchased = Product.change_quantity(pid, quantity*-1)
+            buyer_undo = User.change_balance(buyer_id, seller_profit) 
+            continue
+        cart_purchase_success[item.product_name] = True
+        Cart.remove_product(buyer_id, pid)
+    return json.dumps(cart_purchase_success)
 
 

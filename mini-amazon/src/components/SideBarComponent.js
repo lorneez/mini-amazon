@@ -171,7 +171,7 @@ function SideBarComponent(props) {
     }
 
     return (
-        <div style={{background: "black", height: "100vh"}}>
+        <div style={{background: "black", height: "100%"}}>
             <aside className="menu">
                 <div className={"p-4"}>
                     {renderPage()}

@@ -13,11 +13,11 @@ Categories:
 
 def getProductImage(category, idx):
 
-    bookImages = ["https://images-na.ssl-images-amazon.com/images/I/41oYsXjLvZL._SX348_BO1,204,203,200_.jpg", 
+    bookImages = ["https://tinyurl.com/bdew8ewr", 
 
-    "https://images-na.ssl-images-amazon.com/images/I/51OOCVBfCQL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
+    "https://tinyurl.com/ycktxfjs",
 
-    "https://images-na.ssl-images-amazon.com/images/I/51KElbJ7EqL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg",
+    "https://tinyurl.com/4uuw7d7c",
 
     "https://m.media-amazon.com/images/I/61rFgbqlcrL._AC_UY436_FMwebp_QL65_.jpg",
 

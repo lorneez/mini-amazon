@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useRef, useEffect} from "react"
 import axios from 'axios';
 import SideBarComponent from "../../components/SideBarComponent"
+import SearchTable from "../../components/SearchTable"
 import SearchBar from "../../components/SearchBar"
 import ProductPreview from "../../components/ProductPreview"
 
@@ -29,11 +30,66 @@ const styles = {
     }
 }
 
+let categories = [
+    "category0",
+    "category1",
+    "category2",
+    "category3",
+    "category4",
+    "category5",
+    "category6",
+    "category7",
+    "category8",
+    "category9",
+  ]
+
 
 
 function Search() {
     const [searchInput, setSearchInput] = useState('');
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(1)
+    const itemsPerPage = 4;
+
+    const [selectedCategory, setSelectedCategory] = useState("")
+    const [dropdownSearchValue, setDropdownSearchValue] = useState("")
+    const [editMode, setEditMode] = useState(false)
+    const dropdownRef = useRef()
+
+    /**
+     * Close the dropdown when clicked outside
+     * Refer https://www.codingdeft.com/posts/react-on-click-outside/ for details
+     */
+    useEffect(() => {
+        const checkIfClickedOutside = e => {
+        // If the menu is open and the clicked target is not within the menu,
+        // then close the menu
+        if (
+            editMode &&
+            dropdownRef.current &&
+            !dropdownRef.current.contains(e.target)
+        ) {
+            setEditMode(false)
+        }
+        }
+        document.addEventListener("mousedown", checkIfClickedOutside)
+        return () => {
+        // Cleanup the event listener
+        document.removeEventListener("mousedown", checkIfClickedOutside)
+        }
+    }, [editMode])
+
+    const categorySelectionHandler = category => {
+        setSelectedCategory(category)
+        setDropdownSearchValue("")
+        setEditMode(false)
+    }
+
+    const filteredCategories = categories.filter(category =>
+        category.match(new RegExp(dropdownSearchValue, "i"))
+    )
+
+    //
 
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
@@ -64,20 +120,52 @@ function Search() {
                         <div class="control">
                         <input style={styles.search} icon='search' placeholder='Search by Keyword' onChange={(e) => searchItems(e.target.value)}/>
                          <button style={styles.button} onClick={()=>search()}>Search</button>
+                         <div className="column" >
+                        <h2>Filter by Category</h2>
+
+                        {editMode ? (
+                            // display the dropdown when the input us focused
+                            <div ref={dropdownRef} className="dropdown-wrapper">
+                            <input
+                                className="dropdown-input"
+                                name="dropdown-input"
+                                autoFocus
+                                onChange={e => setDropdownSearchValue(e.target.value)}
+                                value={dropdownSearchValue}
+                            />
+                            <div className="dropdown-list">
+                                <ul>
+                                {filteredCategories.map(category => {
+                                    return (
+                                    <li key={category} onClick={() => categorySelectionHandler(category)}>
+                                        {category}{" "}
+                                    </li>
+                                    )
+                                })}
+                                {filteredCategories.length === 0 && (
+                                    <li className="no-result">No results found</li>
+                                )}
+                                </ul>
+                            </div>
+                            </div>
+                        ) : (
+                            <input
+                            className={`dropdown-search ${
+                                !(dropdownSearchValue || selectedCategory) && "default"
+                            }`}
+                            onFocus={() => setEditMode(true)}
+                            value={selectedCategory || "Select Category"}
+                            />
+                        )}
+                    </div>
                         </div>
                     </div>
                     <div className={"column"}>
                         {
-                            data.map((item)=>(
-                                <div>
-                                <ProductPreview data={item}/>
-                                </div>
-                            ))
+                            <SearchTable data={data} category={selectedCategory}/>
                         }
                     </div>
-                    <div>
-                        {JSON.stringify(data)}
-                    </div>
+
                 </div>
             </div>
         </div>

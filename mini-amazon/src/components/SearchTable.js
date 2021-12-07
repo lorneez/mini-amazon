@@ -1,22 +1,30 @@
 import React, {useState} from "react";
-import InventoryItem from "../components/seller/InventoryItem"
-import OrderItem from "./OrderItem";
+import ProductPreview from "./ProductPreview"
+
 
 function OrderTable(props) {
 
     const [page, setPage] = useState(1)
-    const itemsPerPage = 6;
+    const itemsPerPage = 4;
 
     function renderPage() {
         const start = (page - 1) * itemsPerPage
-        const end = Math.min(props.items.length, page * itemsPerPage)
-        const slicedItems = props.items.slice(start, end);
+        const end = Math.min(props.data.length, page * itemsPerPage)
+        const filteredItems = []
+
+        for (var i = 0; i<props.data.length; i++){
+            if(props.category.includes(props.data[i].category)){
+                filteredItems.push(props.data[i]);
+            }
+        }
+
+        const slicedItems = filteredItems.slice(start, end);
 
         return (
             <div>
                 {slicedItems.map((item)=>(
-                    <OrderItem item={item}/>
-                ))}
+                    <ProductPreview data={item}/>
+                ))} 
             </div>
         )
     }
@@ -28,13 +36,13 @@ function OrderTable(props) {
     }
 
     function handleNext() {
-        if(page < (props.items.length)/itemsPerPage + 1) {
+        if(page < (props.data.length)/itemsPerPage + 1) {
             setPage(page + 1)
         }
     }
 
     function renderButtons() {
-        if(page > 1 && page < (props.items.length)/itemsPerPage + 1) {
+        if(page > 1 && page < (props.data.length)/itemsPerPage + 1) {
             return (
                 <div>
                     <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
@@ -60,32 +68,6 @@ function OrderTable(props) {
 
     return (
         <div className={"table"}>
-            <div className={"columns m-2"} style={{background: "#F2AA56", borderRadius: "5px"}}>
-                <div className={"column"}>
-                Product Image
-                </div>
-                <div className={"column"}>
-                Order ID
-                </div>
-                <div className={"column"}>
-                Product ID
-                </div>
-                <div className={"column"}>
-                Product Name
-                </div>
-                <div className={"column"}>
-                Quantity
-                </div>
-                <div className={"column"}>
-                Price (USD)
-                </div>
-                <div className={"column"}>
-                Date Ordered
-                </div>
-                <div className={"column"}>
-                    View Order
-                </div>
-            </div>
             {renderPage()}
             {renderButtons()}
         </div>
