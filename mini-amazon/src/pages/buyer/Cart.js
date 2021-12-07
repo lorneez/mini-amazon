@@ -3,7 +3,12 @@ import axios from "axios"
 import SideBarComponent from "../../components/SideBarComponent"
 import CartTable from "../../components/buyer/CartTable"
 import CartHeader from "../../components/buyer/CartHeader"
-
+const styles = {
+    button:{
+        marginLeft: '2px',
+        backgroundColor: 'orange'
+    }
+}
 function Cart() {
 
     const [data, setData] = useState([]);
@@ -20,6 +25,19 @@ function Cart() {
         setData(result.data);
     }, []);
 
+    async function buyCart () {
+        const result = await axios.post('http://0.0.0.0:5000/api/buy_cart/?user_id=2');
+        console.log(result.data)
+        const newList = []
+        for (var i = 0; i<data.length; i++){
+            for(var j = 0; j<result.data.length; j++)
+                if(result.data[j].product_name === data[i].product_name){
+                    newList.push(data[i]);
+                }
+        }
+        setData(newList);
+    }
+
     return (
         <div>
             <div className={"columns"}>
@@ -30,6 +48,7 @@ function Cart() {
                     <div>
                         <CartHeader/>
                         <CartTable items={data}/>
+                        <button class='button' style={styles.button} onClick={()=>buyCart()}>Buy All Cart Items</button>
                     </div>
                 </div>
             </div>
