@@ -82,12 +82,15 @@ WHERE LOWER(name) LIKE :keyword
     def change_quantity(pid, quantity_change):
         try:
             rows = app.db.execute('''
-                SELECT price
+                SELECT available_quantity
                 FROM Products
                 WHERE id=:pid
             ''', pid=pid)
             quantity = rows[0][0]
-            if (quantity is None or quantity < quantity_change):
+            print(quantity_change)
+            if quantity is None: 
+                return None
+            elif quantity < abs(quantity_change):
                 return None
             else:
                 rows = app.db.execute('''
@@ -96,8 +99,16 @@ WHERE LOWER(name) LIKE :keyword
         WHERE id=:pid
         RETURNING :pid
         ''', quantity_change=quantity_change, pid=pid)
+                if (quantity == quantity_change):
+                    rows = app.db.execute('''
+                    UPDATE Products
+                    SET inventory_status = FALSE
+                    WHERE id=:pid
+                    RETURNING :pid
+                    ''', quantity_change=quantity_change, pid=pid)
                 return pid
-        except Exception:
+        except Exception as e:
+            print(e)
             return None
 
     @staticmethod

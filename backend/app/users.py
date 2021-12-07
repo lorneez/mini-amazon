@@ -48,15 +48,28 @@ def get_name():
 
 @users.route("/api/update_balance/", methods=["POST"])
 def update_balance():
-    user_balance = User.change_balance(request.args['uid'], request.args['difference'])
+    user_balance = User.change_balance(request.args['user_id'], request.args['difference'])
     if user_balance is None:
         return jsonify(update_status=False)
     return jsonify(update_status=True)
 
+@users.route("/api/get_balance/", methods=["GET"])
+def get_balance():
+    user_balance = User.get_balance(request.args['user_id'])
+    if user_balance is None:
+        return jsonify(get_status=False)
+    return jsonify(user_balance=user_balance)
+
 @users.route("/api/all_seller_reviews/", methods=["GET"])
 def all_seller_reviews():
     reviews = SReview.get_all_for_seller(request.args['seller_id'])
-    return json.dumps([r.__dict__ for r in reviews], default=str)
+    all_info = []
+    for r in reviews:
+        info = r.__dict__
+        user = User.get(info['from_id'])
+        info['from_name'] = user.name
+        all_info.append(info)
+    return json.dumps(all_info, default=str)
 
 @users.route("/api/update_seller_review_text/", methods=["POST"])
 def edit_seller_review_text():

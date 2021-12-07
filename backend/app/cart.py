@@ -1,6 +1,7 @@
 from backend.app.models.cart import Cart
 from backend.app.models.product import Product
 from backend.app.models.user import User
+from backend.app.models.order import Order
 from flask import Flask, request, jsonify, flash, Blueprint
 import json
 
@@ -73,8 +74,8 @@ def buy_cart():
         pid = item.product_id
         quantity = item.cart_quantity * -1
         cost = abs(quantity) * item.product_price
-        print(pid, quantity, cost)
         purchased = Product.change_quantity(pid, quantity)
+        
         if purchased is None:
             continue
         # decrement buyer money
@@ -93,7 +94,9 @@ def buy_cart():
             buyer_undo = User.change_balance(buyer_id, seller_profit) 
             continue
         cart_purchase_success[item.product_name] = True
-        Cart.remove_product(buyer_id, pid)
+        remove = Cart.remove_product(buyer_id, pid)
+        added_order = Order.add_order(buyer_id, pid, quantity*-1, int(cost), False)
+
     return json.dumps(cart_purchase_success)
 
 

@@ -107,3 +107,17 @@ WHERE id = :id
             return rows[0][0]
         except Exception:
             return None
+
+    @staticmethod
+    def get_balance(uid):
+        try:
+            rows = app.db.execute('''
+        SELECT balance
+        FROM Users
+        WHERE id=:uid
+        ''', uid=uid)
+            if rows is None:
+                return None
+            return rows[0][0]
+        except Exception:
+            return None
