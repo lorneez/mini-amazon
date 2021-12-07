@@ -17,16 +17,22 @@ function CreateProduct() {
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
     }
+    
+    const is_inventory = (inputs.quantity>0).toString()
 
     function handleSubmit(event) {
         event.preventDefault();
         console.log(inputs.name)
+        console.log(userId)
+        console.log(inputs.price)
     }
+
+    
 
     async function handleSubmit() {
 
         await axios.post(
-            'http://localhost:5000/api/add_product/?name=' + inputs.name + '&seller_id=' + userId + '&price=' + inputs.price + '&quantity=' + inputs.quantity,'&inventory_status=' + (inputs.quantity>0), '&category=' + inputs.category,'&image=' + inputs.image, {
+            'http://localhost:5000/api/add_product/?name=' + inputs.name + '&seller_id=' + userId + '&price=' + inputs.price + '&quantity=' + inputs.quantity,'&inventory_status=' + is_inventory, '&category=' + inputs.category,'&image=' + inputs.image, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -44,14 +50,14 @@ function CreateProduct() {
                 <div className={"column is-one-fifth"}>
                         <SideBarComponent type={"buyer"}/>
                 </div>
-            <div class="mt-1 ml-5"> 
+            <div className="mt-1 ml-5"> 
             <div className={"container has-text-centered is-size-1 has-text-weight-semibold pt-6 mb-5 "}>
                 Create new product listing
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="columns">
-                    <div class="column is-two-thirds">
-                    <div class="mb-4">
+                    <div className="column is-two-thirds">
+                    <div className="mb-4">
                         <label> Insert image of product 
                             <div>
                             <input 
@@ -65,11 +71,11 @@ function CreateProduct() {
                     </div>
                     </div>
 
-                    <div class="column is-half">
-                        <div class="mb-4">
+                    <div className="column is-half">
+                        <div className="mb-4">
                         <label> Enter product name
                             <div>
-                            <input class="input" type="text" placeholder="Macbook Pro"
+                            <input className="input" type="text" placeholder="Macbook Pro"
                                 type="text" 
                                 name="name"
                                 value={inputs.name}
@@ -78,10 +84,10 @@ function CreateProduct() {
                             </div>
                         </label>
                         </div>
-                        <div class="mt-4">
+                        <div className="mt-4">
                         <label> Enter listing price 
                             <div>
-                            <input class="input" type="text" placeholder="$999.99"
+                            <input className="input" type="text" placeholder="$999.99"
                                 type="text" 
                                 name="price"
                                 value={inputs.price || ""}
@@ -90,10 +96,10 @@ function CreateProduct() {
                             </div>
                         </label>
                         </div> 
-                        <div class="mt-4">
+                        <div className="mt-4">
                             <label> Insert quanity of product 
                                 <div>
-                                <input class="input" type="text" placeholder="500"
+                                <input className="input" type="text" placeholder="500"
                                     type="text" 
                                     name="quantity"
                                     value={inputs.quantity || ""}
@@ -104,10 +110,10 @@ function CreateProduct() {
                         </div>   
                     </div>
                 </div>
-                <div class="mt-4">
+                <div className="mt-4">
                     <label> Enter product description 
                         <div>
-                        <input class="input" type="text" placeholder="Savvy laptop device that permits access to the interweb..."
+                        <input className="input" type="text" placeholder="Savvy laptop device that permits access to the interweb..."
                             type="text"
                             name="description" 
                             value={inputs.description || ""}
@@ -116,10 +122,10 @@ function CreateProduct() {
                         </div>
                     </label>
                 </div>
-                <div class="mt-4 mb-5">
+                <div className="mt-4 mb-5">
                     <label> Insert category of product 
                         <div>
-                        <input class="input" type="text" placeholder="Technology"
+                        <input className="input" type="text" placeholder="Technology"
                             type="text" 
                             name="category"
                             value={inputs.category || ""}

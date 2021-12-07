@@ -8,10 +8,23 @@ function ProductReview(props) {
 
     const [data, setData] = useState([]);
 
+    // useEffect(async () => {
+    //     console.log("called backend for reviews")
+    //     const result = await axios(
+    //         'http://localhost:5000/api/all_product_reviews/?product_id=' + props.id, {
+    //             headers: {
+    //                 'Access-Control-Allow-Origin': '*',
+    //             },
+    //         }
+    //     );
+    //     console.log(result.data)
+    //     setData(result.data);
+    // }, []);
+
     useEffect(async () => {
         console.log("called backend for reviews")
         const result = await axios(
-            'http://localhost:5000/api/all_product_reviews/?product_id=' + props.id, {
+            'http://localhost:5000/api/all_product_reviews/?product_id=1', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -20,6 +33,61 @@ function ProductReview(props) {
         console.log(result.data)
         setData(result.data);
     }, []);
+
+    const [page, setPage] = useState(1)
+    const itemsPerPage = 6;
+
+    function renderPage() {
+        const start = (page - 1) * itemsPerPage
+        const end = Math.min(data.length, page * itemsPerPage)
+        const slicedItems = data.slice(start, end);
+
+        return (
+            <div>
+                {slicedItems.map((item)=>(
+                    <Review item={item}/>
+                ))}
+            </div>
+        )
+    }
+
+    function handlePrev() {
+        if(page > 1) {
+            setPage(page - 1)
+        }
+    }
+
+    function handleNext() {
+        if(page < (data.length)/itemsPerPage + 1) {
+            setPage(page + 1)
+        }
+    }
+
+    function renderButtons() {
+        if(page > 1 && page < (data.length)/itemsPerPage + 1) {
+            return (
+                <div>
+                    <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
+                    <button className="button m-2" onClick={() => handleNext()}>Next</button>
+                </div>
+            )
+        }
+        if(page === 1) {
+            return (
+                <div>
+                    <button className="button m-2" onClick={() => handleNext()}>Next</button>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div>
+                    <button className="button m-2" onClick={() => handlePrev()}>Prev</button>
+                </div>
+            )
+        }
+    }
+
 
     return (
         <div>
@@ -33,7 +101,7 @@ function ProductReview(props) {
                     </div>
                     <div className={"container"}>
                         <div className="ProductReview-Row">
-                            {data.map(item => {
+                            {/* {data.map(item => {
                                 return (
                                     <Review
                                         id={item.product_id}
@@ -45,11 +113,13 @@ function ProductReview(props) {
                                         date={item.post_time}
                                     />
                                 )
-                            })}
+                            })} */}
                         </div>
                     </div>
                 </div>    
             </div>
+            {renderPage()}
+            {renderButtons()}
         </div>    
     );
 }
