@@ -44,7 +44,7 @@ console.log("Hello")
                     <h1 class="title"> Price: ${price} </h1>
                     <button class="button is-warning is-medium is-rounded is-fullwidth">Add to Cart</button>
                     <div class="mt-2"></div>
-                    <button class="button is-danger is-medium is-rounded is-fullwidth" onClick={handleBuy}>Buy Now</button>
+                    <button class="button is-danger is-medium is-rounded is-fullwidth" onClick={() => handleBuy()}>Buy Now</button>
                     </div>
                 </div>
             </div>

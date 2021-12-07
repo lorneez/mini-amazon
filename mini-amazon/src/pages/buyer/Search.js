@@ -17,16 +17,22 @@ const styles = {
         paddingTop: '35px',
         paddingBottom: '25px',
         width: '1180px',
-        display: 'flex', justifyContent: 'center', alignItems: 'center'
+        display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+        background: 'orange'
     },
     search: {
-        width: '600px',
+        width: '700px',
         height: '40px'
     },
     button:{
         width: '100px',
         height: '40px',
         marginLeft: '2px'
+    },
+    title:{
+        fontWeight: '1000px',
+        fontSize: '28px',
+        marginBottom: '25px'
     }
     
 }
@@ -113,6 +119,7 @@ function Search() {
                 </div>
                 <div style={styles.container}>
                     <div class="field" style={styles.containerTop}>
+                        <div style={styles.title}>Search for a Product by Keyword</div>
                         <div class="control">
                         <input style={styles.search} icon='search' placeholder='Search by Keyword' onChange={(e) => searchItems(e.target.value)}/>
                          <button style={styles.button} onClick={()=>search()}>Search</button>
