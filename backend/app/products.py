@@ -1,6 +1,7 @@
 from flask import Flask, request, Blueprint, jsonify
 from backend.app.models.product_review import PReview
 from backend.app.models.product import Product
+from backend.app.models.user import User
 import json
 
 
@@ -72,7 +73,13 @@ def update_product_quantity():
 @products.route("/api/all_product_reviews/", methods=["GET"])
 def all_product_reviews():
     reviews = PReview.get_all_for_product(request.args['product_id'])
-    return json.dumps([r.__dict__ for r in reviews], default=str)
+    all_info = []
+    for r in reviews:
+        info = r.__dict__
+        user = User.get(info['from_id'])
+        info['from_name'] = user.name
+        all_info.append(info)
+    return json.dumps(all_info, default=str)
 
 @products.route("/api/update_product_review_text/", methods=["POST"])
 def edit_product_review_text():
@@ -124,7 +131,12 @@ def delete_product_review():
         return jsonify(update_status=False)
     return jsonify(update_status=True)
 
-
+# @products.route("/api/buy_product/", methods=["POST"])
+# def buy_product():
+#     review = PReview.remove_product_review(request.args['user_id'], request.args['product_id'], )
+#     if review is None:
+#         return jsonify(update_status=False)
+#     return jsonify(update_status=True)
 
 
 

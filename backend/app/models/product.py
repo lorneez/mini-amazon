@@ -87,15 +87,18 @@ WHERE LOWER(name) LIKE :keyword
                 WHERE id=:pid
             ''', pid=pid)
             quantity = rows[0][0]
+            print("here")
             if (quantity is None or quantity < quantity_change):
                 return None
             else:
+                print("here2")
                 rows = app.db.execute('''
         UPDATE Products
         SET available_quantity = available_quantity+:quantity_change
         WHERE id=:pid
         RETURNING :pid
         ''', quantity_change=quantity_change, pid=pid)
+                print("here3")
                 return pid
         except Exception:
             return None

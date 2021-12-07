@@ -1,6 +1,7 @@
 from backend.app.models.cart import Cart
 from backend.app.models.product import Product
 from backend.app.models.user import User
+from backend.app.models.order import Order
 from flask import Flask, request, jsonify, flash, Blueprint
 import json
 
@@ -98,6 +99,8 @@ def buy_cart():
         cart_purchase_success[item.product_name] = True
         remove = Cart.remove_product(buyer_id, pid)
         print(remove)
+        added_order = Order.add_order(buyer_id, pid, quantity*-1, cost, False)
+        print(added_order)
     return json.dumps(cart_purchase_success)
 
 
