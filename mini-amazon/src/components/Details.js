@@ -1,27 +1,57 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { RatingView } from 'react-simple-star-rating';
 import axios from "axios";
 import {AuthContext} from "../contexts/AuthContext";
+import ProductReviewModal from '../pages/product/ProductReviewModal';
 
 function Details({id, title, price, rating, image}) {
     const auth = useContext(AuthContext);
     const { state } = auth;
     const { userId } = state;
+    // const [sellerdata, setsellerData] = useState([]);
 
-async function handleBuy() {
-    const url = 'http://localhost:5000/api/buy_product/?product_id=' + id + '&user_id=' + userId + '&quantity=' + "1" 
-    console.log(url)
+    // useEffect(async () => {
+    //     const result = await axios(
+    //         'http://localhost:5000/api/all_seller_reviews/?seller_id=' + userId, {
+    //             headers: {
+    //                 'Access-Control-Allow-Origin': '*',
+    //             },
+    //         }
+    //     );
+    //     setsellerData(result.data);
+    //     console.log(result.data)
+    // }, []);
+    
+    async function handleBuy() {
+        const url = 'http://localhost:5000/api/buy_product/?product_id=' + id + '&user_id=' + userId + '&quantity=' + "1" 
+        console.log(url)
 
-    await axios.post(
-        url, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
-        }
-    ).then((response) => {
-        console.log(response)
-    })
-}
+        await axios.post(
+            url, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        ).then((response) => {
+            console.log(response)
+        })
+    }
+
+    async function addToCart() {
+        const url = 'http://localhost:5000/api/add_cart/?user_id=' + userId + '&product_id=' + id + '&quantity=' + "1" 
+        console.log(url)
+
+        await axios.post(
+            url, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        ).then((response) => {
+            console.log(response)
+        })
+    }
+
 
 console.log("Hello")
 
@@ -42,9 +72,12 @@ console.log("Hello")
                     <hr></hr>
                     <RatingView ratingValue={rating}></RatingView> 
                     <h1 class="title"> Price: ${price} </h1>
-                    <button class="button is-warning is-medium is-rounded is-fullwidth">Add to Cart</button>
+                    <button class="button is-warning is-medium is-rounded is-fullwidth" onClick={addToCart}>Add to Cart</button>
                     <div class="mt-2"></div>
                     <button class="button is-danger is-medium is-rounded is-fullwidth" onClick={handleBuy}>Buy Now</button>
+                    </div>
+                    <div>
+                        {ProductReviewModal(id, userId)}
                     </div>
                 </div>
             </div>

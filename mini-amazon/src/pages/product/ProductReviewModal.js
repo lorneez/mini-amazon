@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react"
 import Review from "../../components/Review";
-import { reviews } from './testProducts.js';
-import SideBarComponent from "../../components/SideBarComponent"
+import {products} from "./testProducts";
 import axios from "axios";
 
-function ProductReview(id) {
+function ProductReviewModal(id, userId) {
 
     const [data, setData] = useState([]);
+    const [sellerdata, setsellerData] = useState([]);
+
+    useEffect(async () => {
+        const result = await axios(
+            'http://localhost:5000/api/all_seller_reviews/?seller_id=' + userId, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        );
+        setsellerData(result.data);
+        console.log(result.data)
+    }, []);
 
     useEffect(async () => {
         console.log("called backend for reviews")
@@ -21,19 +33,6 @@ function ProductReview(id) {
         setData(result.data);
     }, []);
 
-    // useEffect(async () => {
-    //     console.log("called backend for reviews")
-    //     const result = await axios(
-    //         'http://localhost:5000/api/all_product_reviews/?product_id=1', {
-    //             headers: {
-    //                 'Access-Control-Allow-Origin': '*',
-    //             },
-    //         }
-    //     );
-    //     console.log(result.data)
-    //     setData(result.data);
-    // }, []);
-
     const [page, setPage] = useState(1)
     const itemsPerPage = 3;
 
@@ -41,12 +40,31 @@ function ProductReview(id) {
         const start = (page - 1) * itemsPerPage
         const end = Math.min(data.length, page * itemsPerPage)
         const slicedItems = data.slice(start, end);
+        // const slicedSellerReviews = sellerdata.slice(start,end);
+        const slicedSellerReviews = products.slice(start,end);
 
         return (
-            <div>
-                {slicedItems.map((item)=>(
-                    <Review item={item}/>
-                ))}
+            <div className="columns"> 
+                <div className="column is-one-third"> 
+                <div style={styles.title}>
+                        Product Reviews
+                    </div>
+                <div>                
+                    {slicedItems.map((item)=>(
+                        <Review item={item}/>
+                    ))}
+                </div>
+                </div>
+                <div className="column is-one-third"> 
+                <div style={styles.title}>
+                        Seller Reviews
+                    </div>
+                <div>
+                    {slicedSellerReviews.map((item) => (
+                        <Review item={item}/>
+                    ))}
+                </div>
+                </div>
             </div>
         )
     }
@@ -92,15 +110,9 @@ function ProductReview(id) {
     return (
         <div>
             <div className={"columns"}>
-                <div className={"column is-one-fifth"}>
-                    <SideBarComponent type={"buyer"}/>
-                </div>
                 <div className={"column"}>
-                    <div style={styles.title}>
-                        Product Reviews
-                    </div>
                     <div className={"container"}>
-                        <div className="ProductReview-Row">
+                        {/* <div className="ProductReview-Row"> */}
                             {renderPage()}
                             {renderButtons()}  
 
@@ -117,7 +129,7 @@ function ProductReview(id) {
                                     />
                                 )
                             })} */}
-                        </div>
+                        {/* </div> */}
                     </div>
                 </div>  
             </div>
@@ -136,4 +148,4 @@ const styles = {
     }
 }
 
-export default ProductReview;
+export default ProductReviewModal;
