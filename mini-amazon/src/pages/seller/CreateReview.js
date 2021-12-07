@@ -29,9 +29,6 @@ function CreateReview(props) {
     return (
         <div>
             <div className={"columns"}>
-                <div className={"column is-one-fifth"}>
-                    <SideBarComponent type={"seller"}/>
-                </div>
                 <div className={"column"}>
                     <section className="hero">
                         <div className="hero-body">

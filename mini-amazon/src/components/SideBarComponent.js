@@ -3,6 +3,13 @@ import { Link, useHistory } from "react-router-dom";
 import {AuthContext} from "../contexts/AuthContext";
 import axios from "axios";
 
+const styles = {
+    button: {
+        marginBottom: '12px',
+        marginTop: '12px'
+    }
+}
+
 function SideBarComponent(props) {
     const history = useHistory();
 
@@ -226,12 +233,12 @@ function SideBarComponent(props) {
                             You have ${balance}!
                         </div>
                         <div>
-                            <button className={"button"} onClick={() => setShowModal(true)}>
+                            <button className={"button"} style={styles.button} onClick={() => setShowModal(true)}>
                                 Add Funds!
                             </button>
                         </div>
                         <div>
-                            <button className="button" onClick={() => handleLogout()}>Logout</button>
+                            <button className="button" style={styles.button} onClick={() => handleLogout()}>Logout</button>
                         </div>
                         {renderModal()}
                     </div>
