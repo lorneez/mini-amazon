@@ -4,6 +4,7 @@ import { products } from './testProducts.js';
 import SideBarComponent from "../../components/SideBarComponent";
 
 function ProductBrowse() {
+    
     return (
         <div>
         <div className={"columns"}>
@@ -11,7 +12,7 @@ function ProductBrowse() {
                 <SideBarComponent type={"buyer"}/>
             </div>
             <div className={"column"}>
-                <div className={"container"}>
+                <div className={"container mt-5"}>
                     <div className="ProductBrowse-Row">
                         {products.map(item => {
                             return (

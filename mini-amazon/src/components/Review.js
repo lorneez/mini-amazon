@@ -2,25 +2,28 @@ import React from "react";
 import Avatar from 'react-avatar';
 import { RatingView } from 'react-simple-star-rating';
 
-function Review({id, title, userName, description, rating, image, date}) {
+//id, title, userName, description, rating, image, date
+
+function Review(props) {
+    const rating = Math.round(props.item.stars)
     return(
         <div style = {styles.container}>
             <div>
             <div>
                 <div className={"columns"}>
-                    <div class="column is-one-sixth">
-                        <Avatar round={true} size={40} name={userName}/>
+                    <div className="column is-one-sixth">
+                        <Avatar round={true} size={40} name={props.item.from_id}/>
                     </div>
                     <div column>
                         <div container style={styles.name}>
-                        <div style={styles.title} centered>  {userName} </div>
+                        <div style={styles.title} centered>  {props.item.from_id} </div>
                         </div>
                     </div>
                 </div>
-                <div style = {styles.title}> {title} </div>
+                <div style = {styles.title}> {props.item.product_name} </div>
                 <RatingView ratingValue={rating}></RatingView> 
-                <div style = {styles.title}> {date} </div>
-                <div style = {styles.title}> Product was great. Would recommend. </div>
+                <div style = {styles.title}> {props.item.post_time} </div>
+                <div style = {styles.title}> {props.item.text} </div>
             </div> 
             </div>
             {/* <div style={styles.imagecontainer} >
