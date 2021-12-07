@@ -1,15 +1,36 @@
-import React, {useContext} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import { Link, useHistory } from "react-router-dom";
 import {AuthContext} from "../contexts/AuthContext";
+import axios from "axios";
 
 function SideBarComponent(props) {
     const history = useHistory();
 
+    const [showModal, setShowModal] = useState(false);
+    const [loadingBalance, setLoadingBalance] = useState(true);
+    const [balance, setBalance] = useState(0);
+    const [fundsToAdd, setFundsToAdd] = useState(0);
+
     const auth = useContext(AuthContext);
     const { state, dispatch } = auth;
-    const { username, isSignedIn, userType } = state;
+    const { username, isSignedIn, userType, userId } = state;
 
     const sideBarType = props.type;
+
+    useEffect(async () => {
+        const result = await axios(
+            'http://127.0.0.1:5000/api/get_balance/?user_id=' + userId, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        ).then((response) => {
+            console.log(response)
+            setLoadingBalance(false);
+            setBalance(response.data.user_balance)
+        })
+    }, []);
+
 
     const landingPageLinks = [
         {
@@ -101,9 +122,6 @@ function SideBarComponent(props) {
     }
 
     function renderPage() {
-        console.log(userType)
-        console.log(userType == "seller")
-
         if(userType === "seller") {
             console.log("hello")
             buyerLinks.push({
@@ -111,7 +129,7 @@ function SideBarComponent(props) {
                 name: "Go To Seller"
             })
         }
-        console.log(buyerLinks)
+        console.log(sideBarType)
         switch(sideBarType) {
             case "landing":
                 return (
@@ -144,6 +162,44 @@ function SideBarComponent(props) {
         }
     }
 
+    async function handleAddFunds() {
+        setShowModal(false);
+        const result = await axios.post(
+            'http://127.0.0.1:5000/api/update_balance/?user_id=' + userId +'&difference=' + fundsToAdd, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+            }
+        ).then((response) => {
+            console.log(response)
+            window.location.reload(false);
+
+        })
+    }
+
+    function renderModal() {
+        return (
+            <div className={"modal " + (showModal ? "is-active" : "")}>
+                <div className="modal-background"></div>
+                <div className="modal-content">
+                    <div className={"container p-6"} style={{background: "white", borderRadius: "5px"}}>
+                        <div className="field has-addons">
+                            <p className="control">
+                                <input className="input" type="number" placeholder="Amount of money" value={fundsToAdd} onChange={(e) => setFundsToAdd(e.target.value)}/>
+                            </p>
+                            <p className="control">
+                                <a className="button is-primary" onClick={() => handleAddFunds()}>
+                                    Transfer
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button className="modal-close is-large" aria-label="close" onClick={() => setShowModal(false)}></button>
+            </div>
+        )
+    }
+
     function handleLogout() {
         dispatch({
             type: "LOGOUT",
@@ -154,17 +210,38 @@ function SideBarComponent(props) {
     }
 
     function renderLogout() {
+        console.log(isSignedIn)
         if(isSignedIn) {
-            return (
-                <div>
-                    <button className="button" onClick={() => handleLogout()}>Logout</button>
-                </div>
-            )
+            if(loadingBalance) {
+                return (
+                    <div>
+                        Loading Your Balance
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div>
+                        <div>
+                            You have ${balance}!
+                        </div>
+                        <div>
+                            <button className={"button"} onClick={() => setShowModal(true)}>
+                                Add Funds!
+                            </button>
+                        </div>
+                        <div>
+                            <button className="button" onClick={() => handleLogout()}>Logout</button>
+                        </div>
+                        {renderModal()}
+                    </div>
+                )
+            }
         }
         else {
             return (
                 <div>
-                    Login pls
+                    Please Login to Continue
                 </div>
             )
         }
