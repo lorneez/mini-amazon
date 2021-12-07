@@ -2,6 +2,8 @@ from flask import Flask, request, Blueprint, jsonify
 from backend.app.models.product_review import PReview
 from backend.app.models.product import Product
 from backend.app.models.user import User
+from backend.app.models.cart import Cart
+from backend.app.models.order import Order
 import json
 
 
@@ -131,12 +133,40 @@ def delete_product_review():
         return jsonify(update_status=False)
     return jsonify(update_status=True)
 
-# @products.route("/api/buy_product/", methods=["POST"])
-# def buy_product():
-#     review = PReview.remove_product_review(request.args['user_id'], request.args['product_id'], )
-#     if review is None:
-#         return jsonify(update_status=False)
-#     return jsonify(update_status=True)
+@products.route("/api/buy_product/", methods=["POST"])
+def buy_product():
+    pid = request.args["product_id"]
+    buyer_id = request.args['user_id']
+    quantity = int(request.args["quantity"])
+
+    product = Product.get(pid)[0]
+    cost = float(quantity) * product.price
+
+    purchased = Product.change_quantity(pid, quantity*-1)
+    
+    if purchased is None:
+        return jsonify(purchase_status=False)
+
+    buyer_cost = cost*-1
+    seller_profit = cost
+    seller_id = product.seller
+
+    buyer_balance = User.change_balance(buyer_id, buyer_cost)
+    if buyer_balance is None:
+        purchased = Product.change_quantity(pid, quantity)
+        return jsonify(purchase_status=False)
+
+    seller_balance = User.change_balance(seller_id, seller_profit)
+    print(seller_balance)
+    if seller_balance is None:
+        purchased = Product.change_quantity(pid, quantity)
+        buyer_undo = User.change_balance(buyer_id, seller_profit) 
+        return jsonify(purchase_status=False)
+    
+    remove = Cart.remove_product(buyer_id, pid)
+    added_order = Order.add_order(buyer_id, pid, quantity, int(cost), False)
+    
+    return jsonify(purchase_status=True)
 
 
 

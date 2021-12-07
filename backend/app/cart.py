@@ -74,7 +74,6 @@ def buy_cart():
         pid = item.product_id
         quantity = item.cart_quantity * -1
         cost = abs(quantity) * item.product_price
-        print(pid, quantity, cost)
         purchased = Product.change_quantity(pid, quantity)
         
         if purchased is None:
@@ -86,22 +85,18 @@ def buy_cart():
         buyer_id = request.args['user_id']
         seller_id = item.product_seller
         buyer_balance = User.change_balance(buyer_id, buyer_cost)
-        print(buyer_balance)
         if buyer_balance is None:
             purchased = Product.change_quantity(pid, quantity*-1)
             continue
         seller_balance = User.change_balance(seller_id, seller_profit)
-        print(seller_balance)
         if seller_balance is None:
             purchased = Product.change_quantity(pid, quantity*-1)
             buyer_undo = User.change_balance(buyer_id, seller_profit) 
             continue
         cart_purchase_success[item.product_name] = True
         remove = Cart.remove_product(buyer_id, pid)
-        print(remove)
         added_order = Order.add_order(buyer_id, pid, quantity*-1, int(cost), False)
-        print(buyer_id, pid, quantity*-1, cost, False)
-        print(added_order)
+
     return json.dumps(cart_purchase_success)
 
 
