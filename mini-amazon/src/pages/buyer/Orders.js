@@ -11,7 +11,7 @@ function Orders() {
 
     useEffect(async () => {
         const result = await axios(
-            'http://0.0.0.0:5000/api/all_user_orders/?user_id=2', {
+            'http://0.0.0.0:5000/api/all_buyer_orders/?user_id=2', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -31,6 +31,7 @@ function Orders() {
                     <div className={"container"}>
                         <OrderHeader/>
                         <OrderTable items={data}/>
+                        <button>Buy All Cart Items</button>
                     </div>
                 </div>
             </div>
