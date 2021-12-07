@@ -40,7 +40,9 @@ function Product({id, title, price, rating, image}){
                 </div>
             </div>
             <img src={image} alt=""/>
-            <button>Add to cart</button>
+            <button className={"button"} aria-label="close">
+                Add to cart
+            </button>
             <div className={"column"}>
                 <button className={"button"} onClick={() => setShowModal(true)}>
                     View
