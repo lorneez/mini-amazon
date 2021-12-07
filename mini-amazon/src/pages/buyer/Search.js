@@ -31,16 +31,11 @@ const styles = {
 }
 
 let categories = [
-    "category0",
-    "category1",
-    "category2",
-    "category3",
-    "category4",
-    "category5",
-    "category6",
-    "category7",
-    "category8",
-    "category9",
+    "Books",
+    "Electronics",
+    "Groceries",
+    "Games",
+    "Clothing",
   ]
 
 
@@ -121,7 +116,7 @@ function Search() {
                         <input style={styles.search} icon='search' placeholder='Search by Keyword' onChange={(e) => searchItems(e.target.value)}/>
                          <button style={styles.button} onClick={()=>search()}>Search</button>
                          <div className="column" >
-                        <h2>Filter by Category</h2>
+                        <div>Filter by Category</div>
 
                         {editMode ? (
                             // display the dropdown when the input us focused

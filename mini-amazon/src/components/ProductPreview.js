@@ -4,7 +4,7 @@ function ProductPreview(props) {
     console.log(props)
     return(
         <div style = {styles.container}>
-            <img style={styles.image} src={props.picture}/>
+            <img style={styles.image} src={props.data.image_id}/>
             <div>
                 <div style = {styles.title}>{props.data.name}</div>
                 <div style = {styles.title}>${props.data.price}</div>
@@ -23,7 +23,7 @@ const styles = {
         height: '180px',
         display: 'flex',
         flexDirection: 'row',
-        marginLeft: '100px',
+        marginLeft: '200px',
         marginBottom: '20px',
         marginTop: '10px',
         gap: '20px'
