@@ -46,6 +46,7 @@ FROM OrderItem as o
 INNER JOIN Products as p
 ON p.id = o.product_id
 WHERE o.user_id = :uid
+ORDER BY o.time_stamp DESC
 ''', uid=uid)
         return [OrderProduct(*row) for row in rows]
 
@@ -57,6 +58,7 @@ FROM OrderItem as o
 INNER JOIN Products as p
 ON p.id = o.product_id
 WHERE p.seller_id = :uid
+ORDER BY o.time_stamp DESC
 ''', uid=uid)
         return [OrderProduct(*row) for row in rows]
 
