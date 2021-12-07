@@ -13,9 +13,9 @@ function ProductDetails(props) {
                     <div className={"container"}>
                         <Details
                             id={props.id}
-                            title={"Oculus Quest All-in-one VR Gaming Headset – 64GB"}
-                            image={"https://images-na.ssl-images-amazon.com/images/I/31pEe2taIPL._AC_US327_FMwebp_QL65_.jpg"}
-                            price={11.96}
+                            title={props.Details}
+                            image={props.image}
+                            price={props.price}
                             rating={props.rating}
                         />
                     </div>

@@ -1,10 +1,30 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { RatingView } from 'react-simple-star-rating';
-// import * as FaIcons from 'react-icons/fa'
-// import * as AiIcons from 'react-icons/Ai'
-
+import axios from "axios";
+import {AuthContext} from "../contexts/AuthContext";
 
 function Details({id, title, price, rating, image}) {
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { userId } = state;
+
+async function handleBuy() {
+    const url = 'http://localhost:5000/api/buy_product/?product_id=' + id + '&user_id=' + userId + '&quantity=' + "1" 
+    console.log(url)
+
+    await axios.post(
+        url, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
+        }
+    ).then((response) => {
+        console.log(response)
+    })
+}
+
+console.log("Hello")
+
     return (
         <div classname="ProductDetails">
             
@@ -24,7 +44,7 @@ function Details({id, title, price, rating, image}) {
                     <h1 class="title"> Price: ${price} </h1>
                     <button class="button is-warning is-medium is-rounded is-fullwidth">Add to Cart</button>
                     <div class="mt-2"></div>
-                    <button class="button is-danger is-medium is-rounded is-fullwidth" >Buy Now</button>
+                    <button class="button is-danger is-medium is-rounded is-fullwidth" onClick={handleBuy}>Buy Now</button>
                     </div>
                 </div>
             </div>
