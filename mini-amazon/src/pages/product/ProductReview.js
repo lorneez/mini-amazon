@@ -101,6 +101,9 @@ function ProductReview(props) {
                     </div>
                     <div className={"container"}>
                         <div className="ProductReview-Row">
+                            {renderPage()}
+                            {renderButtons()}  
+
                             {/* {data.map(item => {
                                 return (
                                     <Review
@@ -116,10 +119,9 @@ function ProductReview(props) {
                             })} */}
                         </div>
                     </div>
-                </div>    
+                </div>  
             </div>
-            {renderPage()}
-            {renderButtons()}
+            
         </div>    
     );
 }

@@ -4,6 +4,7 @@ import { products } from './testProducts.js';
 import SideBarComponent from "../../components/SideBarComponent";
 
 function ProductBrowse() {
+    
     return (
         <div>
         <div className={"columns"}>

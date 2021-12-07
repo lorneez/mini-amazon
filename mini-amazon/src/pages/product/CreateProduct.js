@@ -18,21 +18,12 @@ function CreateProduct() {
         setInputs(values => ({...values, [name]: value}))
     }
     
-    const is_inventory = (inputs.quantity>0).toString()
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        console.log(inputs.name)
-        console.log(userId)
-        console.log(inputs.price)
-    }
-
-    
-
     async function handleSubmit() {
+        const url = 'http://localhost:5000/api/add_product/?name=' + inputs.name + '&seller_id=' + userId + '&price=' + inputs.price + '&quantity=' + inputs.quantity + '&inventory_status=' + (inputs.quantity>0).toString() + '&category=' + inputs.category +'&image=' + inputs.image
+        console.log(url)
 
         await axios.post(
-            'http://localhost:5000/api/add_product/?name=' + inputs.name + '&seller_id=' + userId + '&price=' + inputs.price + '&quantity=' + inputs.quantity,'&inventory_status=' + is_inventory, '&category=' + inputs.category,'&image=' + inputs.image, {
+            url, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -46,6 +37,11 @@ function CreateProduct() {
 
     return (
         <div>
+            <div>
+                {JSON.stringify(inputs)}
+                {(inputs.quantity>0).toString()}
+
+            </div>
             <div className="columns">
                 <div className={"column is-one-fifth"}>
                         <SideBarComponent type={"buyer"}/>
@@ -54,14 +50,13 @@ function CreateProduct() {
             <div className={"container has-text-centered is-size-1 has-text-weight-semibold pt-6 mb-5 "}>
                 Create new product listing
             </div>
-            <form onSubmit={handleSubmit}>
+            <div>
                 <div className="columns">
                     <div className="column is-two-thirds">
                     <div className="mb-4">
-                        <label> Insert image of product 
+                        <label> Insert URL of image  
                             <div>
-                            <input 
-                                type="file" 
+                            <input className="input" type="text" 
                                 name="image"
                                 value={inputs.image || ""}
                                 onChange={handleChange}
@@ -69,60 +64,7 @@ function CreateProduct() {
                             </div>
                         </label>
                     </div>
-                    </div>
-
-                    <div className="column is-half">
-                        <div className="mb-4">
-                        <label> Enter product name
-                            <div>
-                            <input className="input" type="text" placeholder="Macbook Pro"
-                                type="text" 
-                                name="name"
-                                value={inputs.name}
-                                onChange={handleChange}
-                            />
-                            </div>
-                        </label>
-                        </div>
-                        <div className="mt-4">
-                        <label> Enter listing price 
-                            <div>
-                            <input className="input" type="text" placeholder="$999.99"
-                                type="text" 
-                                name="price"
-                                value={inputs.price || ""}
-                                onChange={handleChange}
-                            />
-                            </div>
-                        </label>
-                        </div> 
-                        <div className="mt-4">
-                            <label> Insert quanity of product 
-                                <div>
-                                <input className="input" type="text" placeholder="500"
-                                    type="text" 
-                                    name="quantity"
-                                    value={inputs.quantity || ""}
-                                    onChange={handleChange}
-                                />
-                                </div>
-                            </label>
-                        </div>   
-                    </div>
-                </div>
-                <div className="mt-4">
-                    <label> Enter product description 
-                        <div>
-                        <input className="input" type="text" placeholder="Savvy laptop device that permits access to the interweb..."
-                            type="text"
-                            name="description" 
-                            value={inputs.description || ""}
-                            onChange={handleChange}
-                        />
-                        </div>
-                    </label>
-                </div>
-                <div className="mt-4 mb-5">
+                    <div className="mt-4">
                     <label> Insert category of product 
                         <div>
                         <input className="input" type="text" placeholder="Technology"
@@ -133,9 +75,62 @@ function CreateProduct() {
                         />
                         </div>
                     </label>
+                    </div>
+                    <div className="mt-4">
+                    <label> Enter product description 
+                        <div>
+                        <input className="input" type="text" placeholder="Savvy laptop device that permits access to the interweb..."
+                            type="text"
+                            name="description" 
+                            value={inputs.description || ""}
+                            onChange={handleChange}
+                        />
+                        </div>
+                    </label>
+                    </div>
+                    </div>
+
+                    <div className="column is-half">
+                        <div className="mb-4">
+                        <label> Enter product name
+                            <div>
+                            <input className="input" type="text" placeholder="Macbook Pro"
+                                name="name"
+                                value={inputs.name}
+                                onChange={handleChange}
+                            />
+                            </div>
+                        </label>
+                        </div>
+                        <div className="mt-4">
+                        <label> Enter listing price 
+                            <div>
+                            <input className="input" type="number" placeholder="$999.99"
+                                name="price"
+                                value={inputs.price || ""}
+                                onChange={handleChange}
+                            />
+                            </div>
+                        </label>
+                        </div> 
+                        <div className="mt-4">
+                            <label> Insert quanity of product 
+                                <div>
+                                <input className="input" type="number" placeholder="500"
+                                    name="quantity"
+                                    value={inputs.quantity || ""}
+                                    onChange={handleChange}
+                                />
+                                </div>
+                            </label>
+                        </div>   
+                    </div>
                 </div>
-                <input type="submit" value="Submit"/>
-            </form>
+                
+                <button className={"button mt-5"} onClick={() => handleSubmit()}>
+                    Submit
+                </button>
+            </div>
             </div>
             </div>
         </div>
