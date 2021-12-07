@@ -37,11 +37,6 @@ function CreateProduct() {
 
     return (
         <div>
-            <div>
-                {JSON.stringify(inputs)}
-                {(inputs.quantity>0).toString()}
-
-            </div>
             <div className="columns">
                 <div className={"column is-one-fifth"}>
                         <SideBarComponent type={"buyer"}/>

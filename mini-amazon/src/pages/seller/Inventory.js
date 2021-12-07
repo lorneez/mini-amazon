@@ -68,7 +68,10 @@ function Inventory() {
                                 Inventory
                             </p>
                             <p className="subtitle">
-                                Here are the products you currently have!
+                                <div>Here are the products you currently have!</div>
+                                <a href={"/product/create"}>
+                                    Click here to create a product!
+                                </a>
                             </p>
                         </div>
                     </section>
