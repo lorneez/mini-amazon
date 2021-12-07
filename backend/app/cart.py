@@ -76,7 +76,7 @@ def buy_cart():
         cost = abs(quantity) * item.product_price
         print(pid, quantity, cost)
         purchased = Product.change_quantity(pid, quantity)
-        print(purchased)
+        
         if purchased is None:
             continue
         # decrement buyer money
@@ -99,7 +99,8 @@ def buy_cart():
         cart_purchase_success[item.product_name] = True
         remove = Cart.remove_product(buyer_id, pid)
         print(remove)
-        added_order = Order.add_order(buyer_id, pid, quantity*-1, cost, False)
+        added_order = Order.add_order(buyer_id, pid, quantity*-1, int(cost), False)
+        print(buyer_id, pid, quantity*-1, cost, False)
         print(added_order)
     return json.dumps(cart_purchase_success)
 

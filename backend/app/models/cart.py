@@ -94,7 +94,11 @@ WHERE c.user_id = :uid
                 DELETE FROM CartItem
                 WHERE user_id=:uid
                 AND product_id=:pid
+                RETURNING :pid
                 """, uid=uid, pid=pid)
+                if rows is None:
+                    return None
+                return rows[0][0]
             except Exception:
                 return None
 

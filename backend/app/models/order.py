@@ -87,8 +87,8 @@ WHERE p.seller_id = :uid
             rows = app.db.execute("""
 INSERT INTO OrderItem(user_id, product_id, quantity, final_price, fulfillment_status)
 VALUES(:uid, :pid, :quantity, :final_price, :fulfillment_status)
-RETURNING :pid
-""", pid=pid)
+RETURNING product_id
+""", uid=uid, pid=pid, quantity=quantity, final_price=final_price, fulfillment_status=fulfillment_status)
             pid = rows[0][0]
             return pid
         except Exception:
