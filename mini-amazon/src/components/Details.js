@@ -68,7 +68,7 @@ console.log("Hello")
                         {CreateReview(seller)}
                     </div>
                     <div>
-                        {ProductReviewModal(id, userId)}
+                        {ProductReviewModal(id, seller)}
                     </div>
                 </div>
             </div>
