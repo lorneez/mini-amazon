@@ -4,6 +4,8 @@ import Details from "./Details"
 
 function ProductPreview(props) {
 
+    console.log("AAAAAAAAAAAAAAAAAAA")
+
     const [show, setShow] = useState(false);
     console.log(props)
 

@@ -3,14 +3,14 @@ import Review from "../../components/Review";
 import {products} from "./testProducts";
 import axios from "axios";
 
-function ProductReviewModal(id, userId) {
+function ProductReviewModal(props) {
 
     const [data, setData] = useState([]);
     const [sellerdata, setsellerData] = useState([]);
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_seller_reviews/?seller_id=' + userId, {
+            'http://localhost:5000/api/all_seller_reviews/?seller_id=' + props.seller, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -23,7 +23,7 @@ function ProductReviewModal(id, userId) {
     useEffect(async () => {
         console.log("called backend for reviews")
         const result = await axios(
-            'http://localhost:5000/api/all_product_reviews/?product_id=' + id, {
+            'http://localhost:5000/api/all_product_reviews/?product_id=' + props.id, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -41,7 +41,7 @@ function ProductReviewModal(id, userId) {
         const end = Math.min(data.length, page * itemsPerPage)
         const slicedItems = data.slice(start, end);
         // const slicedSellerReviews = sellerdata.slice(start,end);
-        const slicedSellerReviews = products.slice(start,end);
+        const slicedSellerReviews = sellerdata.slice(start,end);
 
         return (
             <div className="columns"> 
