@@ -3,18 +3,25 @@ import SideBarComponent from "../../components/SideBarComponent";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthContext";
+import { Rating } from 'react-simple-star-rating';
 
-function CreateReview(props) {
+
+function CreateReview(sellerId) {
     const history = useHistory();
     const auth = useContext(AuthContext);
     const { state } = auth;
     const { userId } = state;
+    const [rating, setRating] = useState(0) 
 
     const [review, setReview] = useState("")
 
+    const handleRating = (rate) => {
+        setRating(rate)
+      }
+
     async function submitReview() {
-        const result = await axios(
-            'http://localhost:5000/api/add_seller_review/?seller_id=' + props.sellerId + '&user_id=' + userId + '&review_text=' + review, {
+        const result = await axios.post(
+            'http://localhost:5000/api/add_seller_review/?seller_id=' + sellerId + '&user_id=' + userId + '&review_text=' + review + '&stars=' + rating, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -33,18 +40,19 @@ function CreateReview(props) {
                     <section className="hero">
                         <div className="hero-body">
                             <p className="title">
-                                Create Review
-                            </p>
-                            <p className="subtitle">
-                                Create Review Here!
+                                Create Seller Review
                             </p>
                         </div>
                     </section>
-                    <div className={"container m-2"}>
+                    <div className={"container m-1"}>
                         <div>
                             <div>
                                 Review
                             </div>
+                            <Rating
+                                onClick={handleRating}
+                                ratingValue={rating} /* Available Props */
+                            />
                             <input
                                 className="input is-primary"
                                 value={review}

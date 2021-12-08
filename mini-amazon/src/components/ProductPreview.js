@@ -19,6 +19,7 @@ function ProductPreview(props) {
                         title={props.data.name}
                         image={props.data.image_id}
                         price={props.data.price}
+                        seller_id={props.data.seller}
                     />
                 </div>
             )

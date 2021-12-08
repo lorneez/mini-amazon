@@ -22,6 +22,7 @@ function ProductBrowse() {
                                     image={item.image}
                                     price={item.price}
                                     rating={item.rating}
+                                    seller={item.seller}
                                 />
                             )
                         })}
