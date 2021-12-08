@@ -68,19 +68,12 @@ console.log("Hello")
                     <button class="button is-danger is-medium is-rounded is-fullwidth" onClick={() => handleBuy()}>Buy Now</button>
                     </div>
                     <div>
-<<<<<<< HEAD
-                        {CreateReview(seller)}
-                        {CreateProductReview(id)}
-                    </div>
-                    <div>
-                        {ProductReviewModal(id, seller)}
-=======
+                        {CreateProductReview(props.id)}
                         {CreateReview(props.seller_id)}
                     </div>
                     <div>
                         <ProductReviewModal id={props.id} seller={props.seller_id}/>
                         {/*{ProductReviewModal(id, seller)}*/}
->>>>>>> 85d6e8ba4cce14939c4a2e4e869cf66e6fa97169
                     </div>
                 </div>
             </div>
