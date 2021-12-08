@@ -4,6 +4,7 @@ import axios from "axios";
 import {AuthContext} from "../contexts/AuthContext";
 import ProductReviewModal from '../pages/product/ProductReviewModal';
 import CreateReview from '../pages/seller/CreateReview';
+import CreateProductReview from '../pages/product/CreateProductReview';
 
 function Details({id, title, price, rating, image, seller}) {
     const auth = useContext(AuthContext);
@@ -66,9 +67,10 @@ console.log("Hello")
                     </div>
                     <div>
                         {CreateReview(seller)}
+                        {CreateProductReview(id)}
                     </div>
                     <div>
-                        {ProductReviewModal(id, userId)}
+                        {ProductReviewModal(id, seller)}
                     </div>
                 </div>
             </div>
