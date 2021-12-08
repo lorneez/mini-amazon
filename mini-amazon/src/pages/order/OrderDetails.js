@@ -10,7 +10,7 @@ function OrderDetails(props) {
                     </p>
                     <p className="subtitle">
                         <div className={"column"}>
-                            Product Image: {props.item.product_image}.
+                            <img style={{height: "150px", width: "300px"}} src={props.item.product_image}/>
                         </div>
                         <div className={"column"}>
                             You've ordered {props.item.order_quantity} of {props.item.product_name}.

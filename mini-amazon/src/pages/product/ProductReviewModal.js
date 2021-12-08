@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react"
 import Review from "../../components/Review";
 import axios from "axios";
 
-function ProductReviewModal(id, userId) {
+function ProductReviewModal(props) {
 
     const [data, setData] = useState([]);
     const [sellerdata, setsellerData] = useState([]);
 
     useEffect(async () => {
         const result = await axios(
-            'http://localhost:5000/api/all_seller_reviews/?seller_id=' + userId, {
+            'http://localhost:5000/api/all_seller_reviews/?seller_id=' + props.seller, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -22,7 +22,7 @@ function ProductReviewModal(id, userId) {
     useEffect(async () => {
         console.log("called backend for reviews")
         const result = await axios(
-            'http://localhost:5000/api/all_product_reviews/?product_id=' + id, {
+            'http://localhost:5000/api/all_product_reviews/?product_id=' + props.id, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -39,6 +39,10 @@ function ProductReviewModal(id, userId) {
         const start = (page - 1) * itemsPerPage
         const end = Math.min(data.length, page * itemsPerPage)
         const slicedItems = data.slice(start, end);
+<<<<<<< HEAD
+=======
+        // const slicedSellerReviews = sellerdata.slice(start,end);
+>>>>>>> 85d6e8ba4cce14939c4a2e4e869cf66e6fa97169
         const slicedSellerReviews = sellerdata.slice(start,end);
 
         return (
