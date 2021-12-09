@@ -3,6 +3,14 @@ import SideBarComponent from "../../components/SideBarComponent";
 import { useHistory } from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthContext";
 
+
+const styles = {
+    title: {
+        postion: "relative",
+        marginTop: '-500px',
+        fontSize: '100px'
+    }
+}
 function LandingPage() {
     const history = useHistory();
 
@@ -27,12 +35,12 @@ function LandingPage() {
 
     return (
         <div>
-            <div className={"columns"}>
-                <div className={"column is-one-fifth"}>
+            <div className={"columns center"}>
+                <div className={"column is-one-fifth"} style={{height: '100%'}}>
                     <SideBarComponent type={"landing"}/>
                 </div>
-                <div className={"column"}>
-                    <div className={"container has-text-centered is-size-1 has-text-weight-semibold pt-6 welcometext"}>
+                <div className={"column center"}>
+                    <div style={styles.title}>
                         Welcome to Zest!
                     </div>
                 </div>

@@ -1,6 +1,12 @@
-import React from "react";
+import React, {useContext, useState} from "react";
+import { useHistory } from "react-router-dom";
+import {AuthContext} from "../contexts/AuthContext";
 
 function DashBoardHeader(props) {
+    const history = useHistory();
+    const auth = useContext(AuthContext);
+    const { state } = auth;
+    const { username } = state;
 
     const styles = {
         header: {
@@ -12,11 +18,11 @@ function DashBoardHeader(props) {
     <div class = "card">
         <div class="card-content" style = {styles.header}>
             <div class="content">
-                WELCOME SOPHIA
+                WELCOME {username}!
             </div>
-            {/* <div class="content">
-                Your most recent order #456 is out for delivery!
-            </div> */}
+            <div class="content">
+                Your most recent order is out for delivery!
+            </div>
             <div class="content">
                 Check out the newest deals for this upcoming Holiday sale!
             </div>
