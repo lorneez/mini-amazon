@@ -3,6 +3,14 @@ import SideBarComponent from "../../components/SideBarComponent";
 import { useHistory } from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthContext";
 
+
+const styles = {
+    title: {
+        postion: "relative",
+        marginTop: '-500px',
+        fontSize: '100px'
+    }
+}
 function LandingPage() {
     const history = useHistory();
 
@@ -32,7 +40,7 @@ function LandingPage() {
                     <SideBarComponent type={"landing"}/>
                 </div>
                 <div className={"column center"}>
-                    <div className={"container has-text-centered is-size-1 has-text-weight-semibold pt-6 welcometext"}>
+                    <div style={styles.title}>
                         Welcome to Zest!
                     </div>
                 </div>
