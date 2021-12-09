@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import Review from "../../components/Review";
-import {products} from "./testProducts";
 import axios from "axios";
 
 function ProductReviewModal(props) {
@@ -40,7 +39,10 @@ function ProductReviewModal(props) {
         const start = (page - 1) * itemsPerPage
         const end = Math.min(data.length, page * itemsPerPage)
         const slicedItems = data.slice(start, end);
+<<<<<<< HEAD
+=======
         // const slicedSellerReviews = sellerdata.slice(start,end);
+>>>>>>> 85d6e8ba4cce14939c4a2e4e869cf66e6fa97169
         const slicedSellerReviews = sellerdata.slice(start,end);
 
         return (

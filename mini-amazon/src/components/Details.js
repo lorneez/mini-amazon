@@ -4,6 +4,7 @@ import axios from "axios";
 import {AuthContext} from "../contexts/AuthContext";
 import ProductReviewModal from '../pages/product/ProductReviewModal';
 import CreateReview from '../pages/seller/CreateReview';
+import CreateProductReview from '../pages/product/CreateProductReview';
 
 function Details(props) {
     console.log("BBBBBBBBBB")
@@ -67,6 +68,7 @@ console.log("Hello")
                     <button class="button is-danger is-medium is-rounded is-fullwidth" onClick={() => handleBuy()}>Buy Now</button>
                     </div>
                     <div>
+                        {CreateProductReview(props.id)}
                         {CreateReview(props.seller_id)}
                     </div>
                     <div>

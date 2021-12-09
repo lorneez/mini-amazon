@@ -4,7 +4,7 @@ import "../pages/product/testProducts.js"
 import Details from "./Details";
 
 
-function Product({id, title, price, rating, image}){
+function Product({id, title, price, rating, image, seller}){
 
     const [showModal, setShowModal] = useState(false);
 
@@ -18,7 +18,8 @@ function Product({id, title, price, rating, image}){
                         title={title}
                         image={image}
                         price={price}
-                        rating={rating}/>
+                        rating={rating}
+                        seller={seller}/>
                 </div>
                 <button className="modal-close is-large" aria-label="close" onClick={() => setShowModal(false)}></button>
             </div>

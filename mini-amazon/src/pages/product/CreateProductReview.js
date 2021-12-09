@@ -1,12 +1,11 @@
 import React, {useContext, useState} from "react";
-import SideBarComponent from "../../components/SideBarComponent";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import {AuthContext} from "../../contexts/AuthContext";
 import { Rating } from 'react-simple-star-rating';
 
 
-function CreateReview(sellerId) {
+function CreateProductReview(id) {
     const history = useHistory();
     const auth = useContext(AuthContext);
     const { state } = auth;
@@ -21,7 +20,7 @@ function CreateReview(sellerId) {
 
     async function submitReview() {
         const result = await axios.post(
-            'http://localhost:5000/api/add_seller_review/?seller_id=' + sellerId + '&user_id=' + userId + '&review_text=' + review + '&stars=' + rating, {
+            'http://localhost:5000/api/add_product_review/?user_id=' + userId + '&product_id=' + id + '&review_text=' + review + '&stars=' + rating, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                 },
@@ -30,8 +29,6 @@ function CreateReview(sellerId) {
             console.log(response)
         })
         window.location.reload(false);
-
-        // history.push("/seller/dashboard");
     }
 
     return (
@@ -41,15 +38,12 @@ function CreateReview(sellerId) {
                     <section className="hero">
                         <div className="hero-body">
                             <p className="title">
-                                Create Seller Review
+                                Create Product Review
                             </p>
                         </div>
                     </section>
                     <div className={"container m-1"}>
                         <div>
-                            <div>
-                                
-                            </div>
                             <Rating
                                 onClick={handleRating}
                                 ratingValue={rating} /* Available Props */
@@ -71,4 +65,4 @@ function CreateReview(sellerId) {
     )
 }
 
-export default CreateReview;
+export default CreateProductReview;
