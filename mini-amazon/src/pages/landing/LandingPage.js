@@ -27,11 +27,11 @@ function LandingPage() {
 
     return (
         <div>
-            <div className={"columns"}>
-                <div className={"column is-one-fifth"}>
+            <div className={"columns center"}>
+                <div className={"column is-one-fifth"} style={{height: '100%'}}>
                     <SideBarComponent type={"landing"}/>
                 </div>
-                <div className={"column"}>
+                <div className={"column center"}>
                     <div className={"container has-text-centered is-size-1 has-text-weight-semibold pt-6 welcometext"}>
                         Welcome to Zest!
                     </div>

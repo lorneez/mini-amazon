@@ -41,7 +41,7 @@ function SignUpPage() {
     return (
         <div>
             <div className={"columns center"}>
-                <div className={"column is-one-fifth"}>
+                <div className={"column is-one-fifth"} style={{height: '100%'}}>
                     <SideBarComponent type={"landing"}/>
                 </div>
                 <div className={"column center"}>
