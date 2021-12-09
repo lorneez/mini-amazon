@@ -12,13 +12,13 @@ function DashBoardHeader(props) {
     <div class = "card">
         <div class="card-content" style = {styles.header}>
             <div class="content">
-                WELCOME LORNE
+                WELCOME SOPHIA
             </div>
-            <div class="content">
+            {/* <div class="content">
                 Your most recent order #456 is out for delivery!
-            </div>
+            </div> */}
             <div class="content">
-                Check out the newest deals for this upcoming Black Friday sale!
+                Check out the newest deals for this upcoming Holiday sale!
             </div>
         </div>
     </div>

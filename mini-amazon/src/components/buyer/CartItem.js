@@ -5,7 +5,7 @@ function CartItem(props) {
         <div>
             <div className={"columns m-2"} style={{background: "#E1E1E3", borderRadius: "5px"}}>
                 <div className={"column"}>
-                    {props.item.product_image}
+                    <img src={props.item.product_image}/>
                 </div>
                 <div className={"column"}>
                     {props.item.product_seller}
